@@ -8,6 +8,7 @@
 ## General Introduction
 
 Vaccinations may be described as the most significant achievement in the history of medicine, and have lead to the eradication of many of the most severe diseases that plagued (and frequently decimated) societies. 
+However, in developed countries, vaccination opponents have convinced a number of people not to get vaccinations, which could potentially lead to a revival of diseases we already thought extinct. Therefore, modelling the influence of vaccination rates on disease spreading is a worthwile pursuit. 
 
 > (States your motivation clearly: why is it important / interesting to solve this problem?)
 > (Add real-world examples, if any)
