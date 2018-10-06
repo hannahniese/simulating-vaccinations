@@ -46,13 +46,17 @@ Bauch, C. T., & Earn, D. J. (2004). Vaccination and the theory of games. Proceed
 
 ## Research Methods
 
-(Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
+> (Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
 
 
 ## Other
 
-(mention datasets you are going to use)
+https://ourworldindata.org/vaccination
+https://www.gapminder.org/data/ search for 'vaccine'
+
+Immunization coverage, system indicators and schedule, and disease incidence
+http://www.who.int/immunization/monitoring_surveillance/data/en/
 
 # Reproducibility
 
-(step by step instructions to reproduce your results. *Keep in mind that people reading this should accomplish to reproduce your work within 10 minutes. It needs to be self-contained and easy to use*. e.g. git clone URL_PROY; cd URL_PROY; python3 main.py --light_test (#--light test runs in less than 5minutes with up to date hardware)) 
+> (step by step instructions to reproduce your results. *Keep in mind that people reading this should accomplish to reproduce your work within 10 minutes. It needs to be self-contained and easy to use*. e.g. git clone URL_PROY; cd URL_PROY; python3 main.py --light_test (#--light test runs in less than 5minutes with up to date hardware)) 
