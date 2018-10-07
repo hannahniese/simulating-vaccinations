@@ -32,8 +32,8 @@ How would policy measures (vaccinating all school children etc.) change the spre
 
 ## Expected Results
 
-Creating models that simulate the infection rates of a society with different vaccination rates. 
-Compare the effectivity of policy measures with regards to immunisation.
+Using our model, we will simulate different scenarios to find out under which circumstances a disease can be eradicated und under which a decrease in the vaccination rate can lead to an uptake in infections.
+Comparing the effectivity of policy measures with regards to immunisation.
 
 > (What are the answers to the above questions that you expect to find before starting your research?)
 
@@ -49,6 +49,7 @@ Bauch, C. T., & Earn, D. J. (2004). Vaccination and the theory of games. Proceed
 
 
 ## Research Methods
+Game-theory, SIR to model the spreading of diseases
 
 > (Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
 
