@@ -1,17 +1,41 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Oct 31 12:16:03 2018
+Created on Mon Nov  5 16:03:44 2018
 
-@author: timos
+@author: markus
 """
 
-import Spread_of_disease_without_vaccination as cl
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import vacc as people
+import time
 
-population = 100
-people_list = [0] * population
+people.get_started()
 
+time.sleep(5)
 
-#create population
-for x in range(0,population):
-    people_list[x] = cl.People(False, 1, x)
- 
+# number of people
+num = people.population
+sqrtnum = int(np.sqrt(num))
+
+population = np.empty((sqrtnum, sqrtnum))
+i = 0
+j = 0
+while j < sqrtnum:
+    population[i,j] = people.people_list[i + j*sqrtnum].get_status()
+    i += 1
+    if i >= sqrtnum:
+        j += 1
+        i = 0
+    
+# graphic
+fig = plt.figure()
+cmap = plt.get_cmap('brg', 8)
+mat = plt.imshow(population, cmap=cmap, interpolation='nearest', animated=True)
+cax = plt.colorbar(mat, ticks=np.arange(0, 8))
+plt.clim(0, 8)
+plt.grid(True)
+
+    
+mat.set_data(population)
