@@ -5,7 +5,6 @@ Created on Mon Nov  5 14:57:41 2018
 @author: markus
 """
 
-import matplotlib.pyplot as plt
 import random
 import game_theory_tools as tool
 
@@ -67,6 +66,12 @@ def get_num_vaccinated_people():
 
 
 class Person:
+    """TODO Timo
+    dead person
+    recovered
+    change percieved risks member funktion relativ!!
+    kill
+    """
     """
     class Person
     
@@ -169,6 +174,7 @@ class Person:
     
     
     def next_day(self):
+        """später TODO Timo rückgabe Person ist gestorben"""
         """
             Makes some people randomly sick (prob_for_diseases)
             Increases time_to_get_healthy of sick people
@@ -198,9 +204,14 @@ class Person:
         return infections
  
     
+def List_Person(Person):
+    """TODO: Timo
+        Implement the Person class for a list
+    """
+    
 def Grid_Person(Person):
     """
-    TODO:
+    TODO: Timo
         should raise an error if population is not a quadratic number
         should infect people in a directions
     """

@@ -4,7 +4,9 @@ Created on Mon Nov  5 16:03:44 2018
 
 @author: markus
 """
-
+"""
+TODO Markus
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
