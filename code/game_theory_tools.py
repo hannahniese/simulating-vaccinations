@@ -72,7 +72,7 @@ def discrete_gradient(array):
         res.append(array[i]-array[i-1])
     return res
 
-def initial_infected(population, proportion infected):
+def initial_infected(population, proportion_infected):
     """TODO Markus"""
     
-"""TODO kill 
+"""TODO kill"""

@@ -67,10 +67,10 @@ def get_num_vaccinated_people():
 
 class Person:
     """TODO Timo
-    dead person
-    recovered
-    change percieved risks member funktion relativ!!
-    kill
+    dead person ✓
+    recovered ✓
+    change percieved risks member funktion relativ!! ✓
+    kill ✓
     """
     """
     class Person
@@ -104,7 +104,8 @@ class Person:
         
         
     """
-
+    
+    alive = True #if person is dead: false
     
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_risk = 10e-4,\
@@ -115,6 +116,13 @@ class Person:
         self.percieved_vacc_risk = percieved_vacc_risk
         self.percieved_infec_risk = percieved_infec_risk
 		
+        global population_alive
+        population_alive += 1
+    
+        if self.vaccinated == True:
+            global vaccinated_people
+            vaccinated_people += 1
+        
         
     def get_vaccinated(self):
         """
@@ -122,7 +130,7 @@ class Person:
     	"""
         global vaccinated_people
         if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
-          population, infected_people / population, self.percieved_vacc_risk,\
+          population_alive, infected_people / population_alive, self.percieved_vacc_risk,\
           self.percieved_infec_risk) > 0:
             self.vaccinated = True
             vaccinated_people += 1
@@ -159,14 +167,14 @@ class Person:
                 contacts -= 1
                 #possible infection of contact person
                 if random.random() <= prob_for_contact_infection: 
-                    contact_index = (self.index + contact_delta_index)%population
+                    contact_index = (self.index + contact_delta_index)%population_alive
                     infections.append(contact_index)
              
             if contacts > 0 and random.random() <= 1: #we have a contact with a person "on the left"
                 contacts -= 1
                 #possible infection of contact person
                 if random.random() <= prob_for_contact_infection:
-                    contact_index = (self.index - contact_delta_index)%population
+                    contact_index = (self.index - contact_delta_index)%population_alive
                     infections.append(contact_index)
             
             contact_delta_index += 1
@@ -202,7 +210,78 @@ class Person:
         if self.infected_days > 0: #person is sick
             return self.infect_other_people()
         return infections
+    
+    
+    def kill(self):
+        """
+            Kills a person by changing the alive-variable
+        """
+        global alive
+        global population_alive
+        global vaccinated_people
+        global infected_people
+        
+        if alive == True:
+            alive = False
+            
+            population_alive -= 1
+            
+            if self.vaccinated == True:
+                self.vaccinated = False
+                vaccinated_people -= 1
+            
+            if self.infected_days >= 0:
+                infected_people -= 1
+                self.infected_days = -1
+        
+        elif alive == False:
+            print("Person is still dead!")
+            
+    
+    def recovered(self, vaccinated, infected_days, \ #index stays the same
+                 percieved_vacc_risk = 10e-4,\
+				 percieved_infec_risk = 0.5):
+        """
+            A dead person becomes alive
+        """
+        if self.dead_person == True:
+            self.vaccinated = vaccinated
+            self.infected_days = infected_days
+            self.percieved_vacc_risk = percieved_vacc_risk
+            self.percieved_infec_risk = percieved_infec_risk
+            
+            global population_alive
+            population_alive += 1
+            
+            if self.vaccinated == True:
+                global vaccinated_people
+                vaccinated_people += 1
+        
+        elif self.dead_person == False:
+            print("Person is not dead!")
+        
+        
+    def dead_person(self):
+        """
+            Retuns true, if person is dead
+        """
+        return (not alive)
  
+    
+    def change_vacc_risk_relative(self, factor):
+        """
+            Changes the percieved vaccination risk relativ
+        """
+        self.percieved_vacc_risk *= factor
+    
+    
+    def change_infec_risk_relative(self, factor):
+        """
+            Changes the percieved infection risk relativ
+        """
+        self.percieved_infec_risk *= factor
+		
+        
     
 def List_Person(Person):
     """TODO: Timo
