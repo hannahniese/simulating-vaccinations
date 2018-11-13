@@ -18,7 +18,7 @@ import game_theory_tools as tool
 # parameters for the disease
 
 #Population parameters
-population = 400 #number of people in our simulation
+population = 100 #number of people in our simulation
 vaccinated_people = 0 #number of people, who are vaccinated
 infected_people = 0 #number of currently infected people
 
@@ -131,7 +131,34 @@ def animate(day):
     i = 0
     j = 0
     #one day is over
-    for x in range(0,population): 
+#    for x in range(0,population): 
+#        people_list[x].next_day()
+#        
+#        # TODO
+#        #for x in range(0,population): 
+#        people_list[x].get_vaccinated()
+#            
+#        #looks, which people are infected during this day
+#        #for x in range(0,population): 
+#        infections = people_list[x].start_infection()
+#            #print(infections)
+#        for i in infections:
+#            people_list[i].get_infected()
+#        
+#        #append the number of infected people of this day to infected_people_list
+#        infected_people_list.append(person.get_num_infected_people()) 
+#        # append the number of vaccinated people of this day to the vaccinated_people_list
+#        vaccinated_people_list.append(person.get_num_vaccinated_people())
+        
+            #if days > simulation_time * 0.4:
+        #calculate average of infected people per day
+#        if infected_people > 0: 
+#            average += infected_people
+#            count += 1
+    
+    while j < sqrtnum:
+        x = sqrtnum * j + i
+        
         people_list[x].next_day()
         
         # TODO
@@ -149,14 +176,6 @@ def animate(day):
         infected_people_list.append(person.get_num_infected_people()) 
         # append the number of vaccinated people of this day to the vaccinated_people_list
         vaccinated_people_list.append(person.get_num_vaccinated_people())
-        
-            #if days > simulation_time * 0.4:
-        #calculate average of infected people per day
-#        if infected_people > 0: 
-#            average += infected_people
-#            count += 1
-    
-    while j < sqrtnum:
         population_array[i,j] = people_list[i + j*sqrtnum].get_status()
         i += 1
         if i >= sqrtnum:
@@ -166,7 +185,7 @@ def animate(day):
     return mat
 
 ani = animation.FuncAnimation(fig, animate, range(1, simulation_time), repeat=False,\
-                              interval=800, blit=False, init_func=setup)
+                              interval=1000, blit=False, init_func=setup)
 
 plt.show()
     
