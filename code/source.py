@@ -54,7 +54,7 @@ for x in range(0,population):
 average = 0 #average number of sick people
 count = 0 #needed to calculate average
 
-simulation_time = 750 #days of simulation
+simulation_time = 1000 #days of simulation
 
 #simulate spread of infection
 for days in range(0,simulation_time):

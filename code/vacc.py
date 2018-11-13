@@ -131,13 +131,14 @@ class Person:
     
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.5, alive = True):
+				 percieved_infec_risk = 0.5, alive = True, recovered = False):
         self.vaccinated = vaccinated
         self.infected_days = infected_days
         self.index = index
         self.percieved_vacc_risk = percieved_vacc_risk
         self.percieved_infec_risk = percieved_infec_risk
         self.alive = alive
+        self.recovered = recovered
 		
         global population_alive
         population_alive += 1
@@ -165,7 +166,7 @@ class Person:
            changes 'infected_days'-parameter to 0 and increases the number of
            currently infected people
     	"""
-        if (not self.vaccinated) and self.infected_days == -1: #person is healthy and not vaccinated
+        if (not self.vaccinated) and (not self.recovered) and self.infected_days == -1: #person is healthy and not vaccinated
             self.infected_days = 0 #infection starts
             global infected_people
             infected_people += 1
@@ -220,6 +221,7 @@ class Person:
             self.infected_days += 1 #increase days person is infected
             if self.infected_days > time_to_get_healthy: #person becomes healthy
                 self.infected_days = -1
+                self.recovered = True #person cannot become infected any more
                 
                 global infected_people
                 infected_people -= 1
@@ -248,6 +250,7 @@ class Person:
             alive = False
             
             population_alive -= 1
+            self.recovered = False
             
             if self.vaccinated == True:
                 self.vaccinated = False
@@ -275,6 +278,8 @@ class Person:
             
             global population_alive
             population_alive += 1
+            
+            self.recovered = False
             
             if self.vaccinated == True:
                 global vaccinated_people
