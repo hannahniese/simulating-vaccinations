@@ -321,12 +321,12 @@ class Person:
 		
         
     
-def List_Person(Person):
+class List_Person(Person):
     """TODO: Timo
         Implement the Person class for a list
     """
     
-def Grid_Person(Person):
+class Grid_Person(Person):
     """
     TODO: Timo
         should raise an error if population is not a quadratic number
