@@ -4,19 +4,19 @@ Created on Tue Nov  6 21:13:09 2018
 
 @author: markus
 """
-
+"""TODO auf die Welt bringen"""
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import vacc
 import game_theory_tools as tool
 
-5
+
 # parameters for the disease
 
 #Population parameters
 population = 1000 #number of people in our simulation
-population_alive = 0 #number of currently alive people (increases, when we create people-objects)
+population_alive = 1000 #number of people alive at the start of the simulation
 vaccinated_people = 0 #number of people, who are vaccinated
 infected_people = 0 #number of currently infected people
 
@@ -43,7 +43,7 @@ time_to_get_healthy = 10 #counts days from infection. After this time, a person
 vacc.init_parameters(population, vaccinated_people, infected_people,\
         daily_contacts_when_healthy, daily_contacts_when_sick,\
         prob_for_diseases, prob_for_contact_infection,\
-        incubation_time, time_to_get_healthy)
+        incubation_time, time_to_get_healthy, population_alive)
                          
 #create population in people_list
 for x in range(0,population):
@@ -95,7 +95,6 @@ plt.plot(infected_people_list)
 plt.plot(new_vaccinations)
 plt.show()
 
-if count != 0 and population != 0:
-    percentage_infected_people = (float(average)/float(count))/float(population)*100 #average calculation
-    print("In average", round(percentage_infected_people,1), "% of the population is infected.")
+percentage_infected_people = (float(average)/float(count))/float(population)*100 #average calculation
 
+print("In average", round(percentage_infected_people,1), "% of the population is infected.")

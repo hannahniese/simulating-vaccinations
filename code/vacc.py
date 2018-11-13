@@ -23,12 +23,23 @@ import game_theory_tools as tool
 
 
 
+
 def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_daily_contacts_when_healthy, p_daily_contacts_when_sick,\
         p_prob_for_diseases, p_prob_for_contact_infection,\
-        p_incubation_time, p_time_to_get_healthy):
+        p_incubation_time, p_time_to_get_healthy, p_population_alive):
     """
-    TODO
+    initialize the global paramters needed by the class
+    Args:
+        p_population(int): the total population
+        p_vaccinated_people(int): vaccinated people at the beginning
+        p_infected_people(int): infected people at the beginning
+        p_daily_contacts_when_healthy(int): number of contacts per day when the person is healthy
+        p_prob_for_diseases(float): random probability to get infected by non-human sources
+        p_prob_for_contact_infection(float): probability the infect another person when there is contact
+        p_incubation_time(int): incubation time in days
+        p_time_to_get_healthy(int): length of the disease in days
+        p_population_alive(int): number of people alive at the beginning
     """
 
     global population
@@ -49,6 +60,8 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
     incubation_time = p_incubation_time
     global time_to_get_healthy
     time_to_get_healthy = p_time_to_get_healthy
+    global population_alive
+    population_alive = p_population_alive
 
     
 
@@ -63,6 +76,16 @@ def get_num_vaccinated_people():
     returns the current number of vaccinated people
     """
     return vaccinated_people
+
+def change_population_alive(change):
+    """
+        changes the value of population_alive by change
+        
+        raises error if the population alive would be bigger than population
+    """
+    if population_alive + change > population or population_alive + change < 0:
+        raise Exception("Invalid amount of population_alive")
+    #population_alive += change
 
 
 class Person:
@@ -105,16 +128,16 @@ class Person:
         
     """
     
-    alive = True #if person is dead: false
     
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.5):
+				 percieved_infec_risk = 0.5, alive = True):
         self.vaccinated = vaccinated
         self.infected_days = infected_days
         self.index = index
         self.percieved_vacc_risk = percieved_vacc_risk
         self.percieved_infec_risk = percieved_infec_risk
+        self.alive = alive
 		
         global population_alive
         population_alive += 1
@@ -167,14 +190,14 @@ class Person:
                 contacts -= 1
                 #possible infection of contact person
                 if random.random() <= prob_for_contact_infection: 
-                    contact_index = (self.index + contact_delta_index)%population_alive
+                    contact_index = (self.index + contact_delta_index)%population
                     infections.append(contact_index)
              
             if contacts > 0 and random.random() <= 1: #we have a contact with a person "on the left"
                 contacts -= 1
                 #possible infection of contact person
                 if random.random() <= prob_for_contact_infection:
-                    contact_index = (self.index - contact_delta_index)%population_alive
+                    contact_index = (self.index - contact_delta_index)%population
                     infections.append(contact_index)
             
             contact_delta_index += 1
@@ -238,9 +261,9 @@ class Person:
             print("Person is still dead!")
             
     
-    def recovered(self, vaccinated, infected_days, \ #index stays the same
+    def get_born(self, vaccinated, infected_days, \
                  percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.5):
+				 percieved_infec_risk = 0.5):   #index stays the same
         """
             A dead person becomes alive
         """
@@ -280,6 +303,21 @@ class Person:
             Changes the percieved infection risk relativ
         """
         self.percieved_infec_risk *= factor
+        
+    def get_status(self):
+        """
+            returns
+            -1 if the person is healthy
+            -2 if the person is vaccinated
+            -3 if the person is dead
+            the number of sick days
+        """
+        if not self.alive:
+            return -3
+        elif self.vaccinated:
+            return -2;
+        else:
+            return self.infected_days
 		
         
     
