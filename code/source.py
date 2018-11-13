@@ -95,6 +95,7 @@ plt.plot(infected_people_list)
 plt.plot(new_vaccinations)
 plt.show()
 
-percentage_infected_people = (float(average)/float(count))/float(population)*100 #average calculation
+if count != 0 and population != 0:
+    percentage_infected_people = (float(average)/float(count))/float(population)*100 #average calculation
+    print("In average", round(percentage_infected_people,1), "% of the population is infected.")
 
-print("In average", round(percentage_infected_people,1), "% of the population is infected.")
