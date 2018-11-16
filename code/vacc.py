@@ -7,6 +7,7 @@ Created on Mon Nov  5 14:57:41 2018
 
 import random
 import game_theory_tools as tool
+import numpy as np
 
 
 ##Population parameters
@@ -314,13 +315,16 @@ class Person:
             returns
             -1 if the person is healthy
             -2 if the person is vaccinated
-            -3 if the person is dead
+            -3 if the person is recovered
+            -4 if the person is dead
             the number of sick days
         """
         if not self.alive:
+            return -4
+        if self.recovered:
             return -3
         elif self.vaccinated:
-            return -2;
+            return -2
         else:
             return self.infected_days
 		
@@ -338,6 +342,7 @@ class Grid_Person(Person):
         should raise an error if population is not a quadratic number
         should infect people in a directions
     """
+    
     def infect_other_people(self):
         """
             Looking for random contacts in neighbourhood until 'daily_contacts'
@@ -346,12 +351,21 @@ class Grid_Person(Person):
         """
         infections = []
         
-        for i in range(-1,1):
-            for j in range(-1,1):
-                if i != 0 or j != 0:
+        sqrtnum = int(np.sqrt(population))
+    
+        if sqrtnum * sqrtnum != population:
+            raise Exception("Population has to be a quadratic number!")
+        
+    
+        
+        for i in range(-1,2): #Spalte
+            for j in range(-1,2): #Zeile
+                if (i != 0 or j != 0) and \
+                    ((self.index % sqrtnum) + i >= 0 and (self.index % sqrtnum) + i < sqrtnum) and \
+                    (int(self.index/sqrtnum) + j >= 0 and int(self.index/sqrtnum) + j < sqrtnum):
                     #possible infection of contact person
                     if random.random() <= prob_for_contact_infection: 
-                        contact_index = self.index + i + np.sqrt(population)*j
+                        contact_index = self.index + i + sqrtnum*j
                         infections.append(contact_index)
                  
          
