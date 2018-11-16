@@ -331,12 +331,32 @@ class List_Person(Person):
         Implement the Person class for a list
     """
     
+    
 class Grid_Person(Person):
     """
     TODO: Timo
         should raise an error if population is not a quadratic number
         should infect people in a directions
     """
+    def infect_other_people(self):
+        """
+            Looking for random contacts in neighbourhood until 'daily_contacts'
+            is reached. Infects randomly the person, to which it has a contact.
+            Assumption: Person (self) is sick
+        """
+        infections = []
+        
+        for i in range(-1,1):
+            for j in range(-1,1):
+                if i != 0 or j != 0:
+                    #possible infection of contact person
+                    if random.random() <= prob_for_contact_infection: 
+                        contact_index = self.index + i + np.sqrt(population)*j
+                        infections.append(contact_index)
+                 
+         
+        return infections
+    
     
 def Network_Person(Person):
     """
