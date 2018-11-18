@@ -103,12 +103,14 @@ class Person:
         vaccinated (boolean): true, if person is vaccinated
         infected_days (int): counts days since person is infected, -1 if person is healthy
         index (int): between 0 and population size, "Name" of a person (for identification)
-        percieved_vacc_risk = 10e-4 TODO
-		percieved_infec_risk = 0.5 TODO
+        percieved_vacc_risk (float): percieved risk when vaccinating (side effects)
+		percieved_infec_risk (float): the percieved risk when the person gets infected
+        alive (bool): only alive people are counted in the simulation
+        recoverd (bool): true, if the person has recoverd from the disease
         
     Functions:
         get_vaccinated(self):
-            TODO
+            sets vaccinated to true if tool.expected_gain() is positive
             
         get_infected(self):
             changes 'infected_days'-parameter to 0 and increases the number of
@@ -125,6 +127,23 @@ class Person:
         
         start_infection(self):
             Calls the infect_other_people() function, if person is sick
+            
+        kill(self):
+            Kills a person by changing the alive variable to false
+            
+        get_born(self, vaccinated, infected_days, \
+                 percieved_vacc_risk = 10e-4,\
+				 percieved_infec_risk = 0.5):
+            A dead person becomes alive initialized with the same attributes
+            
+        change_vacc_risk_relative(self, factor):
+            Changes the percieved vaccination risk relativ
+
+        change_infec_risk_relative(self, factor):
+            Changes the percieved infection risk relativ
+        
+        get_status(self):
+            returns the status (helthy, vacc, et.al.) as a int
         
         
     """
@@ -132,7 +151,7 @@ class Person:
     
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.5, alive = True, recovered = False):
+				 percieved_infec_risk = 0.1, alive = True, recovered = False):
         self.vaccinated = vaccinated
         self.infected_days = infected_days
         self.index = index
@@ -140,6 +159,7 @@ class Person:
         self.percieved_infec_risk = percieved_infec_risk
         self.alive = alive
         self.recovered = recovered
+        
 		
         global population_alive
         population_alive += 1
@@ -151,7 +171,7 @@ class Person:
         
     def get_vaccinated(self):
         """
-            TODO
+            sets vaccinated to true if tool.grid_expected_gain() is positive
     	"""
         global vaccinated_people
         if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
@@ -179,6 +199,7 @@ class Person:
             Assumption: Person (self) is sick
         """
         infections = []
+            
         #contacts: the number of contacts with other people, depending on incubation time
         contacts = daily_contacts_when_healthy
         if self.infected_days > incubation_time:
@@ -288,13 +309,6 @@ class Person:
         
         elif self.dead_person == False:
             print("Person is not dead!")
-        
-        
-    def dead_person(self):
-        """
-            Retuns true, if person is dead
-        """
-        return (not alive)
  
     
     def change_vacc_risk_relative(self, factor):
@@ -338,24 +352,76 @@ class List_Person(Person):
     
 class Grid_Person(Person):
     """
-    TODO: Timo
-        should raise an error if population is not a quadratic number
-        should infect people in a directions
+    Args:
+        neighborhood (int): number of persons in the neighborhood (one can only make contact with the neighbors)
+        infected_neighbors (int): number of people in proximity that are infected
+    
+    Functions:
+        get_vaccinated(self):
+            sets vaccinated to true if tool.grid_expected_gain() is positive
+        
+        get_neighborhood(self):
+            returns a list of people with whom the person can have contact
+            
+        infect_other_people(self):
+            Looks at all people in the neighborhood and infectes them with
+            the probability prob_for_contact_infection
+            Assumption: Person (self) is sick
+            returns: array of the indices of the people that get infected
+            
     """
+    def __init__(self, vaccinated, infected_days, index, \
+                 percieved_vacc_risk = 10e-5,\
+				 percieved_infec_risk = 0.1, alive = True, recovered = False,\
+                 neighborhood = 9):
+        super().__init__(vaccinated, infected_days, index, \
+                 percieved_vacc_risk,\
+				 percieved_infec_risk, alive, recovered)
+        self.neighborhood = neighborhood
+        self.infected_neighbors = 0
+        
+    def get_vaccinated(self):
+        """
+            sets vaccinated to true if tool.grid_expected_gain() is positive
+    	"""
+        global vaccinated_people
+        if self.infected_days < 0 and not self.vaccinated and tool.grid_expected_gain(vaccinated_people / \
+          population_alive, infected_people / population_alive, self.percieved_vacc_risk,\
+          self.percieved_infec_risk, self.infected_neighbors/self.neighborhood) > 0:
+            self.vaccinated = True
+            vaccinated_people += 1
+        
+    def get_neighborhood(self):
+        """
+        returns a list of people with whom the person can have contact
+        
+        returns: array of neighbors
+        """
+        sqrtnum = int(np.sqrt(population))
+        neighbors = []
+        for i in range(-1,2): #Spalte
+            for j in range(-1,2): #Zeile
+                if (i != 0 or j != 0) and \
+                    ((self.index % sqrtnum) + i >= 0 and (self.index % sqrtnum) + i < sqrtnum) and \
+                    (int(self.index/sqrtnum) + j >= 0 and int(self.index/sqrtnum) + j < sqrtnum):
+                        contact_index = self.index + i + sqrtnum*j
+                        neighbors.append(contact_index)
+        return neighbors
     
     def infect_other_people(self):
         """
-            Looking for random contacts in neighbourhood until 'daily_contacts'
-            is reached. Infects randomly the person, to which it has a contact.
+            Looks at all people in the neighborhood and infectes them with
+            the probability prob_for_contact_infection
             Assumption: Person (self) is sick
+            
+            returns: array of the indices of the people that get infected
         """
         infections = []
         
         sqrtnum = int(np.sqrt(population))
-    
+        
         if sqrtnum * sqrtnum != population:
             raise Exception("Population has to be a quadratic number!")
-        
     
         
         for i in range(-1,2): #Spalte
