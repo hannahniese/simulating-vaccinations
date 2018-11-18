@@ -15,7 +15,7 @@ import datetime
 # parameters for the disease
 
 #Population parameters
-population = 10000 #number of people in our simulation
+population = 900 #number of people in our simulation
 population_alive = 10000 #number of people alive at the start of the simulation
 vaccinated_people = 0 #number of people, who are vaccinated
 infected_people = 0 #number of currently infected people
@@ -32,9 +32,9 @@ vaccinated_people_list = [] #integer-list: stores for every day the number of
 
 
 #Diseases parameters
-prob_for_diseases = 0.000003 #Random probability (per day and person) to become
+prob_for_diseases = 0.0003 #Random probability (per day and person) to become
                             #sick without beeing infected by someone else
-prob_for_contact_infection = 0.05 #probability to infect an other person, when
+prob_for_contact_infection = 0.1 #probability to infect an other person, when
                                  #there is a contact
 incubation_time = 2 #days until person realizes that it is sick (needed for daily contacts)
 time_to_get_healthy = 10 #counts days from infection. After this time, a person
@@ -87,11 +87,20 @@ for days in range(0,simulation_time):
         people_list[x].get_vaccinated()
         
     #looks, which people are infected during this day
+    #updates infected_neighbors of all neighbors
     for x in range(0,population): 
         infections = people_list[x].start_infection()
         #print(infections)
         for i in infections:
             people_list[i].get_infected()
+        if people_list[x].infected_days == incubation_time:
+            neighbors = people_list[x].get_neighborhood()
+            for i in neighbors:
+                people_list[i].infected_neighbors += 1
+        if people_list[x].infected_days == 10:
+            neighbors = people_list[x].get_neighborhood()
+            for i in neighbors:
+                people_list[i].infected_neighbors -= 1
     
     #file input
     for x in range(0,population): 
@@ -128,3 +137,5 @@ if count != 0 and population != 0:
     percentage_infected_people = (float(average)/float(count))/float(population)*100 #average calculation
     print("In average", round(percentage_infected_people,1), "% of the population is infected.")
 
+#for x in people_list:
+#    print(x.infected_neighbors)
