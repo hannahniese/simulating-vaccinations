@@ -15,10 +15,10 @@ void setup(){
   //noStroke();
   stroke(0);
   
-  frameRate(10);
+  frameRate(15);
   
   //zeilen = loadStrings("2018-11-17_14-14-51.txt");
-  zeilen = loadStrings("33_2018-11-18_20-37-43.txt");
+  zeilen = loadStrings("2018-11-18_21-43-48.txt");
   
   while(true){
     int[] num = int(split(zeilen[n],'*'));
@@ -62,6 +62,9 @@ void draw(){
 }
 
 void keyReleased(){
+  if(key == '2') n += 1; //2
+  if(key == '1') n -= 1; //1
+  
   if(keyCode == 39) n += 10; //Right arrow
   if(keyCode == 37) n -= 10; //Left arrow
   if(keyCode == 32) start = !start; //Space

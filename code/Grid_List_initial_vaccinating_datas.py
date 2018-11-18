@@ -41,7 +41,7 @@ datas.write("vacc_prob_init,vaccinated_people,immune_and_sick_people\n\n")
 
 vacc_prob_init = 0 #probability of beeing infected at beginning of simulation (Percentage!)
     
-for vacc_prob_init in range(0,100): 
+for vacc_prob_init in range(0,10): 
     immune_and_sick_people = 0
     vaccinated_people2 = 0
         
