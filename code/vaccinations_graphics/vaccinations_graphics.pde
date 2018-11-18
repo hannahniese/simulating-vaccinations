@@ -1,3 +1,5 @@
+// Press space to start/pause simulation //<>//
+
 String[] zeilen;
 int n = 0;
 
@@ -16,7 +18,7 @@ void setup(){
   frameRate(10);
   
   //zeilen = loadStrings("2018-11-17_14-14-51.txt");
-  zeilen = loadStrings("26_2018-11-17_23-34-39.txt");
+  zeilen = loadStrings("33_2018-11-18_20-37-43.txt");
   
   while(true){
     int[] num = int(split(zeilen[n],'*'));
@@ -60,8 +62,8 @@ void draw(){
 }
 
 void keyReleased(){
-  if(keyCode == 39) n += 10;
-  if(keyCode == 37) n -= 10;
-  if(keyCode == 32) start = !start;
+  if(keyCode == 39) n += 10; //Right arrow
+  if(keyCode == 37) n -= 10; //Left arrow
+  if(keyCode == 32) start = !start; //Space
   
 }
