@@ -191,40 +191,6 @@ class Person:
             self.infected_days = 0 #infection starts
             global infected_people
             infected_people += 1
-      
-    def infect_other_people(self):
-        """
-            Looking for random contacts in neighbourhood until 'daily_contacts'
-            is reached. Infects randomly the person, to which it has a contact.
-            Assumption: Person (self) is sick
-        """
-        infections = []
-            
-        #contacts: the number of contacts with other people, depending on incubation time
-        contacts = daily_contacts_when_healthy
-        if self.infected_days > incubation_time:
-            contacts = daily_contacts_when_sick
-        
-        #index distance of possible contact person to person self
-        contact_delta_index = 6
-        #looks for possible contact persons by increasing contact_delta_index
-        while contacts > 0:
-            if random.random() <= 1: #we have a contact with a person "on the right"
-                contacts -= 1
-                #possible infection of contact person
-                if random.random() <= prob_for_contact_infection: 
-                    contact_index = (self.index + contact_delta_index)%population
-                    infections.append(contact_index)
-             
-            if contacts > 0 and random.random() <= 1: #we have a contact with a person "on the left"
-                contacts -= 1
-                #possible infection of contact person
-                if random.random() <= prob_for_contact_infection:
-                    contact_index = (self.index - contact_delta_index)%population
-                    infections.append(contact_index)
-            
-            contact_delta_index += 1
-        return infections
     
     
     def next_day(self):
@@ -345,9 +311,40 @@ class Person:
         
     
 class List_Person(Person):
-    """TODO: Timo
-        Implement the Person class for a list
-    """
+    
+    def infect_other_people(self):
+        """
+            Looking for random contacts in neighbourhood until 'daily_contacts'
+            is reached. Infects randomly the person, to which it has a contact.
+            Assumption: Person (self) is sick
+        """
+        infections = []
+            
+        #contacts: the number of contacts with other people, depending on incubation time
+        contacts = daily_contacts_when_healthy
+        if self.infected_days > incubation_time:
+            contacts = daily_contacts_when_sick
+        
+        #index distance of possible contact person to person self
+        contact_delta_index = 6
+        #looks for possible contact persons by increasing contact_delta_index
+        while contacts > 0:
+            if random.random() <= 1: #we have a contact with a person "on the right"
+                contacts -= 1
+                #possible infection of contact person
+                if random.random() <= prob_for_contact_infection: 
+                    contact_index = (self.index + contact_delta_index)%population
+                    infections.append(contact_index)
+             
+            if contacts > 0 and random.random() <= 1: #we have a contact with a person "on the left"
+                contacts -= 1
+                #possible infection of contact person
+                if random.random() <= prob_for_contact_infection:
+                    contact_index = (self.index - contact_delta_index)%population
+                    infections.append(contact_index)
+            
+            contact_delta_index += 1
+        return infections
     
     
 class Grid_Person(Person):
@@ -438,9 +435,37 @@ class Grid_Person(Person):
         return infections
     
     
-def Network_Person(Person):
-    """
-    TODO:
-        project for a later time
-    """
+class Network_Person(Person):
+    
+    def __init__(self, vaccinated, infected_days, index, \
+                 percieved_vacc_risk = 10e-4,\
+				 percieved_infec_risk = 0.1, alive = True, recovered = False,\
+                 neighborhood = 9):
+        super().__init__(vaccinated, infected_days, index, \
+                 percieved_vacc_risk,\
+				 percieved_infec_risk, alive, recovered)
+        self.contacts = []
+        self.infected_contacts = 0
 
+    def add_contact(self, index):
+        self.contacts.append(index)
+        
+    def infect_other_people(self):
+        infections = []
+        for c in self.contacts:
+            if random.random() <= prob_for_contact_infection:
+                infections.append(c)
+        return infections
+    
+    def get_vaccinated(self):
+        """
+            sets vaccinated to true if tool.grid_expected_gain() is positive
+    	"""
+        global vaccinated_people
+        if len(self.contacts) == 0:
+            return
+        if self.infected_days < 0 and not self.vaccinated and tool.grid_expected_gain(vaccinated_people / \
+          population_alive, infected_people / population_alive, self.percieved_vacc_risk,\
+          self.percieved_infec_risk, self.infected_contacts/len(self.contacts)) > 0:
+            self.vaccinated = True
+            vaccinated_people += 1
