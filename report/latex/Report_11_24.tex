@@ -8,6 +8,7 @@
 \usepackage{natbib}
 \usepackage{amssymb, amsmath}
 \usepackage{listings}
+\graphicspath{ {./images/} }
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \title{Simulating Vaccinations}
@@ -105,6 +106,9 @@ Vaccines are without doubt one of the greatest advances in medicine, whose wides
 \vspace{14px}
 
 We modelled the specific case of Pertussis or Whooping cough, as there have been several incidents where a rising number of infections have been observed despite relatively high vaccination rates. One of these cases is the Netherlands, where, despite a coverage rate of 95\% several cases of Pertussis have been registered. Even though these cases might be few, the survival of the disease means that the coverage rate should remain high. 
+
+\includegraphics[scale=0.6]{ukpertussis}
+
 
 \section{Description of the Model}
 

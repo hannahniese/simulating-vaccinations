@@ -106,6 +106,8 @@ Vaccines are without doubt one of the greatest advances in medicine, whose wides
 
 We modelled the specific case of Pertussis or Whooping cough, as there have been several incidents where a rising number of infections have been observed despite relatively high vaccination rates. One of these cases is the Netherlands, where, despite a coverage rate of 95\% several cases of Pertussis have been registered. Even though these cases might be few, the survival of the disease means that the coverage rate should remain high. 
 
+
+
 \section{Description of the Model}
 
 \subsection{SIR Model}
@@ -137,6 +139,8 @@ time_to_get_healthy = 10
 
 \section{Implementation}
 The model was implemented using Python. First, we wrote the basic SIR model with infection and recovery. Then we added the "vaccination function" which returns whether a person is getting vaccinated or not. Finally, 
+
+\vspace{14px}
 
 
 

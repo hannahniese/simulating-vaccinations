@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  24 NOV 2018 17:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  24 NOV 2018 18:15
 entering extended mode
 **./Report_11_24.tex
 (Report_11_24.tex
@@ -227,18 +227,18 @@ Package: listings 2018/09/02 1.7 (Carsten Heinz)
  (Report_11_24.aux)
 \openout1 = `Report_11_24.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -323,7 +323,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/Hannah Niese/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./ET
 Hlogo-eps-converted-to.pdf>]
-Overfull \hbox (130.82405pt too wide) in paragraph at lines 43--72
+Overfull \hbox (130.82405pt too wide) in paragraph at lines 44--73
  [] 
  []
 
@@ -332,32 +332,42 @@ Overfull \hbox (130.82405pt too wide) in paragraph at lines 43--72
 \openout3 = `Report_11_24.toc'.
 
  [3]
-Overfull \hbox (5.97696pt too wide) in paragraph at lines 103--104
+Overfull \hbox (5.97696pt too wide) in paragraph at lines 104--105
 \OT1/cmr/m/n/12 Vaccines are with-out doubt one of the great-est ad-vances in m
 edicine, whose widespread
  []
 
-[4] [5] [6] (Report_11_24.aux) ) 
+<./images/ukpertussis.png, id=18, 701.62125pt x 552.0625pt>
+File: ./images/ukpertussis.png Graphic file (type png)
+<use ./images/ukpertussis.png>
+Package pdftex.def Info: ./images/ukpertussis.png  used on input line 110.
+(pdftex.def)             Requested size: 420.97598pt x 331.24005pt.
+
+Overfull \hbox (7.97136pt too wide) in paragraph at lines 110--111
+[][] 
+ []
+
+[4] [5 <./images/ukpertussis.png (PNG copy)>] [6] [7] (Report_11_24.aux) ) 
 Here is how much of TeX's memory you used:
- 4789 strings out of 492970
- 63746 string characters out of 3135832
- 141967 words of memory out of 3000000
- 8595 multiletter control sequences out of 15000+200000
+ 4796 strings out of 492970
+ 63889 string characters out of 3135832
+ 141982 words of memory out of 3000000
+ 8599 multiletter control sequences out of 15000+200000
  13655 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,11n,32p,656b,971s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
-i8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr9.pfb>
-Output written on Report_11_24.pdf (6 pages, 143981 bytes).
+<C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+Output written on Report_11_24.pdf (7 pages, 278045 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
+ 66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
