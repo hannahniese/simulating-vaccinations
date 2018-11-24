@@ -1,21 +1,11 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.19)  19 NOV 2018 14:06
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  24 NOV 2018 15:45
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  24 NOV 2018 18:20
 entering extended mode
-**./reportTemplate.tex
-(reportTemplate.tex
+**./Report_11_24.tex
+(Report_11_24.tex
 LaTeX2e <2018-04-01> patch level 5
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cls"
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size11.clo"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size11.clo"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
@@ -30,28 +20,6 @@ File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.
-sty"
-Package: geometry 2018/04/16 v5.8 Page Geometry
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.st
-y"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks14
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.s
-ty"
-Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.
-sty"
-Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
-Package ifvtex Info: VTeX not detected.
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.
-sty"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
 Package: geometry 2018/04/16 v5.8 Page Geometry
 
@@ -67,7 +35,6 @@ Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count88
@@ -83,23 +50,6 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
 
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.
-cfg"))
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.
-sty"
-Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.
-sty"
-Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty"
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\graph
-ics.cfg"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
@@ -111,35 +61,20 @@ Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pdfte
-x.def"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
 )
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amssymb.s
-ty"
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.
-sty"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks16
 \symAMSa=\mathgroup4
@@ -147,46 +82,6 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.
-sty"
-Package: epstopdf 2016/05/15 v2.6 Conversion with epstopdf on the fly (HO)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-
-base.sty"
-Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infware
-rr.sty"
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext.st
-y"
-Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kvdefin
-ekeys.sty"
-Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds
-.sty"
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)))
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions
-.sty"
-Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kvsetke
-ys.sty"
-Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\etexcmd
-s.sty"
-Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifluate
-x.sty"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
 Package: epstopdf 2016/05/15 v2.6 Conversion with epstopdf on the fly (HO)
 
@@ -215,7 +110,6 @@ Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -224,12 +118,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\pdftexc
-mds.sty"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -244,60 +133,30 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 ))
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
-=======
 ("C:\Users\Hannah Niese\AppData\Roaming\MiKTeX\2.9\tex\latex\natbib\natbib.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip43
 \bibsep=\skip44
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count91
-<<<<<<< HEAD
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.st
-y"
-=======
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip45
 
 For additional information on amsmath, use the `?' option.
-<<<<<<< HEAD
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.st
-y"
-Package: amstext 2000/06/29 v2.01 AMS text
-
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
-"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01 AMS text
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen113
 ))
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
-"
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen114
-)
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
-"
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen114
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count92
@@ -337,26 +196,49 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
-<<<<<<< HEAD
-) (reportTemplate.aux)
-=======
 )
-(reportTemplate.aux)
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
-\openout1 = `reportTemplate.aux'.
+("C:\Users\Hannah Niese\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.
+sty"
+\lst@mode=\count104
+\lst@gtempboxa=\box28
+\lst@token=\toks22
+\lst@length=\count105
+\lst@currlwidth=\dimen122
+\lst@column=\count106
+\lst@pos=\count107
+\lst@lostspace=\dimen123
+\lst@width=\dimen124
+\lst@newlines=\count108
+\lst@lineno=\count109
+\lst@maxwidth=\dimen125
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+("C:\Users\Hannah Niese\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstmisc.s
+ty"
+File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
+\c@lstnumber=\count110
+\lst@skipnumbers=\count111
+\lst@framebox=\box29
+)
+("C:\Users\Hannah Niese\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.
+cfg"
+File: listings.cfg 2018/09/02 1.7 listings configuration
+))
+Package: listings 2018/09/02 1.7 (Carsten Heinz)
+ (Report_11_24.aux)
+\openout1 = `Report_11_24.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -393,37 +275,28 @@ LaTeX Font Info:    ... okay on input line 16.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
-=======
 ("C:\Users\Hannah Niese\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mk
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
-\scratchdimen=\dimen122
-\scratchbox=\box28
-\nofMPsegments=\count105
-\nofMParguments=\count106
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count107
-\MPscratchDim=\dimen123
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
-\everyMPtoPDFconversion=\toks23
-) (cover.tex
+\scratchcounter=\count112
+\scratchdimen=\dimen126
+\scratchbox=\box30
+\nofMPsegments=\count113
+\nofMParguments=\count114
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen127
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
+\everyMPtoPDFconversion=\toks24
+)
+\c@lstlisting=\count118
+ (cover.tex
 Package epstopdf Info: Source file: <ETHlogo.eps>
-<<<<<<< HEAD
-(epstopdf)                    date: 2018-11-09 16:52:35
-(epstopdf)                    size: 179075 bytes
-(epstopdf)             Output file: <ETHlogo-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-11-19 14:06:36
-=======
 (epstopdf)                    date: 2018-11-06 12:39:47
 (epstopdf)                    size: 179075 bytes
 (epstopdf)             Output file: <ETHlogo-eps-converted-to.pdf>
 (epstopdf)                    date: 2018-11-06 13:53:32
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
 (epstopdf)                    size: 14409 bytes
 (epstopdf)             Command: <epstopdf --outfile=ETHlogo-eps-converted-to.pd
 f ETHlogo.eps>
@@ -439,18 +312,6 @@ File: ETHlogo-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: ETHlogo-eps-converted-to.pdf  used on input line 5.
 (pdftex.def)             Requested size: 142.26378pt x 35.76698pt.
 LaTeX Font Info:    Try loading font information for U+msa on input line 34.
-<<<<<<< HEAD
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 34.
-("C:\Users\marku\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)) [1
-
-{C:/Users/marku/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./ETHlogo-e
-ps-converted-to.pdf>]
-=======
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -462,61 +323,48 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/Hannah Niese/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./ET
 Hlogo-eps-converted-to.pdf>]
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
-Overfull \hbox (5.3226pt too wide) in paragraph at lines 42--60
+Overfull \hbox (130.82405pt too wide) in paragraph at lines 44--73
  [] 
  []
 
-[2] (reportTemplate.toc)
+[2] (Report_11_24.toc)
 \tf@toc=\write3
-\openout3 = `reportTemplate.toc'.
+\openout3 = `Report_11_24.toc'.
 
-<<<<<<< HEAD
- [3] [4] (reportTemplate.aux) ) 
-Here is how much of TeX's memory you used:
- 3179 strings out of 492970
- 44116 string characters out of 3126593
- 112135 words of memory out of 3000000
- 7001 multiletter control sequences out of 15000+200000
- 12110 words of font info for 47 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 42i,10n,27p,329b,250s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/marku/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/marku/AppData/Local/Progr
-ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/marku/AppData
-/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/m
-arku/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb
->
-Output written on reportTemplate.pdf (4 pages, 72182 bytes).
-PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
-=======
  [3]
-Overfull \hbox (5.97696pt too wide) in paragraph at lines 91--92
+Overfull \hbox (5.97696pt too wide) in paragraph at lines 104--105
 \OT1/cmr/m/n/12 Vaccines are with-out doubt one of the great-est ad-vances in m
 edicine, whose widespread
  []
 
-[4] (reportTemplate.aux) ) 
+<./images/ukpertussis.png, id=18, 701.62125pt x 552.0625pt>
+File: ./images/ukpertussis.png Graphic file (type png)
+<use ./images/ukpertussis.png>
+Package pdftex.def Info: ./images/ukpertussis.png  used on input line 111.
+(pdftex.def)             Requested size: 280.64352pt x 220.82108pt.
+[4 <./images/ukpertussis.png (PNG copy)>] [5] [6] [7] (Report_11_24.aux) ) 
 Here is how much of TeX's memory you used:
- 3188 strings out of 492970
- 42666 string characters out of 3135832
- 113135 words of memory out of 3000000
- 7006 multiletter control sequences out of 15000+200000
- 13348 words of font info for 52 fonts, out of 3000000 for 9000
+ 4796 strings out of 492970
+ 63889 string characters out of 3135832
+ 139982 words of memory out of 3000000
+ 8599 multiletter control sequences out of 15000+200000
+ 13655 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,10n,27p,644b,250s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr9.pfb>
-Output written on reportTemplate.pdf (4 pages, 100583 bytes).
+ 42i,11n,32p,715b,1523s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+Output written on Report_11_24.pdf (7 pages, 296630 bytes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
->>>>>>> 38af7fc4c2c6d4b42eefd0a9bb82ad0a1317703c
+ 74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
