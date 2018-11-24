@@ -57,7 +57,7 @@ def expect_value(vaccinate_probability, coverage_level, infec_level, risk):
 	return expect
 
 
-def expected_gain(coverage_level, infec_level, risk_vacc, risk_infec):
+def expected_gain(coverage_level, infec_level, vacc_cost, infec_cost):
 	"""calculates the expectation expected gain if one vaccinates
 
 	Args:
@@ -67,10 +67,10 @@ def expected_gain(coverage_level, infec_level, risk_vacc, risk_infec):
 	Returns:
 		expectation value
 	"""
-	expect = - risk_vacc + risk_infec * prob_infec(infec_level, coverage_level)
+	expect = - vacc_cost + infec_cost * prob_infec(infec_level, coverage_level)
 	return expect
 
-def grid_expected_gain(coverage_level, infec_level, risk_vacc, risk_infec,\
+def grid_expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
                   rate_in_neighborhood):
 	"""calculates the expectation expected gain if one vaccinates
 
@@ -84,7 +84,7 @@ def grid_expected_gain(coverage_level, infec_level, risk_vacc, risk_infec,\
 	Returns:
 		expectation value
 	"""
-	expect = - risk_vacc + risk_infec * prob_infec(infec_level, coverage_level,\
+	expect = - vacc_cost + infec_cost * prob_infec(infec_level, coverage_level,\
                                                 rate_in_neighborhood)
 	return expect
 
@@ -119,7 +119,24 @@ def initial_infected(people_list, proportion_infected):
         rand = random.randint(0, len(people_list)-1)
         if people_list[rand].infected_days == -1:
             people_list[rand].get_infected()
-        inf -= 1
+            inf -= 1
     return people_list       
     
-"""TODO kill"""
+def initial_vaccinated(people_list, proportion_vaccinated):
+    """calls get_infected on random persons in people_list
+    
+    Args:
+        people_list: list elements of class person
+        propotion_vaccinated: the proportion of the element in the list that
+        should get vaccinated
+        
+    Returns:
+        people_list
+    """
+    inf = len(people_list) * proportion_vaccinated
+    while inf > 0:
+        rand = random.randint(0, len(people_list)-1)
+        if people_list[rand].vaccinated == False:
+            people_list[rand].vaccinated = True
+            inf -= 1
+    return people_list

@@ -10,21 +10,7 @@ import game_theory_tools as tool
 import numpy as np
 
 
-##Population parameters
-#population = 0
-#vaccinated_people = 0
-#infected_people = 0
-#daily_contacts_when_healthy = 0
-#daily_contacts_when_sick = 0
-##Diseases parameters
-#prob_for_diseases = 0
-#prob_for_contact_infection = 0
-#incubation_time = 0
-#time_to_get_healthy = 0
-
-
-
-
+# function that initializes the global parameters
 def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_daily_contacts_when_healthy, p_daily_contacts_when_sick,\
         p_prob_for_diseases, p_prob_for_contact_infection,\
@@ -42,7 +28,6 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_time_to_get_healthy(int): length of the disease in days
         p_population_alive(int): number of people alive at the beginning
     """
-
     global population
     population = p_population
     global vaccinated_people
@@ -65,7 +50,7 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
     population_alive = p_population_alive
 
     
-
+## getter-functions for global parameters
 def get_num_infected_people():
     """
     returns the current number of infected people
@@ -89,13 +74,8 @@ def change_population_alive(change):
     #population_alive += change
 
 
+# base class Person
 class Person:
-    """TODO Timo
-    dead person ✓
-    recovered ✓
-    change percieved risks member funktion relativ!! ✓
-    kill ✓
-    """
     """
     class Person
     
@@ -103,8 +83,8 @@ class Person:
         vaccinated (boolean): true, if person is vaccinated
         infected_days (int): counts days since person is infected, -1 if person is healthy
         index (int): between 0 and population size, "Name" of a person (for identification)
-        percieved_vacc_risk (float): percieved risk when vaccinating (side effects)
-		percieved_infec_risk (float): the percieved risk when the person gets infected
+        percieved_vacc_cost (float): percieved cost when vaccinating (side effects)
+		percieved_infec_cost (float): the percieved cost when the person gets infected
         alive (bool): only alive people are counted in the simulation
         recoverd (bool): true, if the person has recoverd from the disease
         
@@ -132,15 +112,15 @@ class Person:
             Kills a person by changing the alive variable to false
             
         get_born(self, vaccinated, infected_days, \
-                 percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.5):
+                 percieved_vacc_cost = 10e-4,\
+				 percieved_infec_cost = 0.5):
             A dead person becomes alive initialized with the same attributes
             
-        change_vacc_risk_relative(self, factor):
-            Changes the percieved vaccination risk relativ
+        change_vacc_cost_relative(self, factor):
+            Changes the percieved vaccination cost relativ
 
-        change_infec_risk_relative(self, factor):
-            Changes the percieved infection risk relativ
+        change_infec_cost_relative(self, factor):
+            Changes the percieved infection cost relativ
         
         get_status(self):
             returns the status (helthy, vacc, et.al.) as a int
@@ -148,40 +128,25 @@ class Person:
         
     """
     
-    
     def __init__(self, vaccinated, infected_days, index, \
-                 percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.1, alive = True, recovered = False):
+                 percieved_vacc_cost, percieved_infec_cost,\
+                 alive = True, recovered = False):
         self.vaccinated = vaccinated
         self.infected_days = infected_days
         self.index = index
-        self.percieved_vacc_risk = percieved_vacc_risk
-        self.percieved_infec_risk = percieved_infec_risk
+        self.percieved_vacc_cost = percieved_vacc_cost
+        self.percieved_infec_cost = percieved_infec_cost
         self.alive = alive
         self.recovered = recovered
         
-		
         global population_alive
         population_alive += 1
-    
+        
         if self.vaccinated == True:
             global vaccinated_people
             vaccinated_people += 1
         
         
-    def get_vaccinated(self):
-        """
-            sets vaccinated to true if tool.grid_expected_gain() is positive
-    	"""
-        global vaccinated_people
-        if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
-          population_alive, infected_people / population_alive, self.percieved_vacc_risk,\
-          self.percieved_infec_risk) > 0:
-            self.vaccinated = True
-            vaccinated_people += 1
-
-
-
     def get_infected(self):
         """
            changes 'infected_days'-parameter to 0 and increases the number of
@@ -194,7 +159,6 @@ class Person:
     
     
     def next_day(self):
-        """später TODO Timo rückgabe Person ist gestorben"""
         """
             Makes some people randomly sick (prob_for_diseases)
             Increases time_to_get_healthy of sick people
@@ -220,7 +184,7 @@ class Person:
         """
         #print("G")
         infections = []
-        if self.infected_days > 0: #person is sick
+        if self.infected_days >= 0 and self.infected_days <= incubation_time: #person is sick
             return self.infect_other_people()
         return infections
     
@@ -229,13 +193,13 @@ class Person:
         """
             Kills a person by changing the alive-variable
         """
-        global alive
         global population_alive
         global vaccinated_people
         global infected_people
         
-        if alive == True:
-            alive = False
+        
+        if self.alive == True:
+            self.alive = False
             
             population_alive -= 1
             self.recovered = False
@@ -243,26 +207,27 @@ class Person:
             if self.vaccinated == True:
                 self.vaccinated = False
                 vaccinated_people -= 1
+                
             
             if self.infected_days >= 0:
                 infected_people -= 1
                 self.infected_days = -1
-        
-        elif alive == False:
+            
+        else:
             print("Person is still dead!")
             
     
     def get_born(self, vaccinated, infected_days, \
-                 percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.5):   #index stays the same
+                 percieved_vacc_cost = 10e-4,\
+				 percieved_infec_cost = 0.5):   #index stays the same
         """
             A dead person becomes alive
         """
-        if self.dead_person == True:
+        if self.alive == False:
             self.vaccinated = vaccinated
             self.infected_days = infected_days
-            self.percieved_vacc_risk = percieved_vacc_risk
-            self.percieved_infec_risk = percieved_infec_risk
+            self.percieved_vacc_cost = percieved_vacc_cost
+            self.percieved_infec_cost = percieved_infec_cost
             
             global population_alive
             population_alive += 1
@@ -273,22 +238,22 @@ class Person:
                 global vaccinated_people
                 vaccinated_people += 1
         
-        elif self.dead_person == False:
+        elif self.alive == True:
             print("Person is not dead!")
  
     
-    def change_vacc_risk_relative(self, factor):
+    def change_vacc_cost_relative(self, factor):
         """
-            Changes the percieved vaccination risk relativ
+            Changes the percieved vaccination cost relativ
         """
-        self.percieved_vacc_risk *= factor
+        self.percieved_vacc_cost *= factor
     
     
-    def change_infec_risk_relative(self, factor):
+    def change_infec_cost_relative(self, factor):
         """
-            Changes the percieved infection risk relativ
+            Changes the percieved infection cost relativ
         """
-        self.percieved_infec_risk *= factor
+        self.percieved_infec_cost *= factor
         
     def get_status(self):
         """
@@ -310,7 +275,19 @@ class Person:
 		
         
     
+    
 class List_Person(Person):
+    
+    def get_vaccinated(self):
+        """
+            sets vaccinated to true if tool.grid_expected_gain() is positive
+    	"""
+        global vaccinated_people
+        if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
+          population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
+          self.percieved_infec_cost) > 0:
+            self.vaccinated = True
+            vaccinated_people += 1
     
     def infect_other_people(self):
         """
@@ -320,14 +297,14 @@ class List_Person(Person):
         """
         infections = []
             
-        #contacts: the number of contacts with other people, depending on incubation time
+        # contacts: the number of contacts with other people, depending on incubation time
         contacts = daily_contacts_when_healthy
         if self.infected_days > incubation_time:
             contacts = daily_contacts_when_sick
         
-        #index distance of possible contact person to person self
+        # index distance of possible contact person to person self
         contact_delta_index = 6
-        #looks for possible contact persons by increasing contact_delta_index
+        # looks for possible contact persons by increasing contact_delta_index
         while contacts > 0:
             if random.random() <= 1: #we have a contact with a person "on the right"
                 contacts -= 1
@@ -345,6 +322,8 @@ class List_Person(Person):
             
             contact_delta_index += 1
         return infections
+    
+    
     
     
 class Grid_Person(Person):
@@ -368,12 +347,11 @@ class Grid_Person(Person):
             
     """
     def __init__(self, vaccinated, infected_days, index, \
-                 percieved_vacc_risk = 10e-5,\
-				 percieved_infec_risk = 0.1, alive = True, recovered = False,\
-                 neighborhood = 9):
+                 percieved_vacc_cost, percieved_infec_cost,\
+                 alive = True, recovered = False, neighborhood = 9):
         super().__init__(vaccinated, infected_days, index, \
-                 percieved_vacc_risk,\
-				 percieved_infec_risk, alive, recovered)
+                 percieved_vacc_cost,\
+				 percieved_infec_cost, alive, recovered)
         self.neighborhood = neighborhood
         self.infected_neighbors = 0
         
@@ -383,8 +361,8 @@ class Grid_Person(Person):
     	"""
         global vaccinated_people
         if self.infected_days < 0 and not self.vaccinated and tool.grid_expected_gain(vaccinated_people / \
-          population_alive, infected_people / population_alive, self.percieved_vacc_risk,\
-          self.percieved_infec_risk, self.infected_neighbors/self.neighborhood) > 0:
+          population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
+          self.percieved_infec_cost, self.infected_neighbors/self.neighborhood) > 0:
             self.vaccinated = True
             vaccinated_people += 1
         
@@ -396,8 +374,8 @@ class Grid_Person(Person):
         """
         sqrtnum = int(np.sqrt(population))
         neighbors = []
-        for i in range(-1,2): #Spalte
-            for j in range(-1,2): #Zeile
+        for i in range(-1,2): # column
+            for j in range(-1,2): # line
                 if (i != 0 or j != 0) and \
                     ((self.index % sqrtnum) + i >= 0 and (self.index % sqrtnum) + i < sqrtnum) and \
                     (int(self.index/sqrtnum) + j >= 0 and int(self.index/sqrtnum) + j < sqrtnum):
@@ -421,12 +399,12 @@ class Grid_Person(Person):
             raise Exception("Population has to be a quadratic number!")
     
         
-        for i in range(-1,2): #Spalte
-            for j in range(-1,2): #Zeile
+        for i in range(-1,2): # column
+            for j in range(-1,2): # line
                 if (i != 0 or j != 0) and \
                     ((self.index % sqrtnum) + i >= 0 and (self.index % sqrtnum) + i < sqrtnum) and \
                     (int(self.index/sqrtnum) + j >= 0 and int(self.index/sqrtnum) + j < sqrtnum):
-                    #possible infection of contact person
+                    # possible infection of contact person
                     if random.random() <= prob_for_contact_infection: 
                         contact_index = self.index + i + sqrtnum*j
                         infections.append(contact_index)
@@ -435,37 +413,52 @@ class Grid_Person(Person):
         return infections
     
     
+    
 class Network_Person(Person):
     
     def __init__(self, vaccinated, infected_days, index, \
-                 percieved_vacc_risk = 10e-4,\
-				 percieved_infec_risk = 0.1, alive = True, recovered = False,\
-                 neighborhood = 9):
+                 percieved_vacc_cost, percieved_infec_cost,\
+                 alive = True, recovered = False):
         super().__init__(vaccinated, infected_days, index, \
-                 percieved_vacc_risk,\
-				 percieved_infec_risk, alive, recovered)
+                 percieved_vacc_cost,\
+				 percieved_infec_cost, alive, recovered)
         self.contacts = []
         self.infected_contacts = 0
 
     def add_contact(self, index):
+        """
+            Adds the index to the persons adjeciency list
+            
+            Args:
+                index (int): index of the person to be added as contact
+        """
         self.contacts.append(index)
         
     def infect_other_people(self):
+        """
+            goes through all contacts of an infected person and infects
+            randomly some of the contacts
+            
+            Returns:
+                List of indexes of people that get infected
+        """
         infections = []
         for c in self.contacts:
-            if random.random() <= prob_for_contact_infection:
+            if random.random() < 0.2 and random.random() <= prob_for_contact_infection:
                 infections.append(c)
         return infections
     
     def get_vaccinated(self):
         """
-            sets vaccinated to true if tool.grid_expected_gain() is positive
+            sets vaccinated to true if the person is not infected,
+            not vaccinated and tool.grid_expected_gain() is positive
+            increases the global varible infected_people 
     	"""
         global vaccinated_people
         if len(self.contacts) == 0:
             return
-        if self.infected_days < 0 and not self.vaccinated and tool.grid_expected_gain(vaccinated_people / \
-          population_alive, infected_people / population_alive, self.percieved_vacc_risk,\
-          self.percieved_infec_risk, self.infected_contacts/len(self.contacts)) > 0:
+        if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
+          population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
+          self.percieved_infec_cost) > 0:
             self.vaccinated = True
             vaccinated_people += 1
