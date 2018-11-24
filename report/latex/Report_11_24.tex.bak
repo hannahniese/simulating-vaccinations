@@ -8,6 +8,7 @@
 \usepackage{natbib}
 \usepackage{amssymb, amsmath}
 \usepackage{listings}
+\graphicspath{ {./images/} }
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \title{Simulating Vaccinations}
@@ -100,12 +101,15 @@
 
 \section{Introduction and Motivations}
 
-Vaccines are without doubt one of the greatest advances in medicine, whose widespread use has lead to the eradication or restriction of some of the deadliest diseases, including smallpox, polio and measles. Every vaccination carries a small risk of side effects. According to the WHO, severe adverse events are extremely rare for most vaccines (for the Hepatitis B vaccine only one in a million is affected) or not yet clinically proven like in the case of Hepatitis A.\footnote{WHO (2018-10-06)}  However, contested medical papers and rumours have led to a reluctance to vaccinate in parts of the society.
+Vaccines are without doubt one of the greatest advances in medicine, whose widespread use has lead to the eradication or restriction of some of the deadliest diseases, including smallpox, polio and measles. Every vaccination carries a small risk of side effects. According to the WHO, severe adverse events are extremely rare for most vaccines (for the Hepatitis B vaccine only one in a million is affected) or not yet clinically proven like in the case of Hepatitis A.\footnote{WHO (2018-10-06), $http://www.who.int/vaccine_safety/initiative/tools/vaccinfosheets/en/$}  However, contested medical papers and rumours have led to a reluctance to vaccinate in parts of the society.
 
 \vspace{14px}
 
 We modelled the specific case of Pertussis or Whooping cough, as there have been several incidents where a rising number of infections have been observed despite relatively high vaccination rates. One of these cases is the Netherlands, where, despite a coverage rate of 95\% several cases of Pertussis have been registered. Even though these cases might be few, the survival of the disease means that the coverage rate should remain high. 
 
+\begin{center}
+\includegraphics[scale=0.4]{ukpertussis}
+\end{center}
 
 
 \section{Description of the Model}
