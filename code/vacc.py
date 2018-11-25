@@ -74,6 +74,21 @@ def change_population_alive(change):
     #population_alive += change
 
 
+def increase_vaccinated_people(num):
+    """
+    increases the number of vaccinated people by num
+    """
+    global vaccinated_people
+    vaccinated_people += num
+
+
+def increase_infected_people(num):
+    """
+    increases the number of infected people by num
+    """
+    global infected_people
+    infected_people += num
+
 # base class Person
 class Person:
     """
@@ -194,7 +209,6 @@ class Person:
             Kills a person by changing the alive-variable
         """
         global population_alive
-        global vaccinated_people
         global infected_people
         
         
@@ -206,9 +220,9 @@ class Person:
             
             if self.vaccinated == True:
                 self.vaccinated = False
+                global vaccinated_people
                 vaccinated_people -= 1
                 
-            
             if self.infected_days >= 0:
                 infected_people -= 1
                 self.infected_days = -1

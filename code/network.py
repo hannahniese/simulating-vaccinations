@@ -22,7 +22,7 @@ start = timeit.default_timer()
 
 ## Population parameters
 population = 4000 # number of people in the simulation
-population_alive = 10000 #number of people alive at the start of the simulation
+population_alive = 4000 #number of people alive at the start of the simulation
 vaccinated_people = 0 # number vaccinated people
 infected_people = 0 # number of infected people
 
@@ -46,7 +46,7 @@ incubation_time = 12 # Incubation Period of the diseasse
 time_to_get_healthy = 42 # after that time a person becomes healthy again
                          
 ## Length of the Simulation
-simulation_length = 400
+simulation_length = 200
 
 ## Initializes the global parameters for the Person Class
 ## !!!required!!!
@@ -68,16 +68,8 @@ tool.initial_infected(people_list, 0.001)
 tool.initial_vaccinated(people_list, 0.3)
 
 ## make initial counts
-count = 0
-for x in people_list:
-    if x.vaccinated == True:
-        count += 1
-print("Initially vaccinated:", count)
-count = 0
-for x in people_list:
-    if x.infected_days != -1:
-        count += 1
-print("Initially infected:", count)
+print("Initially vaccinated:", vacc.get_num_vaccinated_people())
+print("Initially infected:", vacc.get_num_infected_people())
 
 ## import network from a tsv file
 ## the file has to have two column. One with the starting and one with the
@@ -122,35 +114,21 @@ for days in range(0,simulation_length):
     
     # removes and re-adds some vertices according to death rate
     for x in range(population):
-        if random.random() < 0.00002:
+        if random.random() < 1/(365*80): #probability to die at this day
             people_list[x].kill()
             people_list[x].get_born(False, -1)
         
     # Updates Infected_people_list and vaccinated_people_list
-    count = 0
-    for x in people_list:
-        if x.infected_days != -1:
-            count += 1
-    infected_people_list.append(count)    
-    
-    count = 0
-    for x in people_list:
-        if x.vaccinated:
-            count += 1
-    vaccinated_people_list.append(count)    
+    infected_people_list.append(vacc.get_num_infected_people())    
+    vaccinated_people_list.append(vacc.get_num_vaccinated_people())    
             
-
     ##append the number of infected people of this day to infected_people_list
     #infected_people_list.append(vacc.get_num_infected_people()) 
     #append the number of vaccinated people of this day to the vaccinated_people_list
     #vaccinated_people_list.append(vacc.get_num_vaccinated_people())
     
 ## count the vaccinations at the end
-count = 0
-for x in people_list:
-    if x.vaccinated:
-        count += 1
-print("Vaccinated at the end:", count)
+print("Vaccinated at the end:", vacc.get_num_vaccinated_people())
 
 new_vaccinations = tool.discrete_gradient(vaccinated_people_list)
 # create the plot
