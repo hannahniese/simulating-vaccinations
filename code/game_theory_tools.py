@@ -5,7 +5,6 @@ Created on Sat Oct 13 22:01:11 2018
 @author: markus
 """
 import random
-import vacc
 
 def prob_infec(infec_level, coverage_level, risk = 0.1):
 	"""calculates the probability of getting infected
@@ -139,6 +138,42 @@ def initial_vaccinated(people_list, proportion_vaccinated):
         rand = random.randint(0, len(people_list)-1)
         if people_list[rand].vaccinated == False:
             people_list[rand].vaccinated = True
-            vacc.increase_vaccinated_people(1)
             inf -= 1
+    return people_list
+
+
+def change_infection_cost_population(people_list, factor, probability):
+    """ Change the percieved_infec_cost by a factor for every Person
+    with some probability
+    
+    Args:
+        people_list (list of Person): The list of people whose parameter should be changed
+        factor (float): The factor by which the percieved_infec_cost should be changed
+        probability (float, between 0 and 1): probability of each person to get
+            the percieved_infec_cost changed
+    
+    Returns:
+        people_list (list of Person): The list of people whose parameter have been changed
+    """
+    for p in people_list:
+        if random.random() < probability:
+            p.change_infec_cost_relative(factor)
+    return people_list
+
+def change_vaccination_cost_population(people_list, factor, probability):
+    """ Change the percieved_vacc_cost by a factor for every Person
+    with some probability
+    
+    Args:
+        people_list (list of Person): The list of people whose parameter should be changed
+        factor (float): The factor by which the percieved_vacc_cost should be changed
+        probability (float, between 0 and 1): probability of each person to get
+            the percieved_vacc_cost changed
+    
+    Returns:
+        people_list (list of Person): The list of people whose parameter have been changed
+    """
+    for p in people_list:
+        if random.random() < probability:
+            p.change_vacc_cost_relative(factor)
     return people_list
