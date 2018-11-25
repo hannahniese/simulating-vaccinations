@@ -5,6 +5,7 @@ Created on Sat Oct 13 22:01:11 2018
 @author: markus
 """
 import random
+import vacc
 
 def prob_infec(infec_level, coverage_level, risk = 0.1):
 	"""calculates the probability of getting infected
@@ -139,6 +140,7 @@ def initial_vaccinated(people_list, proportion_vaccinated):
         if people_list[rand].vaccinated == False:
             people_list[rand].vaccinated = True
             inf -= 1
+            vacc.increase_vaccinated_people(1)
     return people_list
 
 

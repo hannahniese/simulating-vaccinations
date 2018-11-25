@@ -77,6 +77,21 @@ def change_population_alive(change):
     if population_alive + change > population or population_alive + change < 0:
         raise Exception("Invalid amount of population_alive")
     #population_alive += change
+    
+def increase_vaccinated_people(num):
+    """
+    increases the number of vaccinated people by num
+    """
+    global vaccinated_people
+    vaccinated_people += num
+
+
+def increase_infected_people(num):
+    """
+    increases the number of infected people by num
+    """
+    global infected_people
+    infected_people += num
 
 
 # base class Person
