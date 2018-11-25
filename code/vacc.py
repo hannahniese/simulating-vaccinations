@@ -14,7 +14,8 @@ import numpy as np
 def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_daily_contacts_when_healthy, p_daily_contacts_when_sick,\
         p_prob_for_diseases, p_prob_for_contact_infection,\
-        p_incubation_time, p_time_to_get_healthy, p_population_alive):
+        p_incubation_time, p_time_to_get_healthy, p_population_alive,\
+        p_length_immunization):
     """
     initialize the global paramters needed by the class
     Args:
@@ -27,6 +28,8 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_incubation_time(int): incubation time in days
         p_time_to_get_healthy(int): length of the disease in days
         p_population_alive(int): number of people alive at the beginning
+        p_length_immunization(int): the number of days a person stays immune after
+            vaccination or recovering from infection
     """
     global population
     population = p_population
@@ -48,6 +51,8 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
     time_to_get_healthy = p_time_to_get_healthy
     global population_alive
     population_alive = p_population_alive
+    global length_immunization
+    length_immunization = p_length_immunization
 
     
 ## getter-functions for global parameters
@@ -74,21 +79,6 @@ def change_population_alive(change):
     #population_alive += change
 
 
-def increase_vaccinated_people(num):
-    """
-    increases the number of vaccinated people by num
-    """
-    global vaccinated_people
-    vaccinated_people += num
-
-
-def increase_infected_people(num):
-    """
-    increases the number of infected people by num
-    """
-    global infected_people
-    infected_people += num
-
 # base class Person
 class Person:
     """
@@ -102,6 +92,8 @@ class Person:
 		percieved_infec_cost (float): the percieved cost when the person gets infected
         alive (bool): only alive people are counted in the simulation
         recoverd (bool): true, if the person has recoverd from the disease
+        age (int): age in days
+        days_since_immunization (int): days since either the last vaccination or the last infection
         
     Functions:
         get_vaccinated(self):
@@ -145,7 +137,8 @@ class Person:
     
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_cost, percieved_infec_cost,\
-                 alive = True, recovered = False):
+                 alive = True, recovered = False, age = 0,\
+                 days_since_immunization = 0):
         self.vaccinated = vaccinated
         self.infected_days = infected_days
         self.index = index
@@ -153,6 +146,8 @@ class Person:
         self.percieved_infec_cost = percieved_infec_cost
         self.alive = alive
         self.recovered = recovered
+        self.age = age
+        self.days_since_immunization = days_since_immunization
         
         global population_alive
         population_alive += 1
@@ -178,18 +173,31 @@ class Person:
             Makes some people randomly sick (prob_for_diseases)
             Increases time_to_get_healthy of sick people
             If time_to_get_healthy is big enought peson becomes healthy (infected_days = -1)
+            increases the age by one day
+            increases the days_since_immunization by one if the person was sick or vaccinated
+            sets the days since immunization to 1 if person becomes healthy
         """
-        #random infection without a contact to someone else
+        global length_immunization
+        self.age += 1
+        #
+        if self.days_since_immunization != 0:
+            self.days_since_immunization += 1
+            
+        # reset recoverd and vaccinated of the immunization is no longer active
+        if self.days_since_immunization == length_immunization:
+            self.recoverd = False
+            self.vaccinated = False
+            
+        # random infection without a contact to someone else
         if self.infected_days == -1: #person is healthy
             if random.random() <= prob_for_diseases: 
-                self.get_infected()
-                
+                self.get_infected() 
         else: #person is sick
             self.infected_days += 1 #increase days person is infected
             if self.infected_days > time_to_get_healthy: #person becomes healthy
                 self.infected_days = -1
+                self.days_since_immunization = 1
                 self.recovered = True #person cannot become infected any more
-                
                 global infected_people
                 infected_people -= 1
         
@@ -197,7 +205,6 @@ class Person:
         """
             Calls the infect_other_people() function, if person is sick
         """
-        #print("G")
         infections = []
         if self.infected_days >= 0 and self.infected_days <= incubation_time: #person is sick
             return self.infect_other_people()
@@ -209,9 +216,11 @@ class Person:
             Kills a person by changing the alive-variable
         """
         global population_alive
+        global vaccinated_people
         global infected_people
         
-        
+        self.days_since_immunization = 0
+        self.age = 0
         if self.alive == True:
             self.alive = False
             
@@ -220,15 +229,15 @@ class Person:
             
             if self.vaccinated == True:
                 self.vaccinated = False
-                global vaccinated_people
                 vaccinated_people -= 1
                 
+            
             if self.infected_days >= 0:
                 infected_people -= 1
                 self.infected_days = -1
             
-        else:
-            print("Person is still dead!")
+#        else:
+#            print("Person is still dead!")
             
     
     def get_born(self, vaccinated, infected_days, \
@@ -362,17 +371,21 @@ class Grid_Person(Person):
     """
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_cost, percieved_infec_cost,\
-                 alive = True, recovered = False, neighborhood = 9):
+                 alive = True, recovered = False, neighborhood = 9,\
+                 age = 0, days_since_immunization = 0):
         super().__init__(vaccinated, infected_days, index, \
                  percieved_vacc_cost,\
-				 percieved_infec_cost, alive, recovered)
+				 percieved_infec_cost, alive, recovered, age,\
+                 days_since_immunization)
         self.neighborhood = neighborhood
         self.infected_neighbors = 0
         
     def get_vaccinated(self):
         """
             sets vaccinated to true if tool.grid_expected_gain() is positive
+            sets the days since immunization to 1
     	"""
+        self.days_since_immunization = 1
         global vaccinated_people
         if self.infected_days < 0 and not self.vaccinated and tool.grid_expected_gain(vaccinated_people / \
           population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
@@ -432,10 +445,12 @@ class Network_Person(Person):
     
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_cost, percieved_infec_cost,\
-                 alive = True, recovered = False):
+                 alive = True, recovered = False,\
+                 age = 0, days_since_immunization = 0):
         super().__init__(vaccinated, infected_days, index, \
                  percieved_vacc_cost,\
-				 percieved_infec_cost, alive, recovered)
+				 percieved_infec_cost, alive, recovered, age,\
+                 days_since_immunization)
         self.contacts = []
         self.infected_contacts = 0
 
@@ -467,7 +482,9 @@ class Network_Person(Person):
             sets vaccinated to true if the person is not infected,
             not vaccinated and tool.grid_expected_gain() is positive
             increases the global varible infected_people 
+            sets the days_since_immizations to 1
     	"""
+        self.days_since_immunization = 1
         global vaccinated_people
         if len(self.contacts) == 0:
             return

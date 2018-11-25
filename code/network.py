@@ -4,6 +4,15 @@ Created on Sun Nov 18 16:23:50 2018
 
 @author: markus
 """
+"""
+Markus:
+    Alter
+    days since immunization
+    change vacc scares
+    
+    Momentan steckt man nur bis zur incubationperiod and
+    
+"""
 ## import packages
 import csv
 import numpy as np
@@ -22,7 +31,7 @@ start = timeit.default_timer()
 
 ## Population parameters
 population = 4000 # number of people in the simulation
-population_alive = 4000 #number of people alive at the start of the simulation
+population_alive = 10000 #number of people alive at the start of the simulation
 vaccinated_people = 0 # number vaccinated people
 infected_people = 0 # number of infected people
 
@@ -44,16 +53,19 @@ prob_for_contact_infection = 0.01 # probability to infect an other person, when
                                   # there is a contact
 incubation_time = 12 # Incubation Period of the diseasse
 time_to_get_healthy = 42 # after that time a person becomes healthy again
+length_immunization = 4380 # the number of days a person stays immune after 
+                           # vaccination or recovering from infection
                          
 ## Length of the Simulation
-simulation_length = 200
+simulation_length = 400
 
 ## Initializes the global parameters for the Person Class
 ## !!!required!!!
 vacc.init_parameters(population, vaccinated_people, infected_people,\
         daily_contacts_when_healthy, daily_contacts_when_sick,\
         prob_for_diseases, prob_for_contact_infection,\
-        incubation_time, time_to_get_healthy, population_alive)
+        incubation_time, time_to_get_healthy, population_alive,\
+        length_immunization)
                          
 ## Initial values of the percieved cost of vaccination and infection
 ## for all people the same
@@ -61,15 +73,27 @@ percieved_vacc_cost = 0.001
 percieved_infec_cost = 0.01
 ## create population in people_list
 for x in range(0,population):
-    people_list[x] = vacc.Network_Person(False, -1, x, percieved_vacc_cost, percieved_infec_cost) 
+    age = random.randint(0, 365000)
+    days_since_immunization = random.randint(0, 4380)
+    people_list[x] = vacc.Network_Person(False, -1, x, percieved_vacc_cost,\
+               percieved_infec_cost, age = age,\
+               days_since_immunization = days_since_immunization) 
 
 ## set initial conditions    
-tool.initial_infected(people_list, 0.001)
+tool.initial_infected(people_list, 0.01)
 tool.initial_vaccinated(people_list, 0.3)
 
 ## make initial counts
-print("Initially vaccinated:", vacc.get_num_vaccinated_people())
-print("Initially infected:", vacc.get_num_infected_people())
+count = 0
+for x in people_list:
+    if x.vaccinated == True:
+        count += 1
+print("Initially vaccinated:", count)
+count = 0
+for x in people_list:
+    if x.infected_days != -1:
+        count += 1
+print("Initially infected:", count)
 
 ## import network from a tsv file
 ## the file has to have two column. One with the starting and one with the
@@ -106,29 +130,43 @@ for days in range(0,simulation_length):
         if people_list[x].infected_days == incubation_time:
             for i in people_list[x].contacts:
                 people_list[i].infected_contacts += 1
-                people_list[i].change_infec_cost_relative(1.5)
+                people_list[i].change_infec_cost_relative(1.2)
         if people_list[x].infected_days == time_to_get_healthy:
             for i in people_list[x].contacts:
                 people_list[i].infected_contacts -= 1
-                people_list[i].change_infec_cost_relative(-1.3)
+                people_list[i].change_infec_cost_relative(0.9)
     
     # removes and re-adds some vertices according to death rate
     for x in range(population):
-        if random.random() < 1/(365*80): #probability to die at this day
+        if random.random() < 0.00002:
             people_list[x].kill()
             people_list[x].get_born(False, -1)
         
     # Updates Infected_people_list and vaccinated_people_list
-    infected_people_list.append(vacc.get_num_infected_people())    
-    vaccinated_people_list.append(vacc.get_num_vaccinated_people())    
+    count = 0
+    for x in people_list:
+        if x.infected_days != -1:
+            count += 1
+    infected_people_list.append(count)    
+    
+    count = 0
+    for x in people_list:
+        if x.vaccinated:
+            count += 1
+    vaccinated_people_list.append(count)    
             
+
     ##append the number of infected people of this day to infected_people_list
     #infected_people_list.append(vacc.get_num_infected_people()) 
     #append the number of vaccinated people of this day to the vaccinated_people_list
     #vaccinated_people_list.append(vacc.get_num_vaccinated_people())
     
 ## count the vaccinations at the end
-print("Vaccinated at the end:", vacc.get_num_vaccinated_people())
+count = 0
+for x in people_list:
+    if x.vaccinated:
+        count += 1
+print("Vaccinated at the end:", count)
 
 new_vaccinations = tool.discrete_gradient(vaccinated_people_list)
 # create the plot
