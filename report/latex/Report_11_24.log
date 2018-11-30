@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  24 NOV 2018 18:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  30 NOV 2018 21:52
 entering extended mode
 **./Report_11_24.tex
 (Report_11_24.tex
@@ -296,7 +296,7 @@ Package epstopdf Info: Source file: <ETHlogo.eps>
 (epstopdf)                    date: 2018-11-06 12:39:47
 (epstopdf)                    size: 179075 bytes
 (epstopdf)             Output file: <ETHlogo-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-11-06 13:53:32
+(epstopdf)                    date: 2018-11-25 23:02:05
 (epstopdf)                    size: 14409 bytes
 (epstopdf)             Command: <epstopdf --outfile=ETHlogo-eps-converted-to.pd
 f ETHlogo.eps>
@@ -342,29 +342,41 @@ File: ./images/ukpertussis.png Graphic file (type png)
 <use ./images/ukpertussis.png>
 Package pdftex.def Info: ./images/ukpertussis.png  used on input line 111.
 (pdftex.def)             Requested size: 280.64352pt x 220.82108pt.
-[4 <./images/ukpertussis.png (PNG copy)>] [5] [6] [7] (Report_11_24.aux) ) 
+[4 <./images/ukpertussis.png (PNG copy)>] [5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 179--179
+[][]\OT1/cmr/m/n/9 Bundeszentrale fur Gesund-heitliche Aufklarung Ger-many, K
+euch-hus-ten 
+ []
+
+[7]
+Overfull \hbox (8.83667pt too wide) in paragraph at lines 212--213
+\OT1/cmr/m/n/12 coon-ing Vac-ci-na-tion Strate-gies on In-fant Per-tus-sis Epid
+emiology23(6):852-860, Novem-
+ []
+
+[8] (Report_11_24.aux) ) 
 Here is how much of TeX's memory you used:
- 4796 strings out of 492970
- 63889 string characters out of 3135832
- 139982 words of memory out of 3000000
- 8599 multiletter control sequences out of 15000+200000
- 13655 words of font info for 53 fonts, out of 3000000 for 9000
+ 4799 strings out of 492970
+ 63923 string characters out of 3135832
+ 138982 words of memory out of 3000000
+ 8602 multiletter control sequences out of 15000+200000
+ 13963 words of font info for 54 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,11n,32p,715b,1523s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-Output written on Report_11_24.pdf (7 pages, 296630 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
+x12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+Output written on Report_11_24.pdf (8 pages, 319033 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
+ 81 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
