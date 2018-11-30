@@ -6,7 +6,7 @@ Created on Mon Nov  5 14:57:41 2018
 """
 
 import random
-import game_theory_tools as tool
+import simulation_vaccination_tools as tool
 import numpy as np
 
 
@@ -15,21 +15,20 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_daily_contacts_when_healthy, p_daily_contacts_when_sick,\
         p_prob_for_diseases, p_prob_for_contact_infection,\
         p_incubation_time, p_time_to_get_healthy, p_population_alive,\
-        p_length_immunization):
+        p_start_being_infectious = 0):
     """
     initialize the global paramters needed by the class
     Args:
-        p_population(int): the total population
-        p_vaccinated_people(int): vaccinated people at the beginning
-        p_infected_people(int): infected people at the beginning
-        p_daily_contacts_when_healthy(int): number of contacts per day when the person is healthy
-        p_prob_for_diseases(float): random probability to get infected by non-human sources
-        p_prob_for_contact_infection(float): probability the infect another person when there is contact
-        p_incubation_time(int): incubation time in days
-        p_time_to_get_healthy(int): length of the disease in days
-        p_population_alive(int): number of people alive at the beginning
-        p_length_immunization(int): the number of days a person stays immune after
-            vaccination or recovering from infection
+        p_population (int): the total population
+        p_vaccinated_people (int): vaccinated people at the beginning
+        p_infected_people (int): infected people at the beginning
+        p_daily_contacts_when_healthy (int): number of contacts per day when the person is healthy
+        p_prob_for_diseases (float): random probability to get infected by non-human sources
+        p_prob_for_contact_infection (float): probability the infect another person when there is contact
+        p_incubation_time (int): incubation time in days
+        p_time_to_get_healthy (int): length of the disease in days
+        p_population_alive (int): number of people alive at the beginning
+        p_start_being_infectious (int): number of days after which a infected person can infect other people
     """
     global population
     population = p_population
@@ -51,8 +50,8 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
     time_to_get_healthy = p_time_to_get_healthy
     global population_alive
     population_alive = p_population_alive
-    global length_immunization
-    length_immunization = p_length_immunization
+    global start_being_infectious
+    start_being_infectious = p_start_being_infectious
 
     
 ## getter-functions for global parameters
@@ -78,17 +77,17 @@ def change_population_alive(change):
         raise Exception("Invalid amount of population_alive")
     #population_alive += change
     
-def increase_vaccinated_people(num):
+def change_num_vaccinated_people(num):
     """
-    increases the number of vaccinated people by num
+    changes the number of vaccinated people by num
     """
     global vaccinated_people
     vaccinated_people += num
 
 
-def increase_infected_people(num):
+def change_num_infected_people(num):
     """
-    increases the number of infected people by num
+    changes the number of infected people by num
     """
     global infected_people
     infected_people += num
@@ -106,7 +105,7 @@ class Person:
         percieved_vacc_cost (float): percieved cost when vaccinating (side effects)
 		percieved_infec_cost (float): the percieved cost when the person gets infected
         alive (bool): only alive people are counted in the simulation
-        recoverd (bool): true, if the person has recoverd from the disease
+        recovered (bool): true, if the person has recovered from the disease
         age (int): age in days
         days_since_immunization (int): days since either the last vaccination or the last infection
         
@@ -153,7 +152,8 @@ class Person:
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_cost, percieved_infec_cost,\
                  alive = True, recovered = False, age = 0,\
-                 days_since_immunization = 0):
+                 days_since_immunization = 0, length_immune_mean = 4380,\
+                 length_immune_sigma = 300):
         self.vaccinated = vaccinated
         self.infected_days = infected_days
         self.index = index
@@ -163,13 +163,13 @@ class Person:
         self.recovered = recovered
         self.age = age
         self.days_since_immunization = days_since_immunization
+        self.length_immunization = int(np.random.normal(length_immune_mean, length_immune_sigma))
         
         global population_alive
         population_alive += 1
         
         if self.vaccinated == True:
-            global vaccinated_people
-            vaccinated_people += 1
+            change_num_vaccinated_people(1)
         
         
     def get_infected(self):
@@ -179,8 +179,7 @@ class Person:
     	"""
         if (not self.vaccinated) and (not self.recovered) and self.infected_days == -1: #person is healthy and not vaccinated
             self.infected_days = 0 #infection starts
-            global infected_people
-            infected_people += 1
+            change_num_infected_people(1)
     
     
     def next_day(self):
@@ -192,16 +191,17 @@ class Person:
             increases the days_since_immunization by one if the person was sick or vaccinated
             sets the days since immunization to 1 if person becomes healthy
         """
-        global length_immunization
         self.age += 1
-        #
-        if self.days_since_immunization != 0:
+        # increases the days_since_immunization if the person is immune
+        if self.days_since_immunization > 0:
             self.days_since_immunization += 1
             
-        # reset recoverd and vaccinated of the immunization is no longer active
-        if self.days_since_immunization == length_immunization:
-            self.recoverd = False
-            self.vaccinated = False
+        # reset recovered and vaccinated of the immunization is no longer active
+        if self.days_since_immunization == self.length_immunization:
+            if self.vaccinated == True:
+                change_num_vaccinated_people(-1)
+                self.vaccinated = False
+            self.recovered = False
             
         # random infection without a contact to someone else
         if self.infected_days == -1: #person is healthy
@@ -213,15 +213,14 @@ class Person:
                 self.infected_days = -1
                 self.days_since_immunization = 1
                 self.recovered = True #person cannot become infected any more
-                global infected_people
-                infected_people -= 1
+                change_num_infected_people(-1)
         
     def start_infection(self):    
         """
             Calls the infect_other_people() function, if person is sick
         """
         infections = []
-        if self.infected_days >= 0 and self.infected_days <= incubation_time: #person is sick
+        if self.infected_days >= 0 and self.infected_days < start_being_infectious: #person is sick
             return self.infect_other_people()
         return infections
     
@@ -231,12 +230,12 @@ class Person:
             Kills a person by changing the alive-variable
         """
         global population_alive
-        global vaccinated_people
-        global infected_people
         
         self.days_since_immunization = 0
         self.age = 0
-        if self.alive == True:
+        if self.alive == False:
+            print("Person is still dead!")
+        elif self.alive == True:
             self.alive = False
             
             population_alive -= 1
@@ -244,17 +243,37 @@ class Person:
             
             if self.vaccinated == True:
                 self.vaccinated = False
-                vaccinated_people -= 1
+                change_num_vaccinated_people(-1)
                 
-            
             if self.infected_days >= 0:
-                infected_people -= 1
-                self.infected_days = -1
+                change_num_infected_people(-1)
+                self.infected_days = -1 
+      
             
-#        else:
-#            print("Person is still dead!")
+    def set_immunization(self, days_since_immunization, vaccinated = False,\
+                         recovered = False):
+        """Sets either vaccinated of recovered to true and sets the
+            days_since_immunization to the given value
+        Args:
+            days_since_immunization (int): sets the parameter to the given value
+            vaccinated (bool): sets vaccinated to given value
+            recovered (bool): sets recovered to the given value
             
-    
+        Raises:
+            Exception, if both vaccinated and recovered are true or false
+        """
+        if vaccinated == recovered:
+            raise Exception("vaccinated and recovered cannot be both true of false")
+        if vaccinated:
+            self.vaccinated = True
+            self.recovered = False
+            change_num_vaccinated_people(1)
+        elif recovered:
+            self.recovered = True
+            self.vaccinated = False
+        self.days_since_immunization = days_since_immunization
+        
+        
     def get_born(self, vaccinated, infected_days, \
                  percieved_vacc_cost = 10e-4,\
 				 percieved_infec_cost = 0.5):   #index stays the same
@@ -266,6 +285,7 @@ class Person:
             self.infected_days = infected_days
             self.percieved_vacc_cost = percieved_vacc_cost
             self.percieved_infec_cost = percieved_infec_cost
+            self.alive = True
             
             global population_alive
             population_alive += 1
@@ -273,8 +293,7 @@ class Person:
             self.recovered = False
             
             if self.vaccinated == True:
-                global vaccinated_people
-                vaccinated_people += 1
+                change_num_vaccinated_people(1)
         
         elif self.alive == True:
             print("Person is not dead!")
@@ -320,12 +339,12 @@ class List_Person(Person):
         """
             sets vaccinated to true if tool.grid_expected_gain() is positive
     	"""
-        global vaccinated_people
         if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
           population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
-          self.percieved_infec_cost) > 0:
+          self.percieved_infec_cost, prob_for_contact_infection) > 0:
             self.vaccinated = True
-            vaccinated_people += 1
+            self.days_since_immunization = 1
+            change_num_vaccinated_people(1)
     
     def infect_other_people(self):
         """
@@ -400,13 +419,12 @@ class Grid_Person(Person):
             sets vaccinated to true if tool.grid_expected_gain() is positive
             sets the days since immunization to 1
     	"""
-        self.days_since_immunization = 1
-        global vaccinated_people
         if self.infected_days < 0 and not self.vaccinated and tool.grid_expected_gain(vaccinated_people / \
           population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
           self.percieved_infec_cost, self.infected_neighbors/self.neighborhood) > 0:
             self.vaccinated = True
-            vaccinated_people += 1
+            self.days_since_immunization = 1
+            change_num_vaccinated_people(1)
         
     def get_neighborhood(self):
         """
@@ -461,11 +479,13 @@ class Network_Person(Person):
     def __init__(self, vaccinated, infected_days, index, \
                  percieved_vacc_cost, percieved_infec_cost,\
                  alive = True, recovered = False,\
-                 age = 0, days_since_immunization = 0):
+                 age = 0, days_since_immunization = 0,\
+                 length_immune_mean = 4380, length_immune_sigma = 300):
         super().__init__(vaccinated, infected_days, index, \
                  percieved_vacc_cost,\
 				 percieved_infec_cost, alive, recovered, age,\
-                 days_since_immunization)
+                 days_since_immunization, length_immune_mean,\
+                 length_immune_sigma)
         self.contacts = []
         self.infected_contacts = 0
 
@@ -478,17 +498,43 @@ class Network_Person(Person):
         """
         self.contacts.append(index)
         
-    def infect_other_people(self):
+    def get_degree(self):
+        """
+        Returns:
+            The degree of the node (number of contacts)
+        """
+        return len(self.contacts)
+    
+    def start_infection(self, probability_to_meet):    
+        """Calls the infect_other_people() function, if person is sick
+                and hands over the probability_to_meet
+            
+        Args:
+            probability_to_meet (int): The probability of a Person to meet
+                and possibly infect each of its contacts
+        """
+        infections = []
+        if self.infected_days >= 0 and self.infected_days > start_being_infectious: #person is sick
+            return self.infect_other_people(probability_to_meet)
+        return infections
+    
+        
+    def infect_other_people(self, probability_to_meet):
         """
             goes through all contacts of an infected person and infects
             randomly some of the contacts
             
+            Args:
+                probability_to_meet (int): The probability of a Person to meet
+                    and possibly infect each of its contacts
+                    
             Returns:
                 List of indexes of people that get infected
         """
         infections = []
         for c in self.contacts:
-            if random.random() < 0.2 and random.random() <= prob_for_contact_infection:
+            if random.random() < probability_to_meet\
+            and random.random() <= prob_for_contact_infection:
                 infections.append(c)
         return infections
     
@@ -499,12 +545,12 @@ class Network_Person(Person):
             increases the global varible infected_people 
             sets the days_since_immizations to 1
     	"""
-        self.days_since_immunization = 1
-        global vaccinated_people
         if len(self.contacts) == 0:
             return
-        if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
+        if self.infected_days < 0 and not self.vaccinated and not self.recovered\
+          and tool.expected_gain(vaccinated_people / \
           population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
-          self.percieved_infec_cost) > 0:
+          self.percieved_infec_cost, prob_for_contact_infection) > 0:
             self.vaccinated = True
-            vaccinated_people += 1
+            self.days_since_immunization = 1
+            change_num_vaccinated_people(1)
