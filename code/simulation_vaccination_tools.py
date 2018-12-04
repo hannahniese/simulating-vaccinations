@@ -5,7 +5,7 @@ Created on Sat Oct 13 22:01:11 2018
 @author: markus
 """
 import random
-
+import numpy as np
 
 def prob_infec(infec_level, coverage_level, risk = 0.5):
 	"""calculates the probability of getting infected
@@ -70,7 +70,8 @@ def expected_gain(coverage_level, infec_level, vacc_cost, infec_cost, risk = 0.5
 	Returns:
 		expectation value
 	"""
-	expect = - vacc_cost + infec_cost * infec_level * (1 - coverage_level) * risk
+	infection_level = np.maximum(infec_level, 0.001)
+	expect = - vacc_cost + infec_cost * infection_level * (1 - coverage_level) * risk
 	return expect
 
 def grid_expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
@@ -141,7 +142,8 @@ def initial_vaccinated(people_list, proportion_vaccinated):
         rand = random.randint(0, len(people_list)-1)
         if people_list[rand].vaccinated == False:
             # set a random value to days since immunization up to 12 years
-            days_since_immunization = random.randint(0,4380)
+            #days_since_immunization = random.randint(0,4380)
+            days_since_immunization = 1
             people_list[rand].set_immunization(days_since_immunization, True, False)
             inf -= 1
     return people_list

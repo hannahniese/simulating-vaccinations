@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Nov 18 16:23:50 2018
+Simulating vaccination
+Created as part of the ETH course "Lecture with Computer Exercises: 
+    Modelling and Simulating Social Systems in MATLAB (or Python)"
 
-@author: markus
+Find all information about the code in code/readme.txt
+
+December 2018
+@author: Hannah Niese, Markus Niese, Timo Schönegg
 """
-"""
-Markus:
-    Alter
-    days since immunization
-    change vacc scares
-    
-    Momentan steckt man nur bis zur incubationperiod and
-    
-"""
+
 ## import packages
 import csv
 import numpy as np
@@ -33,7 +30,7 @@ start = timeit.default_timer()
 
 ## Population parameters
 population = 10000 # number of people in the simulation
-population_alive = 10000 #number of people alive at the start of the simulation
+population_alive = 0 #number of people alive at the start of the simulation
 vaccinated_people = 0 # number vaccinated people
 infected_people = 0 # number of infected people
 
@@ -49,7 +46,7 @@ vaccinated_people_list = [] # int-list: the total number of vaccinated people
                             # each day
 
 ## Diseases parameters
-prob_for_diseases = 0.0001 # Random probability (per day and person) to become
+prob_for_diseases = 0.00001 # Random probability (per day and person) to become
                             # sick by someone outside the network
 prob_for_contact_infection = 0.5 # probability to infect an other person, when
                                   # there is a contact
@@ -57,19 +54,20 @@ incubation_time = 12 # Incubation Period of the diseasse
 time_to_get_healthy = 42 # after that time a person becomes healthy again
 start_being_infectious = 7 # number of days after which a infected person
                             # becomes infectious
+re_vaccination_time = 2920 # time after which immune people should vaccinate again
 
                          
 ## Initial values of the percieved cost of vaccination and infection
 ## for all people the same
-percieved_vacc_cost = 0.02
-percieved_infec_cost = 1
+percieved_vacc_cost = 1
+percieved_infec_cost = 1500
 
 # The probability for a person to meet a contact each day
 probability_to_meet = 0.5
  
                            
 ## Length of the Simulation
-simulation_length = 365
+simulation_length = 500
 
 ## Initializes the global parameters for the Person Class
 ## !!!required!!!
@@ -77,18 +75,18 @@ vacc.init_parameters(population, vaccinated_people, infected_people,\
         daily_contacts_when_healthy, daily_contacts_when_sick,\
         prob_for_diseases, prob_for_contact_infection,\
         incubation_time, time_to_get_healthy, population_alive,\
-        start_being_infectious)
+        start_being_infectious, re_vaccination_time)
                          
 ## create population in people_list
 for x in range(0,population):
     age = random.randint(0, 365000)
     people_list[x] = vacc.Network_Person(False, -1, x, percieved_vacc_cost,\
                percieved_infec_cost, age = age, length_immune_mean = 4380,\
-               length_immune_sigma = 100) 
+               length_immune_sigma = 712) 
 
 ## set initial conditions    
-tool.initial_infected(people_list, 0.01)
-tool.initial_vaccinated(people_list, 0.3)
+tool.initial_infected(people_list, 0.001)
+tool.initial_vaccinated(people_list, 0.0)
 
 ## make initial counts
 print("Initially vaccinated:", vacc.get_num_vaccinated_people())
@@ -116,7 +114,7 @@ for days in range(0,simulation_length):
     # iterate over the people_list every time step
     for x in range(0,population):
         people_list[x].next_day()
-  #      people_list[x].get_vaccinated()
+        people_list[x].get_vaccinated()
         # sick people infect randomly their contacts
         infections = people_list[x].start_infection(probability_to_meet)
         for i in infections:
@@ -133,53 +131,81 @@ for days in range(0,simulation_length):
                 people_list[i].change_infec_cost_relative(0.9)
     
     # removes and re-adds some vertices according to death rate
-#    for x in range(population):
-#        if random.random() < 0.0000214: # probability to die at this day
-#                                        # deathrate 8/1000 per year
-#            people_list[x].kill()
-#            people_list[x].get_born(False, -1)
+    for x in range(population):
+        if random.random() < 0.0000214: # probability to die at this day
+                                        # deathrate 8/1000 per year
+            people_list[x].kill()
+            people_list[x].get_born(False, -1, percieved_vacc_cost,\
+                       percieved_infec_cost)
         
     # Updates infected_people_list and vaccinated_people_list
     infected_people_list.append(vacc.get_num_infected_people())    
     vaccinated_people_list.append(vacc.get_num_vaccinated_people())
     
     # Calculate the average number of infected people for last 100 days
-    if days > 100:
-        average_100 = np.average(infected_people_list[days-100:days])
-        if average_100 < 5 and random.random() < 0.01:
-            tool.change_vaccination_cost_population(people_list, 1, 0.3)
+    if days > 500:
+        average_100 = np.average(infected_people_list[days-500:days])
+        if average_100 < 5 and random.random() < 0.001:
+            print(days)
+            tool.change_vaccination_cost_population(people_list, 2, 0.3)
     
 ## Count the vaccinations at the end
 print("Vaccinated at the end:", vacc.get_num_vaccinated_people())
 print("Maximal number of vaccinated people:", max(vaccinated_people_list))
+print("Maximal number of infected people:", max(infected_people_list))
 
 gradient_vaccinations = tool.discrete_gradient(vaccinated_people_list)
 gradient_infections = tool.discrete_gradient(infected_people_list)
 
 ## Graphic options
 width_of_line = 3
-
+# start and end day of the graph
+# MUST be > 0 and < len(vaccinated_people_list) and < len(infected_people_list)
+start_day = 0
+end_day = simulation_length
+x_axis = np.arange(start_day, end_day, 1)
 ## Create the plot
-plt.axes().yaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1))
-plt.xlabel('Time (days)')
-plt.ylabel('Percentage of Population')
+fig, ax1 = plt.subplots()
 
-plt.plot(np.divide(infected_people_list, population), color = 'darkred', label = '% infected people',\
+
+ax1.set_xlabel('Time (days)')
+ax1.set_ylabel('vaccinated', color = 'navy')
+ax1.yaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1))
+ax1.tick_params(axis='y', colors='navy')
+ax1.set_ylim([0.0,1.05])
+ax1.plot(x_axis, np.divide(vaccinated_people_list[start_day:end_day], population), color = 'navy', label = '% vaccinated people',\
+        linewidth = width_of_line)
+
+ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+ax2.set_ylabel('infected', color = 'darkred')  # we already handled the x-label with ax1
+ax2.set_ylim([0,300])
+ax2.tick_params(axis='y', colors='darkred')
+ax2.plot(x_axis, infected_people_list[start_day:end_day], color = 'darkred', label = '% infected people',\
          linewidth = width_of_line)
-#plt.plot(np.divide(gradient_infections, population), color = 'peru', label = '% change of infected people',\
-#         linewidth = width_of_line)
-plt.plot(np.divide(vaccinated_people_list, population), color = 'navy', label = '% vaccinated people',\
-         linewidth = width_of_line)
-#plt.plot(np.divide(gradient_vaccinations, population), color = 'cadetblue', label = '% change of vaccinated people',\
-#         linewidth = width_of_line)
-plt.legend(loc = 'best')
+ax2.tick_params(axis='y')
+
+fig.tight_layout()  # otherwise the right y-label is slightly clipped
 plt.show()
+#plt.axes().yaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1))
+#plt.xlabel('Time (days)')
+#plt.ylabel('Percentage of Population')
+#
+#plt.plot(np.divide(infected_people_list[3500:5000], population), color = 'darkred', label = '% infected people',\
+#         linewidth = width_of_line)
+##plt.plot(np.divide(gradient_infections, population), color = 'peru', label = '% change of infected people',\
+##         linewidth = width_of_line)
+#plt.plot(np.divide(vaccinated_people_list[3500:5000], population), color = 'navy', label = '% vaccinated people',\
+#         linewidth = width_of_line)
+##plt.plot(np.divide(gradient_vaccinations, population), color = 'cadetblue', label = '% change of vaccinated people',\
+##         linewidth = width_of_line)
+#plt.legend(loc = 'best')
+#plt.show()
 
 test = 0
 for x in people_list:
     if x.days_since_immunization != 0:
         test += 1
-print("Immune", test)
+print("Immune at the end:", test)
 
 
 ## print the time of the simulation

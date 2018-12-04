@@ -15,7 +15,7 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
         p_daily_contacts_when_healthy, p_daily_contacts_when_sick,\
         p_prob_for_diseases, p_prob_for_contact_infection,\
         p_incubation_time, p_time_to_get_healthy, p_population_alive,\
-        p_start_being_infectious = 0):
+        p_start_being_infectious = 0, p_re_vaccination_time = 100000):
     """
     initialize the global paramters needed by the class
     Args:
@@ -52,6 +52,8 @@ def init_parameters(p_population, p_vaccinated_people, p_infected_people,\
     population_alive = p_population_alive
     global start_being_infectious
     start_being_infectious = p_start_being_infectious
+    global re_vaccination_time
+    re_vaccination_time = p_re_vaccination_time
 
     
 ## getter-functions for global parameters
@@ -164,6 +166,12 @@ class Person:
         self.age = age
         self.days_since_immunization = days_since_immunization
         self.length_immunization = int(np.random.normal(length_immune_mean, length_immune_sigma))
+#        temp = False
+#        while temp == False:
+#            num = int(np.random.normal(length_immune_mean, length_immune_sigma))
+#            if num < length_immune_mean:
+#                self.length_immunization = num
+#                temp = True
         
         global population_alive
         population_alive += 1
@@ -220,7 +228,7 @@ class Person:
             Calls the infect_other_people() function, if person is sick
         """
         infections = []
-        if self.infected_days >= 0 and self.infected_days < start_being_infectious: #person is sick
+        if self.infected_days >= 0 and self.infected_days >= start_being_infectious and self.infected_days < incubation_time:
             return self.infect_other_people()
         return infections
     
@@ -339,7 +347,8 @@ class List_Person(Person):
         """
             sets vaccinated to true if tool.grid_expected_gain() is positive
     	"""
-        if self.infected_days < 0 and not self.vaccinated and tool.expected_gain(vaccinated_people / \
+        if self.infected_days < 0 and (self.days_since_immunization == 0 or\
+          self.days_since_immunization > re_vaccination_time) and tool.expected_gain(vaccinated_people / \
           population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
           self.percieved_infec_cost, prob_for_contact_infection) > 0:
             self.vaccinated = True
@@ -547,10 +556,13 @@ class Network_Person(Person):
     	"""
         if len(self.contacts) == 0:
             return
-        if self.infected_days < 0 and not self.vaccinated and not self.recovered\
+        if self.infected_days < 0 and (self.days_since_immunization == 0 or\
+          self.days_since_immunization > re_vaccination_time)\
           and tool.expected_gain(vaccinated_people / \
           population_alive, infected_people / population_alive, self.percieved_vacc_cost,\
           self.percieved_infec_cost, prob_for_contact_infection) > 0:
-            self.vaccinated = True
+            if self.vaccinated == False:
+                change_num_vaccinated_people(1)
+                self.vaccinated = True
             self.days_since_immunization = 1
-            change_num_vaccinated_people(1)
+            
