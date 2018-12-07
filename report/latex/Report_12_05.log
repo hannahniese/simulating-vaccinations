@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  2 DEC 2018 21:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  5 DEC 2018 17:55
 entering extended mode
-**./Report_11_29.tex
-(Report_11_29.tex
+**./Report_12_05.tex
+(Report_12_05.tex
 LaTeX2e <2018-04-01> patch level 5
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -224,8 +224,8 @@ cfg"
 File: listings.cfg 2018/09/02 1.7 listings configuration
 ))
 Package: listings 2018/09/02 1.7 (Carsten Heinz)
- (Report_11_29.aux)
-\openout1 = `Report_11_29.aux'.
+ (Report_12_05.aux)
+\openout1 = `Report_12_05.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
@@ -327,9 +327,9 @@ Overfull \hbox (130.82405pt too wide) in paragraph at lines 44--73
  [] 
  []
 
-[2] (Report_11_29.toc)
+[2] (Report_12_05.toc)
 \tf@toc=\write3
-\openout3 = `Report_11_29.toc'.
+\openout3 = `Report_12_05.toc'.
 
  [3]
 Overfull \hbox (5.97696pt too wide) in paragraph at lines 104--105
@@ -342,47 +342,54 @@ File: ./images/ukpertussis.png Graphic file (type png)
 <use ./images/ukpertussis.png>
 Package pdftex.def Info: ./images/ukpertussis.png  used on input line 113.
 (pdftex.def)             Requested size: 280.64352pt x 220.82108pt.
-[4] [5 <./images/ukpertussis.png (PNG copy)>] [6] [7]
-Overfull \hbox (13.9999pt too wide) in paragraph at lines 192--194
+[4] [5 <./images/ukpertussis.png (PNG copy)>] [6]
+Overfull \hbox (16.40804pt too wide) in paragraph at lines 159--164
+\OT1/cmr/m/n/12 vid-ual. The de-tails of that can be found in chap-ter Start[]i
+nfecteion(probability[]to[]meet):
+ []
+
+[7] [8] [9]
+Overfull \hbox (13.9999pt too wide) in paragraph at lines 217--219
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 221--221
+Underfull \hbox (badness 10000) in paragraph at lines 246--246
 [][]\OT1/cmr/m/n/9 Bundeszentrale fur Gesund-heitliche Aufklarung Ger-many, K
 euch-hus-ten 
  []
 
-[8]
-Overfull \hbox (8.83667pt too wide) in paragraph at lines 254--255
+[10]
+Overfull \hbox (8.83667pt too wide) in paragraph at lines 279--280
 \OT1/cmr/m/n/12 coon-ing Vac-ci-na-tion Strate-gies on In-fant Per-tus-sis Epid
 emiology23(6):852-860, Novem-
  []
 
-[9] [10] (Report_11_29.aux) ) 
+[11] [12] (Report_12_05.aux) ) 
 Here is how much of TeX's memory you used:
  4801 strings out of 492970
  63947 string characters out of 3135832
- 147982 words of memory out of 3000000
+ 149982 words of memory out of 3000000
  8604 multiletter control sequences out of 15000+200000
  13963 words of font info for 54 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,11n,32p,785b,1569s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-
-Output written on Report_11_29.pdf (10 pages, 330001 bytes).
+ 42i,11n,32p,1419b,1569s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi1
+2.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on Report_12_05.pdf (12 pages, 352341 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
