@@ -1,4 +1,4 @@
-Simulating vaccination
+﻿Simulating vaccination
 Created as part of the ETH course "Lecture with Computer Exercises: 
     Modelling and Simulating Social Systems in MATLAB (or Python)"
 
@@ -14,7 +14,9 @@ all logic elements and variables are described in comments.
 For the numerical values of the parameters please refer to the report
 (report/report.pdf) where they are described and justified.
 All the parameters are specific to pertussis but you can change them
-to simulate other diseases.
+to simulate other diseases. The most important parameters that are not
+specific for a special disease are the population size and the number
+of simulated days.
 
 
 We invite you to test our simulation and play around with the parameters.
@@ -35,7 +37,7 @@ For the light test (20 min simulation of one graph) follow these steps:
 
 LIGHT TEST: (20 minutes, one graph)
 Reproduce the graph showing the number of people who get the disease in
-dependence of how many people are vaccinated in the beginning(in percent).
+dependence of how many people are vaccinated in the beginning (in percent).
 People do not vaccinate themselves during simulation.
 
 Follow these steps
