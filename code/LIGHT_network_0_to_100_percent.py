@@ -23,7 +23,7 @@ import simulation_vaccination_tools as tool
 import network_generator
 
 
-population = 5000 # number of people in the simulation
+population = 10000 # number of people in the simulation
 
 #network_generator.create_barabasi_in_file(population, 2, 'barabasi_' + str(population) + '_2.txt')
 
@@ -37,7 +37,7 @@ infected_to_not_vaccinated_list = []
 total_infected_people_list = []
 percentage_list = []
 
-stepwidth = 3
+stepwidth = 1
 
 for percent in range (0,100,stepwidth): #change initially vaccinated people
     
@@ -101,14 +101,9 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
                    percieved_infec_cost, age = age, length_immune_mean = 4380,\
                    length_immune_sigma = 712) 
     
-<<<<<<< HEAD
-    ## set initial conditions    
-    tool.initial_infected(people_list, 0.001)
-=======
     ## set initial conditions
-    initially_infected_people = 0.5 # in percent
+    initially_infected_people = 0.1 # in percent
     tool.initial_infected(people_list, initially_infected_people/100)
->>>>>>> 4e0d33b4e19a73b4ff31883c8ce9acaf2f32be7b
     tool.initial_vaccinated(people_list, percent/100)
     
     ## make initial counts
@@ -131,7 +126,7 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
     network_generator.import_barabasi_graph('Networks/barabasi_' + str(population) + '_2.txt', people_list)
     #network_generator.import_graph_from_tsv("Networks/edges.tsv", people_list)
         
-    new_infected_people = vacc.get_num_infected_people() #after simulation: total amount of people, who were infected once
+    new_infected_people = 0 #after simulation: total amount of people, who were infected once (without initially infected)
     
     ## simulation
     for days in range(0,simulation_length):
