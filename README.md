@@ -64,4 +64,51 @@ http://www.who.int/immunization/monitoring_surveillance/data/en/
 
 # Reproducibility
 
-> (step by step instructions to reproduce your results. *Keep in mind that people reading this should accomplish to reproduce your work within 10 minutes. It needs to be self-contained and easy to use*. e.g. git clone URL_PROY; cd URL_PROY; python3 main.py --light_test (#--light test runs in less than 5minutes with up to date hardware)) 
+Reproduce the graph of people who were at least once infected during simulation
+time, dependent on the proportion of initially infected people in the population.
+People do not vaccinate themselves during simulation.
+
+To use the LIGHT version, the following steps have to be taken:
+
+1. 
+Download the files 
+    LIGHT_network_0_to_100_percent.py
+    vacc.py
+    simulation_vaccination_tools.py
+    network_generator.py
+    
+    folder networks with file 'barabasi_5000_2.txt' (This is a network with 5000 people)
+
+
+2. 
+Make sure you have matplotlib, numpy, csv, random, timeit and networkx installed.
+
+3. 
+Open your favourite python development environment e.g. Spyder, PyCharm etc.
+Open the downloaded file LIGHT_network_0_to_100_percent.py 
+Important: Do NOT change anything in this file.
+Start the program.
+It will iterate the percentage of vaccinated people from 0% to 100% with steps of 3%.
+This might take 2-3 minutes, depending on the CPU of your computer. 
+When it finished, it will output the graph of people who were at least once infected 
+during the simulation time of 500 days. The graph might be in the background.
+
+The following parameters can be changed:
+- population (line 26): 
+      You need to create a new network graph for the new population!
+      Remove therefore the comment in line 28 to use the function
+      network_generator.create_barabasi_in_file(population, 2, 'barabasi_' + str(population) + '_2.txt')
+      Make sure there are enought initially infected people (at least ~3)
+      by changing the initially_infected_people variable (line 105).
+              
+- simulation_length (line 51):
+      Change the time periode (in days) of the simulation.
+      Be careful: if the periode is to short, some people are still sick and
+      can infect other people, when the simulation ends.
+      
+- stepwidth of iteration  (line 40):
+      Decrease the stepwith of the iteration throught the percentage of initially
+      vaccinated people for more exact results.
+      stepwidth needs to be an integer!
+                    
+    

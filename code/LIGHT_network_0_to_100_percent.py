@@ -23,6 +23,11 @@ import simulation_vaccination_tools as tool
 import network_generator
 
 
+population = 5000 # number of people in the simulation
+
+#network_generator.create_barabasi_in_file(population, 2, 'barabasi_' + str(population) + '_2.txt')
+
+
 print('\nInitially vaccinated (%),', 'Initially vaccinated people,', \
        'Initially infected people,', 'Vaccinated people at the end,', \
        'Maximum vaccinated people,', 'Total infected people at the end,', \
@@ -32,7 +37,9 @@ infected_to_not_vaccinated_list = []
 total_infected_people_list = []
 percentage_list = []
 
-for percent in range (0,100,3): #change initially vaccinated people
+stepwidth = 3
+
+for percent in range (0,100,stepwidth): #change initially vaccinated people
     
     ## start the time measurement of the simulation
     start = timeit.default_timer()
@@ -44,7 +51,6 @@ for percent in range (0,100,3): #change initially vaccinated people
     simulation_length = 500
    
     ## Population parameters
-    population = 5000 # number of people in the simulation
     population_alive = 0 #number of people alive at the start of the simulation
     vaccinated_people = 0 # number vaccinated people
     infected_people = 0 # number of infected people
@@ -95,8 +101,9 @@ for percent in range (0,100,3): #change initially vaccinated people
                    percieved_infec_cost, age = age, length_immune_mean = 4380,\
                    length_immune_sigma = 712) 
     
-    ## set initial conditions    
-    tool.initial_infected(people_list, 0.005)
+    ## set initial conditions
+    initially_infected_people = 0.5 # in percent
+    tool.initial_infected(people_list, initially_infected_people/100)
     tool.initial_vaccinated(people_list, percent/100)
     
     ## make initial counts
