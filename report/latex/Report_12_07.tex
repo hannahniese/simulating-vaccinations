@@ -41,7 +41,7 @@
 \bigskip
 
 
-\begin{tabular}{@{}p{0.5cm}@{}p{6cm}@{}p{6cm}@{}p{6cm}@{}p{1cm}}
+\begin{tabular}{@{}p{0.5cm}@{}p{5.5cm}@{}p{5.5cm}@{}p{5.5cm}@{}p{1cm}}
 \begin{minipage}{1cm}
 
 \end{minipage}
@@ -94,8 +94,8 @@
 
 
 \section{Abstract}
-
-under which circumstances Pertussis outbreaks can occur
+The first objective of this paper is to model find which level of immunisation is required to eradicate Pertussis in a society. We simulated the effects of various initial vaccination rates and draw a comparison to theoretical models, and observe the stability of our results. 
+The second objective is to find out under wich circumstances Pertussis outbreaks occur, in particular in societies with high vaccination coverage. We find that a lack of  
 
 \section{Individual contributions}
 
@@ -109,9 +109,27 @@ We modelled the specific case of Pertussis or Whooping cough, as there have been
 
 This paper tries to answer the question of how people take decisions on whenther to get vaccinated or not, and how the dynamics of the disease changes. 
 
-\begin{center}
-\includegraphics[scale=0.4]{ukpertussis}
-\end{center}
+\begin{figure}
+\centering
+\begin{minipage}{.6\textwidth}
+  \centering
+  \includegraphics[height=0.7\linewidth]{ukpertussis}
+  \caption{Pertussis Notifications in England \break
+  and Wales 1940-2011}  
+  \label{fig:test1}
+  
+\end{minipage}%
+\begin{minipage}{.4\textwidth}
+  \centering
+  \includegraphics[height=1\linewidth]{grundimmodeutschlandpertussis}
+  \caption{Basic immunisation against Pertussis by age-groups}
+  \label{fig:test2}
+ 
+\end{minipage}%
+\end{figure}
+
+Figures 1 and 2 show interesting data from two countries with good vaccination coverage, the UK and Germany. In the second the basic immunisation (having had the two first pertussis shots) of children by age-group. \footnote{Robert-Koch-Institut und BZgA: Zur Gesundheit von Kindern und Jugendlichen in Deutschland}
+
 
 
 \section{Description of the Model}
@@ -193,29 +211,6 @@ If a person B in the network of A falls ill, A\'s perceived infection cost rises
 \subsection{Equilibria for N people}
 In addition to the "local" information of the nodes in the network of the person, there is also information on the general coverage and infection level in society available to the individual, as well as an additional factor that we call 
 
-change\_infection\_cost\_population
-
-\begin{small}
-\begin{lstlisting}
-def change_infection_cost_population(people_list, factor, probability):
-    """ Change the percieved_infec_cost by a factor for every Person
-    with some probability
-    
-    Args:
-        people_list (list of Person): 
-        The list of people whose parameter should be changed
-        factor (float): 
-        The factor by which the percieved_infec_cost should be changed
-        probability (float, between 0 and 1): 
-        probability of each person to get the percieved_infec_cost changed
-    
-    Returns:
-        people_list (list of Person): 
-        The list of people whose parameter have been changed
-    """
-
-\end{lstlisting}
-\end{small}
 
 
 \subsection{Important Parameters}
@@ -223,20 +218,18 @@ First we look at the dynamics of the disease. Pertussis is highly contagious, an
 \begin{lstlisting}
 #Random probability (per day and person) to become sick 
 #without being infected by someone else
-prob_for_diseases = 0.00003 
+prob_for_diseases = 0.000001 
 
 #probability to infect someone when there is contact
 prob_for_contact_infection = 0.5 
 
 #incubation time (in days)
-incubation_time = 10
+incubation_time = 12
  
 #days from infection, after this time a person is recovered
-time_to_get_healthy = 10 
+time_to_get_healthy = 42
 \end{lstlisting}
 
-The patient starts being infectious 7 days after infection, and remains so until they recover \footnote{Bundeszentrale für Gesundheitliche Aufklärung Germany, Keuchhusten \break
-$www.infektionsschutz.de/erregersteckbriefe/keuchhusten/\#c3580$, accessed 30.11.2018}
 
 \section{Implementation}
 The model was implemented using Python. First, we wrote the basic SIR model with infection and recovery. Then we added the "vaccination function" which returns whether a person is getting vaccinated or not. 
@@ -259,7 +252,8 @@ Each timestep (one day) several member functions are called to refresh the statu
 
 \textbf{Get\_vaccinated():} Every day, each person decides whether to get vaccinated today, depening on the expected gain for themselves. The details of that can be found in 4.3. 
 
-\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle anymore and are only attended by those who have been vaccinated. The probability\_to\_meet represents the probability of two people meeting each other, with the probability of being infected is prob\_for\_contact\_infection.
+\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle anymore and are only attended by those who have been vaccinated.\footnote{Bundeszentrale für Gesundheitliche Aufklärung Germany, Keuchhusten \break
+$www.infektionsschutz.de/erregersteckbriefe/keuchhusten/\#c3580$, accessed 30.11.2018} The probability\_to\_meet represents the probability of two people meeting each other, with the probability of being infected is prob\_for\_contact\_infection.
 \vspace{14px}
 
 
@@ -275,7 +269,8 @@ The last but arguably most important parameters are the perceived cost of vaccin
 Letting this model run yields no results, as it operates in an equilibrium. As soon as one person’s immunisation becomes inactive they will immediately vaccinate again, resulting in a constant coverage level. This is also consistent with the real situation. If 97\% of the people have decided to vaccinate and the opinion of everybody remains the same, they will immediately vaccinate again upon losing immunisation.
 \vspace{14px}
 
-That means we have to introducea parameter to vary their opinion, which we call vaccination scares. At different times we change the perceived cost of vaccination of some proportion of the population just like a anti-vaccine newspaper article or television documentary for example would.
+\subsubsection{Vaccination scares}
+That means we have to introduce a parameter to vary their opinion, which we call vaccination scares. At different times we change the perceived cost of vaccination of some proportion of the population just like a anti-vaccine newspaper article or television documentary for example would.
 If there has not been a noticeable outbreak, the perceived vaccination percent of 30\% of the population (selected randomly) is increased by a factor of 1.5, this happens all 500 days at maximum. Since these dynamics are hard to model, we decided to implement it this way. However, if you were to implement this mechanism in a different way, you would get similar results, the main difference being the time intervals at which those events occur. Since we are not trying to predict when an outbreak will occur, we are indifferent to the exact timing and instead observe the reaction of the system to such a vaccination scare. 
 
 
@@ -284,18 +279,64 @@ If there has not been a noticeable outbreak, the perceived vaccination percent o
 \section{Simulation Results and Discussion}
 
 
+\subsection{Initial breakout}
+In our first test, we ran our model with different levels of initial coverage level, analogous to the study by Hein on Herd Immunity.\footnote{Fine, Paul, Ken Eames, and David L. Heymann. "“Herd immunity”: a rough guide." Clinical infectious diseases 52.7 (2011): 911-916.} As predicted by other models, our results indicate that there is a threshold of vaccination coverage, which is needed to keep the number of infections low. On the x-Axis we have the percentage of initially vaccinated people (we do not take into account waning immunity as we only run the programme for a period of 500 days), on the y-Axis the absolute number of people who get infected at some point during this time period, excluding the persons who are infected at the start of the simulation (just one person in our case). 
 
+This also coincides with the Vaccination coverage $V_{c}$ and the Basic Reproduction Number $R_{c}$ of Pertussis, that we have set to the value of xxxxxxxxxxxxxx\footnote{INSERT BASIC REP NO} for the purpose of our study. (This is based on the standard SIR model, which in our case was slightly modified). 
+
+\begin{equation}
+V_{c} = 1-\dfrac{1}{R_{0}}
+\end{equation}
+
+
+\begin{figure}
 \begin{center}
-\includegraphics[scale=1]{totalinfecwoinitinfec}
+\includegraphics[scale=0.6]{totalinfecwoinitinfec}
 \end{center}
+\caption{caption}
+\label{fig:test3}
+\end{figure}
 total infected people without initially infected
 
 
+
+\subsection{Long-term study}
+As explained in 5.2.1, we introduced vaccination scares in our long-term model, which results in a system that is a lot more unstable than the initial model without such supplement. Not only is this expected, it is also realistic to assume that outbreaks happen randomly and are not 'scheduled'. 
+
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{02aedges200001p2fixedtime5001p5sv0p001}
+  \caption{graph 1}  
+  \label{fig:test4}
+  
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{02bedges200001p2fixedtime5001p5sv0p001}
+  \caption{graph 2}
+  \label{fig:test5}
+ 
+\end{minipage}%
+\end{figure}
+
+
+
 \subsection{Limitations}
+As with any model, this model has a range of limitations that result from the simplifying assumption that were taken.
+
+The short term analysis has the same limitations as a standard stochastic SIR model. All the parameters of the disease like incubation time or the probability of transmission are the same for every person. However, having the stochastic SIR on the network approximates the transmission of the disease already much better than a deterministic SIR.
+
+In the long term analysis people decide if they should get vaccinated based on perfect information of infections of other people. That is the same as Bauch did it in his deterministic model. In contrast to that, our model has two dynamic variables, perceived infection cost and perceived vaccination cost. As perceived vaccination cost is dependent on the contacts, our model has a “cluster effect”. This means that people who are closely connected are prone to doing the same thing as their connections, which is something we can observe in society, where those who criticise/favour vaccinations often influence their friends' decisions. Additionally we introduced vaccination scares that change the long term properties of the system. Both effects are very hard to quantify, as they are complicated and unpredictable processes. Therefore, our model simplifies these effects; this could be extended to account for more variance in reactions than we were able to account for. However, for the purpose of showing the phenomenon of declining coverage and the resurgence of diseases it is well suited. 
+ 
 
 \subsection{Algorithm Performance}
+As we have a stochastic model on a network performance, a fast runtime is important for scaling and running the test multiple times. For each day in our simulation we need to iterate through all people to update their status. The only operations possibly taking more than constant time are the interactions of the people. That depends on the network. If the highest number of edges for one vertice is not constant, it will prolong the runtime drastically. However, this effect was minor for all networks we tested. So for the length of the simulation d, the number of people n, and the number of edges m, the simulation has a time complexity of O(d*n*m). Therefore, we expect a linear dependence of people and the other way around for a constant number of days (assuming m is constant in n). The graphs show exactly that dependence. \footnote{INSERT TIMO'S GRAPH HERE}
 
 \section{Summary and Outlook}
+We found the critical coverage level which needs to be reached or surpassed in order to prevent an outbreak, with several 
 
 \section{References}
 Table of References: 
@@ -311,12 +352,19 @@ Coolen, Anthony CC, Alessia Annibale, and Ekaterina Roberts. Generating random n
 Eshel, I. (1996). On the changing concept of evolutionary population stability as a reflection of a changing point of view in the quantitative theory of evolution. Journal of mathematical biology, 34(5-6), 485-510.
 \vspace{14px}
 
+Fine, Paul, Ken Eames, and David L. Heymann. "“Herd immunity”: a rough guide." Clinical infectious diseases 52.7 (2011): 911-916.
+\vspace{14px}
+
 Heal, G., \& Kunreuther, H. (2005). The vaccination game. Risk Management and Decision Processes Center Working Paper, (05-10). 
 \vspace{14px}
 
-Estimation of Household Transmission Rates of Pertussis and the Effect of Cocooning Vaccination Strategies on Infant Pertussis Epidemiology23(6):852-860, November 2012
+Estimation of Household Transmission Rates of Pertussis and the Effect of Cocooning Vaccination Strategies on Infant Pertussis Epidemiology 23(6):852-860, November 2012
+\vspace{14px}
+
+Robert-Koch-Institut und BZgA: Zur Gesundheit von Kindern und Jugendlichen in Deutschland, ISBN 978-3-89606-109-7, 05.05.09
 
 Wendelboe AM, Van RA, Salmaso S, Englund JA: Duration of immunity against pertussis after natural infection or vaccination. Pediatr Infect Dis J 2005; 24(5 Suppl): S58–S61
+\vspace{14px}
 
 Torres Codeço, C; Mendes Luz, P; Is pertussis actually reemerging? Insights from an individual-based model, Cad. Saúde Pública vol.17 no.3 Rio de Janeiro May/June 2001
 \vspace{14px}
