@@ -1,0 +1,20 @@
+How long does it take to simulate the disease? Dependent on our simulation time.
+Simulation time [days],Running time [seconds]
+100,0.351792925
+200,0.509913063
+300,0.630598074
+400,0.727035046
+500,0.8943717
+750,1
+1000,2
+2000,3
+3000,5
+4000,6
+5000,8
+7500,13
+10000,16
+15000,24
+30000,48
+50000,87
+75000,164
+100000,227

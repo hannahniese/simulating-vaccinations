@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec  5 15:59:35 2018
+Created on Wed Dec  5 16:00:00 2018
 
 @author: timos
 """
@@ -16,7 +16,7 @@ Important:
     Second line is the labels of the axis
 '''
 
-filename = 'Proportion of infected people to not vaccinated people' #is also title of plot
+filename = 'Short term analysis depedent on simulation time' #is also title of plot
 
 #read csv to data_list
 with open('csv_to_plot/' + filename + '.csv', 'r') as datas:
@@ -44,4 +44,4 @@ for t in data_list:
 
 #print(x_list)
 
-plt.plot(x_list, y_list, color = 'navy')
+plt.plot(x_list, y_list, '.-', color = 'navy')
