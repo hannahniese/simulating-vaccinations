@@ -63,7 +63,7 @@ def expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
 		infec_level (double): The amount of people that are currently infected
         vacc_cost (double): The percieved cost when vaccinating
         infec_cost (doulbe): The percieved cost due to infection
-		risk (double): risk of vacc / risk of infection
+		risk (double): risk of getting infected
         minimal_infec_level (double): The minimal infec_level precieved by 
             a person
             
@@ -129,7 +129,8 @@ def initial_infected(people_list, proportion_infected):
     inf = len(people_list) * proportion_infected
     while inf > 0:
         rand = random.randint(0, len(people_list)-1)
-        if people_list[rand].infected_days == -1:
+        if people_list[rand].infected_days == -1 and\
+          people_list[rand].vaccinated == False:
             people_list[rand].get_infected()
             inf -= 1
     return people_list       
@@ -150,7 +151,8 @@ def initial_vaccinated(people_list, proportion_vaccinated):
     inf = len(people_list) * proportion_vaccinated
     while inf > 0:
         rand = random.randint(0, len(people_list)-1)
-        if people_list[rand].vaccinated == False:
+        if people_list[rand].vaccinated == False and\
+          people_list[rand].infected_days == -1:
             # set a random value to days since immunization up to 12 years
             #days_since_immunization = random.randint(0,4380)
             days_since_immunization = 1
