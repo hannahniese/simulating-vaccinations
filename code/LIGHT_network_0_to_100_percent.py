@@ -40,6 +40,9 @@ for percent in range (0,100,3): #change initially vaccinated people
     
     ### parameters for the simulation
     
+    ## Length of the Simulation
+    simulation_length = 500
+   
     ## Population parameters
     population = 5000 # number of people in the simulation
     population_alive = 0 #number of people alive at the start of the simulation
@@ -76,10 +79,6 @@ for percent in range (0,100,3): #change initially vaccinated people
     
     # The probability for a person to meet a contact each day
     probability_to_meet = 0.5
-     
-                               
-    ## Length of the Simulation
-    simulation_length = 500
     
     ## Initializes the global parameters for the Person Class
     ## !!!required!!!
