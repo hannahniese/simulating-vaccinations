@@ -121,19 +121,27 @@ This paper tries to answer the question of how people take decisions on whenther
 We used an SIR model for the simulation of the spreading of Pertussis. Pertussis is transmitted by respiratory droplets human-to-human with an incubation period ranging from 9 to 14 days, while symptoms can last up to 6 weeks. \footnote{Torres Codeço, C; Mendes Luz, P; Is pertussis actually reemerging? Insights from an individual-based model, Cad. Saúde Pública vol.17 no.3 Rio de Janeiro May/June 2001}
 
 \begin{lstlisting}
-prob_for_diseases = 0.001 
 #probability of infection from outside sources
+prob_for_diseases = 0.001 
 prob_for_contact_infection = 0.5
 \end{lstlisting}
 
-
 This estimation is taken from a simulation which assesses the susceptibility of family members. We assume that a person has frequent contact with close family members and modulate the outcome with another variable that uses the probability that you meet with someone from your network on a given day to depict a realistic depiction of the society. 
-\footnote{Estimation of Household Transmission Rates of Pertussis and the Effect of Cocooning Vaccination Strategies on Infant Pertussis Epidemiology23(6):852-860, November 2012}
+\footnote{Estimation of Household Transmission Rates of Pertussis and the Effect of Cocooning Vaccination Strategies on Infant Pertussis Epidemiology 23(6):852-860, November 2012}
+\vspace{14px}
+
+Markus
+\vspace{14px}
+
+In our model individuals have the choice of vaccinating or not. They do that based on the current benefits of each option. The main parameters infulincing their decision are the perceived risk of side effects of the vaccination r\_v and perceived risk to get harmed by the disease r\_i. 
+These two parameters do not just have to be caused by one specific reason but can be composed of a number of factors. Certainly the actual risks play a part, but equally the perceived risk, which will rise for example when individuals in the neigborhood are infected. But also financial consideration may play a part. We will elaborate on the possible influences in Chapter….
+Furthermore we will assume that the disease can only be transmitted by humans. Childhood diseases like pertussis or measles are of that kind. Diseases like Cholera of Malaria can also infect someone if nobody else is infected. This sort of diseases will not be looked at in our initial model. We will however incorporate that possibility later. 
+The probability to get infected PI\_i is primarily determined by the proportion of people that are currently infected l\_i and the proportion of people that are vaccinated l\_c
 
 
 \subsubsection{Modelling immunisation}
 We assume that the vaccination provides 100\% safety, equal to having recovered from the disease. However, as recent research has shown that the protection considerably decreases about 10  years after the initial protection. 
-To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we take a period of 13 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination. 
+To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we take a period of 13 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination. \footnote{Wendelboe, Van, Salmaso, Englund: Duration of immunity against pertussis after natural infection or vaccination. S58–S61} 
 As this dynamics of waning immunity already provides us with a constant population, we do not model births and deaths, as Pertussis is not a disease that frequenly causes death. 
 
 \subsection{Network}
@@ -159,10 +167,37 @@ The perceived vaccination cost of a person changes in two scenarios:
 
 2. When the global level of 
 
-\subsection{Equilibria for two people}
-In the case of two people
+\subsection{One person among N people}
+To illustrate this, let us have a look how a person A takes the decision to vaccinate: 
+We initialise each person with a value for perceived vaccination cost and perceived infection cost (which are the same for everyone at the beginning. 
+If a person B in the network of A falls ill, A's perceived infection cost rises by a factor of 1.2. If another person C in A's network were to fall ill, A'S perceived infection cost would rise by a factor of 1.2 again. After person B recovers, A's perceived infection cost are multiplied by a factor of 0.9, the same is true when person C recovers, leaving person A with a perceived risk of infection of 1.1664 compared to 1 at the beginning, accounting for the fact that the person is more aware of the cost of the disease because B and C in their network have been affected. 
 
 \subsection{Equilibria for N people}
+In addition to the "local" information of the nodes in the network of the person, there is also information on the general coverage and infection level in society available to the individual, as well as an additional factor that we call 
+
+change\_infection\_cost\_population
+
+\begin{small}
+\begin{lstlisting}
+def change_infection_cost_population(people_list, factor, probability):
+    """ Change the percieved_infec_cost by a factor for every Person
+    with some probability
+    
+    Args:
+        people_list (list of Person): 
+        The list of people whose parameter should be changed
+        factor (float): 
+        The factor by which the percieved_infec_cost should be changed
+        probability (float, between 0 and 1): 
+        probability of each person to get the percieved_infec_cost changed
+    
+    Returns:
+        people_list (list of Person): 
+        The list of people whose parameter have been changed
+    """
+
+\end{lstlisting}
+\end{small}
 
 
 \subsection{Important Parameters}
