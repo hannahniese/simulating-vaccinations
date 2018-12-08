@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov 27 20:08:34 2018
+Simulating vaccination
+Created as part of the ETH course "Lecture with Computer Exercises: 
+    Modelling and Simulating Social Systems in MATLAB (or Python)"
 
-@author: markus
+Find all information about the code in code/readme.md
+
+December 2018
+@author: Hannah Niese, Markus Niese, Timo Schönegg
 """
+
 import random
 import numpy as np
 import csv
@@ -36,6 +42,9 @@ def generate_Albert_Barbasi(people_list, m, seed_size):
         people_list (list of Network_Person): Nodes of Network
         m (int): Number of edges to attach from a new node to existing nodes
         seed_size (int): number of initially connected nodes
+        
+    Function is based on description of the Albert-Barabasi-Model in
+    Caldarelli, G., Chessa, A., "Data Science & Complex Networks"
     """
     ## generate seed (these nodes are all connected to each other)
     for i in range(seed_size):
