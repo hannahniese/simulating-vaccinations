@@ -95,7 +95,7 @@
 
 \section{Abstract}
 
-
+under which circumstances Pertussis outbreaks can occur
 
 \section{Individual contributions}
 
@@ -141,34 +141,17 @@ The probability to get infected PI\_i is primarily determined by the proportion 
 
 \subsubsection{Modelling immunisation}
 We assume that the vaccination provides 100\% safety, equal to having recovered from the disease. However, as recent research has shown that the protection considerably decreases about 10  years after the initial protection. 
-To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we take a period of 13 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination. \footnote{Wendelboe, Van, Salmaso, Englund: Duration of immunity against pertussis after natural infection or vaccination. S58–S61} 
+To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we give people the option to vaccinate again after 8 years. The average duration of protection is 12 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination. \footnote{Wendelboe, Van, Salmaso, Englund: Duration of immunity against pertussis after natural infection or vaccination. S58–S61} 
 As this dynamics of waning immunity already provides us with a constant population, we do not model births and deaths, as Pertussis is not a disease that frequenly causes death. 
 
 \subsection{Network}
 
 The main model of our project uses a complex network representing the contacts of each person. The vertices are the individuals in the simulation and each edge is a contact between the two people. We worked with undirected networks in all our simulations. The transmission of a disease, at least in the case of pertussis, occurs if and only if the two individuals have direct contact. Meaning if Person A has contact to Person B, then Person B has automatically also contact to Person A. That context is better represented by an undirected network. However, our simulation works for directed networks as well.
 All networks we used were also connected, which means that there is a path between each two vertices. All social networks nowadays are that way, in particular small sized systems like in our simulation. Moreover, unconnected individuals do not play a role as the disease can only be transmitted by human contact.
+\vspace{14px}
 
 As studied by Barabasi, \footnote{INSERT REFERENCE BARABASI} randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals. That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behavior, meaning that the degree distribution falls by some polynomial rather than being constant like in a completely random network. The Barabasi-Albert-Network reaches that by sequentially adding single nodes each with two new edges connecting randomly, but with a preference to nodes with a higher degree, to the already existing nodes. Using that process, a degree distribution of $k^{-3}$ is reached. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Networkx for most of our simulation, especially for those with a high number of vertices.
-
-General Principle of the Simulation
-The program is based on an object-oriented approach. That means the main program is executed by objects of class Person in vacc.py. Each Person is one individual in our model. There are three derived classes each corresponding to way of simulating the interactions between those individuals:
-
-1	Grid\_Person: Places people on a two$-$dimensional plane, where each pixel stands for one Person. Not a very realistic model, but allows for nice graphical representations and animations.
-
-2	Network\_Person: More realistic and thus the one used for the whole analysis. Every Network\_Person has an adjacency list of all its contacts and can only interact with those.
-In every timestep a couple of memberfunctions are called to refresh the status of each Person.
-Next\_day(): checks, if immunization or infection is still active and refreshes the corresponding variables if not
-Get\_vaccinated(): Each Person decides everyday, if it should vaccinated dependend on the expected gain for this individual. The details of that can be found in chapter
-Start\_infecteion(probability\_to\_meet): if the Person is infected, it itself can infect people. Therefore it must meet them (determined by the probability to meet) and if the two people meet, the infection will happen with a certain probability prob\_for\_contact\_infection.
-
-
-
-Initialisation for long time analysis:
-The main goal of the long-term analysis is to investigate if and when the disease can reemerge. To model this, a few new functions and parameters are needed. The immunization has a finite length. According to papers pertussis immunization irrelevant if due to vaccination or recovery stays active for around 12 years. We approximate the length of each individual’s immunity by a gaussian with a mean of 12 years and a standard deviation of two years. The individual obviously does not know, if he is still immune, but can vaccinate again after 8 years. That is consistent with recommendations from health organisations. What we also introduce is a random probability to be infected. Pertussis is only transmitted by other humans. However, that random probability is needed as the disease would die out quickly due to the small size of our system. So this probability represents people in our system having contact with someone from outside and bringing the disease in. The last but arguably most important parameters are the perceived cost due to vaccination and infection. There exists very little public research on that, meaning we had to investigate it ourselves. The first problem is that no one vaccinates if nobody is infected. That is evidently false, so we set the infection level to a minimum of 0.1 percent, corresponding to the probability to get infected by an outside person.
-Considering now the numerical values for the costs it becomes apparent that the absolute values do not matter but only the relation between the two costs. Thus, we set the perceived vaccination cost arbitrarily to 1. We find the perceived infection cost by going back to our initial assumption that there is a voluntary vaccination policy at place. That means that the initial perceived infection cost is related to the initial coverage level in our system. If for example initially 97\% of the people are vaccinated, we set the perceived vaccination cost in such a way that the expected gain due to vaccination is slightly negative for every person exceeding the 97\% coverage level.
-Letting that model run yields no results, as it operates in an equilibrium. As soon as one person’s immunization becomes inactive it will immediately vaccinate again, such that the coverage level is always constant. That is also very consistent with the real situation. If 97\% have decided to vaccinate and the opinion of everybody stays the same they will immediately vaccinate again if they lose immunization.
-That means we have to introduce vaccination scares. At variable times we change the perceived cost of vaccination of some proportion of the population just like a anti-vaccine newspaper article or television documentary for example would.
+\vspace{14px}
 
 
 \subsection{Vaccination Decision}
@@ -183,6 +166,16 @@ To evaluate the probability of a person to get vaccinated, we use a static model
 
 
 \subsubsection{Perceived vaccination cost} 
+As we consider the ratio of the perceived cost of vaccination and the perceived cost of infection (i.e. getting sick) and not the absolute values, we set the perceived cost of vaccination arbitrarily to 1 at the start. This number does not only include the monetary cost, but also the risk of side effects and other factors, which we do not consider separately. For finding the perceived cost of infection, we go back to our initial assumption that a voluntary vaccination policy is in place. That means that the initial perceived cost of infection is related to the initial coverage level in our system. If initially 97\% of the people are vaccinated, we set the perceived vaccination cost in such a way that the expected gain due to vaccination is slightly negative for every person exceeding the 97\% coverage level.
+
+\begin{equation}
+E(P,p) = -rP +(1-P)*i
+\end{equation}
+
+
+expected\_gain = - perceived risk of vaccination + infection cost *(infection level * (1 - coverage level)* risk of infection) 
+
+\vspace{14px}
 
 
 \subsubsection{Perceived infection cost}
@@ -195,7 +188,7 @@ The perceived vaccination cost of a person changes in two scenarios:
 \subsection{One person among N people}
 To illustrate this, let us have a look how a person A takes the decision to vaccinate: 
 We initialise each person with a value for perceived vaccination cost and perceived infection cost (which are the same for everyone at the beginning. 
-If a person B in the network of A falls ill, A's perceived infection cost rises by a factor of 1.2. If another person C in A's network were to fall ill, A'S perceived infection cost would rise by a factor of 1.2 again. After person B recovers, A's perceived infection cost are multiplied by a factor of 0.9, the same is true when person C recovers, leaving person A with a perceived risk of infection of 1.1664 compared to 1 at the beginning, accounting for the fact that the person is more aware of the cost of the disease because B and C in their network have been affected. 
+If a person B in the network of A falls ill, A\'s perceived infection cost rises by a factor of 1.2. If another person C in A's network were to fall ill, A's perceived infection cost would rise by a factor of 1.2 again. After person B recovers, A's perceived infection cost are multiplied by a factor of 0.9, the same is true when person C recovers, leaving person A with a perceived risk of infection of 1.1664 compared to 1 at the beginning, accounting for the fact that the person is more aware of the cost of the disease because B and C in their network have been affected. 
 
 \subsection{Equilibria for N people}
 In addition to the "local" information of the nodes in the network of the person, there is also information on the general coverage and infection level in society available to the individual, as well as an additional factor that we call 
@@ -246,16 +239,56 @@ The patient starts being infectious 7 days after infection, and remains so until
 $www.infektionsschutz.de/erregersteckbriefe/keuchhusten/\#c3580$, accessed 30.11.2018}
 
 \section{Implementation}
-The model was implemented using Python. First, we wrote the basic SIR model with infection and recovery. Then we added the "vaccination function" which returns whether a person is getting vaccinated or not. Finally, 
+The model was implemented using Python. First, we wrote the basic SIR model with infection and recovery. Then we added the "vaccination function" which returns whether a person is getting vaccinated or not. 
 
 \vspace{14px}
 
+\subsection{General Principle of the Simulation}
+The programme has an object-oriented approach, meaning that the main program is executed by objects of a class Person in vacc.py. Each Person is one individual in our model. There are two derived classes, each corresponding to a way of simulating the interactions between those individuals:
+\vspace{14px}
+
+\textbf{Grid\_Person:} Places people on a two-dimensional plane, where each pixel stands for one Person. Not a very realistic model, but it allows for nice graphical representations and animations.
+\vspace{14px}
+
+\textbf{Network\_Person:} More realistic and thus the one used for the whole analysis. Every Network\_Person has an adjacency list of all its contacts and can only interact with those.
+\vspace{14px}
+
+Each timestep (one day) several member functions are called to refresh the status of each Person.
+
+\textbf{Next\_day():} Checks, whether immunisation or infection is still active or refreshes the corresponding variables if this is not the case
+
+\textbf{Get\_vaccinated():} Every day, each person decides whether to get vaccinated today, depening on the expected gain for themselves. The details of that can be found in 4.3. 
+
+\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle anymore and are only attended by those who have been vaccinated. The probability\_to\_meet represents the probability of two people meeting each other, with the probability of being infected is prob\_for\_contact\_infection.
+\vspace{14px}
 
 
-\subsection{SIR Model Implementation}
+\subsection{Initialisation for long time analysis}
+The main goal of the long-term analysis is to investigate if and when the disease can reemerge. To model this, a few new functions and parameters are needed. Following the assumptions about waning immunisation \textbf{(explained in 4.1.1)}, we approximate the length of immunity of an individual by a gaussian with a mean of 12 years and a standard deviation of two years. The individuals obviously do not know, whether they are still immune, but can vaccinate again after 8 years,consistent with recommendations from health organisations. 
+
+Another parameter that we introduce is a random probability to be infected. Pertussis is only transmitted by other humans. However, that random probability is needed as the disease would die out quickly due to the small size of our system, and represents contact with others outside the system (e.g. travellers) that would otherwise not be accounted for. 
+
+The last but arguably most important parameters are the perceived cost of vaccination and infection. As the literature on this topic is very theoretical in nature, we took and adjusted a simple game-theory based model by Heal\footnote{HEAL ............} and fit it to our model. \textbf{(Read more in 4.3.1 and 4.3.2).} The first problem is that no one vaccinates if nobody is infected. That is evidently false, so we set the infection level to a minimum of 0.1 percent, corresponding to the probability of getting infected by an outside person.
+\vspace{14px}
+
+
+Letting that model run yields no results, as it operates in an equilibrium. As soon as one person’s immunization becomes inactive it will immediately vaccinate again, such that the coverage level is always constant. That is also very consistent with the real situation. If 97\% have decided to vaccinate and the opinion of everybody stays the same they will immediately vaccinate again if they lose immunization.
+\vspace{14px}
+
+That means we have to introduce vaccination scares. At variable times we change the perceived cost of vaccination of some proportion of the population just like a anti-vaccine newspaper article or television documentary for example would.
+
+
 
 
 \section{Simulation Results and Discussion}
+
+
+
+\begin{center}
+\includegraphics[scale=1]{totalinfecwoinitinfec}
+\end{center}
+total infected people without initially infected
+
 
 \subsection{Limitations}
 
@@ -269,6 +302,10 @@ Table of References:
 
 Bauch, C. T., \& Earn, D. J. (2004). Vaccination and the theory of games. Proceedings of the National Academy of Sciences, 101(36), 13391-13394.
 \vspace{14px}
+
+Caldarelli, Guido, and Alessandro Chessa. Data science and complex networks: real case studies with Python. Oxford University Press, 2016.
+
+Coolen, Anthony CC, Alessia Annibale, and Ekaterina Roberts. Generating random networks and graphs. Oxford University Press, 2017.
 
 Eshel, I. (1996). On the changing concept of evolutionary population stability as a reflection of a changing point of view in the quantitative theory of evolution. Journal of mathematical biology, 34(5-6), 485-510.
 \vspace{14px}
