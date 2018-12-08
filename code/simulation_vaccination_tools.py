@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Oct 13 22:01:11 2018
+Simulating vaccination
+Created as part of the ETH course "Lecture with Computer Exercises: 
+    Modelling and Simulating Social Systems in MATLAB (or Python)"
 
-@author: markus
+Find all information about the code in code/readme.md
+
+December 2018
+@author: Hannah Niese, Markus Niese, Timo Schönegg
 """
+"""
+This file contains a number of basic functions needed in various other files.
+"""
+
+
+### Import packages
 import random
 import numpy as np
 
@@ -11,9 +22,9 @@ def prob_infec(infec_level, coverage_level, risk = 0.5):
 	"""calculates the probability of getting infected
 
 	Args:
-		infec_level (double): the amount of people that are currently infected
-		coverage_level (double): proportion of the population that is vaccinated
-		risk (double): the risk of getting infected
+		infec_level (double): The amount of people that are currently infected
+		coverage_level (double): Vaccinated proportion of the population
+		risk (double): The risk of getting infected
 	
 	Returns:
 		the probability of one person to get infected
@@ -22,13 +33,15 @@ def prob_infec(infec_level, coverage_level, risk = 0.5):
 	#prob = (1-coverage_level)
 	return prob
 
+
+
 def grid_prob_infec(infec_level, coverage_level,\
                     rate_in_neighborhood, risk = 0.1):
 	"""calculates the probability of getting infected
 
 	Args:
 		infec_level (double): the amount of people that are currently infected
-		coverage_level (double): proportion of the population that is vaccinated
+		coverage_level (double): Vaccinated proportion of the population
 		risk (double): the risk of getting infected
         rate_in_neighborhood (double): the porpotion of people infected in
         the neighborhood
@@ -41,71 +54,66 @@ def grid_prob_infec(infec_level, coverage_level,\
 
 
 
-def expect_value(vaccinate_probability, coverage_level, infec_level, risk):
-	"""calculates the expectation value for an individual
-
-	Args:
-		vaccinate_probability (double): the probability of that person to get vaccinated
-		coverage_level (double) : the proportion of the scociety that is vaccinated
-		infec_level (double): the amount of people that are currently infected
-		risk (double): risk of vacc / risk of infection
-	
-	Returns:
-		expectation value
-	"""
-	expect = - risk * vaccinate_probability - (1 - vaccinate_probability) *\
-	 prob_infec(infec_level, coverage_level)
-	return expect
-
-
-def expected_gain(coverage_level, infec_level, vacc_cost, infec_cost, risk = 0.5):
+def expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
+                  risk = 0.5, minimal_infec_level = 0):
 	"""calculates the expectation expected gain if one vaccinates
 
 	Args:
-		coverage_level (double) : the proportion of the scociety that is vaccinated
-		infec_level (double): the amount of people that are currently infected
-        vacc_cost (double): the percieved cost when vaccinating
-        infec_cost (doulbe): the percieved cost due to infection
+		coverage_level (double) : Vaccinated probortion of the population
+		infec_level (double): The amount of people that are currently infected
+        vacc_cost (double): The percieved cost when vaccinating
+        infec_cost (doulbe): The percieved cost due to infection
 		risk (double): risk of vacc / risk of infection
+        minimal_infec_level (double): The minimal infec_level precieved by 
+            a person
+            
 	Returns:
-		expectation value
+		Expected gain when vaccinating
 	"""
-	infection_level = np.maximum(infec_level, 0.001)
-	expect = - vacc_cost + infec_cost * infection_level * (1 - coverage_level) * risk
+	infection_level = np.maximum(infec_level, minimal_infec_level)
+	expect = - vacc_cost + infec_cost * infection_level *\
+        (1 - coverage_level) * risk
 	return expect
+
+
 
 def grid_expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
                   rate_in_neighborhood):
 	"""calculates the expectation expected gain if one vaccinates
 
 	Args:
-		coverage_level (double) : the proportion of the scociety that is vaccinated
-		infec_level (double): the amount of people that are currently infecte
+		coverage_level (double) : Vaccinated proportion of the population
+		infec_level (double): The amount of people that are currently infected
 		risk (double): risk of vacc / risk of infection
-        rate_in_neighborhood (double): the porpotion of people infected in
-        the neighborhood
+        rate_in_neighborhood (double): The porpotion of people infected in
+            the neighborhood
 	
 	Returns:
 		expectation value
 	"""
-	expect = - vacc_cost + infec_cost * prob_infec(infec_level, coverage_level,\
-                                                rate_in_neighborhood)
+	expect = - vacc_cost + infec_cost * prob_infec(infec_level,\
+        coverage_level, rate_in_neighborhood)
 	return expect
 
+
+
 def discrete_gradient(array):
-    """calculates the difference between an element in an array and the element
-    before
+    """ Calculates the difference between an element in an array and the
+        element before
     
     Args:
-        array (int array) : the array for which the daily change should be calculated
+        array (array[int]): The array for which the daily change
+            should be calculated
         
     Returns:
-        array with the daily change
+        Array with the daily change
     """
     res = [0]
     for i in range(1,len(array)):
         res.append(array[i]-array[i-1])
     return res
+
+
 
 def initial_infected(people_list, proportion_infected):
     """calls get_infected on random persons in people_list
@@ -126,6 +134,8 @@ def initial_infected(people_list, proportion_infected):
             inf -= 1
     return people_list       
     
+
+
 def initial_vaccinated(people_list, proportion_vaccinated):
     """calls get_infected on random persons in people_list
     
@@ -144,9 +154,11 @@ def initial_vaccinated(people_list, proportion_vaccinated):
             # set a random value to days since immunization up to 12 years
             #days_since_immunization = random.randint(0,4380)
             days_since_immunization = 1
-            people_list[rand].set_immunization(days_since_immunization, True, False)
+            people_list[rand].set_immunization(days_since_immunization, True,\
+                       False)
             inf -= 1
     return people_list
+
 
 
 def change_infection_cost_population(people_list, factor, probability):
@@ -154,31 +166,39 @@ def change_infection_cost_population(people_list, factor, probability):
     with some probability
     
     Args:
-        people_list (list of Person): The list of people whose parameter should be changed
-        factor (float): The factor by which the percieved_infec_cost should be changed
+        people_list (list of Person): The list of people whose parameter
+            should be changed
+        factor (float): The factor by which the percieved_infec_cost
+            should be changed
         probability (float, between 0 and 1): probability of each person to get
             the percieved_infec_cost changed
     
     Returns:
-        people_list (list of Person): The list of people whose parameter have been changed
+        people_list (list of Person): The list of people whose parameter
+            have been changed
     """
     for p in people_list:
         if random.random() < probability:
             p.change_infec_cost_relative(factor)
     return people_list
 
+
+
 def change_vaccination_cost_population(people_list, factor, probability):
     """ Change the percieved_vacc_cost by a factor for every Person
     with some probability
     
     Args:
-        people_list (list of Person): The list of people whose parameter should be changed
-        factor (float): The factor by which the percieved_vacc_cost should be changed
+        people_list (list of Person): The list of people whose parameter
+            should be changed
+        factor (float): The factor by which the percieved_vacc_cost
+            should be changed
         probability (float, between 0 and 1): probability of each person to get
             the percieved_vacc_cost changed
     
     Returns:
-        people_list (list of Person): The list of people whose parameter have been changed
+        people_list (list of Person): The list of people whose parameter
+            have been changed
     """
     for p in people_list:
         if random.random() < probability:
