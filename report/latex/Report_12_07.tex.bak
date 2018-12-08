@@ -94,9 +94,6 @@
 
 
 \section{Abstract}
-
-under which circumstances Pertussis outbreaks can occur
-
 The first objective of this paper is to model find which level of immunisation is required to eradicate Pertussis in a society. We simulated the effects of various initial vaccination rates and draw a comparison to theoretical models, and observe the stability of our results. 
 The second objective is to find out under wich circumstances Pertussis outbreaks occur, in particular in societies with high vaccination coverage. We find that a lack of  
 
@@ -221,20 +218,18 @@ First we look at the dynamics of the disease. Pertussis is highly contagious, an
 \begin{lstlisting}
 #Random probability (per day and person) to become sick 
 #without being infected by someone else
-prob_for_diseases = 0.00003 
+prob_for_diseases = 0.000001 
 
 #probability to infect someone when there is contact
 prob_for_contact_infection = 0.5 
 
 #incubation time (in days)
-incubation_time = 10
+incubation_time = 12
  
 #days from infection, after this time a person is recovered
-time_to_get_healthy = 10 
+time_to_get_healthy = 42
 \end{lstlisting}
 
-The patient starts being infectious 7 days after infection, and remains so until they recover \footnote{Bundeszentrale für Gesundheitliche Aufklärung Germany, Keuchhusten \break
-$www.infektionsschutz.de/erregersteckbriefe/keuchhusten/\#c3580$, accessed 30.11.2018}
 
 \section{Implementation}
 The model was implemented using Python. First, we wrote the basic SIR model with infection and recovery. Then we added the "vaccination function" which returns whether a person is getting vaccinated or not. 
@@ -257,7 +252,8 @@ Each timestep (one day) several member functions are called to refresh the statu
 
 \textbf{Get\_vaccinated():} Every day, each person decides whether to get vaccinated today, depening on the expected gain for themselves. The details of that can be found in 4.3. 
 
-\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle anymore and are only attended by those who have been vaccinated. The probability\_to\_meet represents the probability of two people meeting each other, with the probability of being infected is prob\_for\_contact\_infection.
+\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle anymore and are only attended by those who have been vaccinated.\footnote{Bundeszentrale für Gesundheitliche Aufklärung Germany, Keuchhusten \break
+$www.infektionsschutz.de/erregersteckbriefe/keuchhusten/\#c3580$, accessed 30.11.2018} The probability\_to\_meet represents the probability of two people meeting each other, with the probability of being infected is prob\_for\_contact\_infection.
 \vspace{14px}
 
 
