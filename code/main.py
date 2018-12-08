@@ -48,7 +48,7 @@ vaccinated_people_list = [] # int-list: the total number of vaccinated people
 
 ## Diseases parameters
 prob_for_diseases = 0.000001 # Random probability (per day and person) to become
-                            # sick by someone outside the network
+                             # sick by someone outside the network
 prob_for_contact_infection = 0.5 # probability to infect an other person, when
                                   # there is a contact
 incubation_time = 12 # Incubation Period of the disease

@@ -96,7 +96,7 @@ for percent in range (0,100,3): #change initially vaccinated people
                    length_immune_sigma = 712) 
     
     ## set initial conditions    
-    tool.initial_infected(people_list, 0.005)
+    tool.initial_infected(people_list, 0.001)
     tool.initial_vaccinated(people_list, percent/100)
     
     ## make initial counts

@@ -143,9 +143,8 @@ class Person:
     Functions:
         get_infected(self):
             changes 'infected_days'-parameter to 0 and increases the number of
-            currently infected people
-            return 1 if person becomes infected, otherwise returns 0
-
+            currently infected people. Returns 1 if person got infected,
+            0 if not
             
         next_day(self):
             Makes some people randomly sick (prob_for_diseases)
@@ -206,15 +205,17 @@ class Person:
     def get_infected(self):
         """ Changes 'infected_days'-parameter to 0 and increases the number of
                currently infected people
-            return 1 if person becomes infected, otherwise returns 0
+               
+            Returns:
+                1 if person got infected, 0 if not
     	"""
         if (not self.vaccinated) and (not self.recovered) and\
           self.infected_days == -1: #person is healthy and not vaccinated
             self.infected_days = 0 #infection starts
             change_num_infected_people(1)
             return 1
-        
         return 0
+    
     
     
     def next_day(self):

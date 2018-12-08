@@ -33,7 +33,7 @@ def run():
     ### parameters for the simulation
     
     ## Population parameters
-    population = 5493 # number of people in the simulation
+    population = 10000 # number of people in the simulation
     population_alive = 0 #number of people alive at the start of the simulation
     vaccinated_people = 0 # number vaccinated people
     infected_people = 0 # number of infected people
@@ -64,7 +64,7 @@ def run():
     ## Initial values of the percieved cost of vaccination and infection
     ## for all people the same
     percieved_vacc_cost = 1
-    percieved_infec_cost = 20000
+    percieved_infec_cost = 5000
     minimal_infec_level = 0.001 # Minimal level of infection in the
                                 # population apparent to one individual
     
@@ -110,8 +110,8 @@ def run():
     # equal to the number of nodes in the imported graph
     
     #network_generator.generate_Albert_Barbasi(people_list, 2, 3)
-    #network_generator.import_barabasi_graph("Networks/test_20000.txt", people_list)
-    network_generator.import_graph_from_tsv("Networks/project90.tsv", people_list)
+    network_generator.import_barabasi_graph("Networks/barabasi_10000_2.txt", people_list)
+    #network_generator.import_graph_from_tsv("Networks/project90.tsv", people_list)
         
     days_since_opinion_change = 0   # saves the amount of days since 
                                     # tool.change_vaccination_cost_population()
@@ -176,7 +176,7 @@ def run():
 ### Run the program and save the results ###
 ###############################################################################
 ## open csv file to store data
-with open('network_data/project90_2000_8000days.csv', mode='w') as file:
+with open('network_data/10000_5000_8000days.csv', mode='w') as file:
     file_writer = csv.writer(file, delimiter=',', lineterminator = '\n')
     file_writer.writerow(['time', 'curr_vacc', 'max_vacc', 'max_infec',\
                           'day_max_infec', 'vacc_min', 'day_vacc_min', 'curr_immune'])
