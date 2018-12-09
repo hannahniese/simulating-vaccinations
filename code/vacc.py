@@ -4,7 +4,7 @@ Simulating vaccination
 Created as part of the ETH course "Lecture with Computer Exercises: 
     Modelling and Simulating Social Systems in MATLAB (or Python)"
 
-Find all information about the code in code/readme.md
+Find all information about the code in code/readme.txt
 
 December 2018
 @author: Hannah Niese, Markus Niese, Timo Schönegg
