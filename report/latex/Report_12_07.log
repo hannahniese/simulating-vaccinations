@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  8 DEC 2018 21:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  9 DEC 2018 11:51
 entering extended mode
 **./Report_12_07.tex
 (Report_12_07.tex
@@ -359,52 +359,70 @@ Underfull \hbox (badness 6995) in paragraph at lines 125--125
  []
 
 [4] [5 <./images/ukpertussis.png (PNG copy)> <./images/grundimmodeutschlandpert
-ussis.png>] [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 256--256
+ussis.png>]
+<./images/networkplot.png, id=33, 462.528pt x 341.8371pt>
+File: ./images/networkplot.png Graphic file (type png)
+<use ./images/networkplot.png>
+Package pdftex.def Info: ./images/networkplot.png  used on input line 168.
+(pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
+<./images/degreedistribution.png, id=34, 462.528pt x 341.8371pt>
+File: ./images/degreedistribution.png Graphic file (type png)
+<use ./images/degreedistribution.png>
+Package pdftex.def Info: ./images/degreedistribution.png  used on input line 17
+5.
+(pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
+ [6] [7 <./images/networkplot.png> <./images/degreedistribution.png>] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 246--246
 [][]\OT1/cmr/m/n/9 Bundeszentrale fur Gesund-heitliche Aufklarung Ger-many, K
 euch-hus-ten 
  []
 
-[10] [11]
-<./images/totalinfecwoinitinfec.png, id=56, 462.528pt x 341.8371pt>
+[9] [10]
+<./images/totalinfecwoinitinfec.png, id=57, 462.528pt x 341.8371pt>
 File: ./images/totalinfecwoinitinfec.png Graphic file (type png)
 <use ./images/totalinfecwoinitinfec.png>
 Package pdftex.def Info: ./images/totalinfecwoinitinfec.png  used on input line
- 294.
-(pdftex.def)             Requested size: 277.51894pt x 205.10382pt.
-<./images/02aedges200001p2fixedtime5001p5sv0p001.png, id=57, 462.528pt x 341.83
+ 276.
+(pdftex.def)             Requested size: 231.26343pt x 170.91812pt.
+ [11 <./images/totalinfecwoinitinfec.png>] [12]
+<./images/02aedges200001p2fixedtime5001p5sv0p001.png, id=66, 462.528pt x 341.83
 71pt>
 File: ./images/02aedges200001p2fixedtime5001p5sv0p001.png Graphic file (type pn
 g)
 <use ./images/02aedges200001p2fixedtime5001p5sv0p001.png>
 Package pdftex.def Info: ./images/02aedges200001p2fixedtime5001p5sv0p001.png  u
-sed on input line 311.
+sed on input line 307.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
-<./images/02bedges200001p2fixedtime5001p5sv0p001.png, id=58, 462.528pt x 341.83
+<./images/02bedges200001p2fixedtime5001p5sv0p001.png, id=67, 462.528pt x 341.83
 71pt>
 File: ./images/02bedges200001p2fixedtime5001p5sv0p001.png Graphic file (type pn
 g)
 <use ./images/02bedges200001p2fixedtime5001p5sv0p001.png>
 Package pdftex.def Info: ./images/02bedges200001p2fixedtime5001p5sv0p001.png  u
-sed on input line 318.
+sed on input line 314.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
- [12 <./images/totalinfecwoinitinfec.png>] [13 <./images/02aedges200001p2fixedt
-ime5001p5sv0p001.png> <./images/02bedges200001p2fixedtime5001p5sv0p001.png>] [1
-4]
-Overfull \hbox (11.44775pt too wide) in paragraph at lines 361--363
+ [13 <./images/02aedges200001p2fixedtime5001p5sv0p001.png> <./images/02bedges20
+0001p2fixedtime5001p5sv0p001.png>]
+Overfull \hbox (52.70445pt too wide) in paragraph at lines 344--345
+[]\OT1/cmr/m/n/12 Office of Pop-u-la-tion Re-search, Princ-ton Uni-ver-sity: ht
+tps://opr.princeton.edu/archive/p90/ 
+ []
+
+[14]
+Overfull \hbox (11.44775pt too wide) in paragraph at lines 362--364
 \OT1/cmr/m/n/12 coon-ing Vac-ci-na-tion Strate-gies on In-fant Per-tus-sis Epi-
 demi-ol-ogy 23(6):852-860, Novem-
  []
 
 [15] (Report_12_07.aux) ) 
 Here is how much of TeX's memory you used:
- 4831 strings out of 492970
- 65016 string characters out of 3135832
- 141025 words of memory out of 3000000
- 8630 multiletter control sequences out of 15000+200000
+ 4842 strings out of 492970
+ 65317 string characters out of 3135832
+ 139041 words of memory out of 3000000
+ 8639 multiletter control sequences out of 15000+200000
  15211 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,11n,32p,1154b,975s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,11n,32p,1153b,975s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 bx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb
@@ -418,9 +436,9 @@ nts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
 8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/
 Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
 Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Report_12_07.pdf (15 pages, 483670 bytes).
+Output written on Report_12_07.pdf (15 pages, 549550 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
+ 124 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

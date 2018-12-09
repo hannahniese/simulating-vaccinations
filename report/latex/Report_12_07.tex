@@ -148,18 +148,11 @@ This estimation is taken from a simulation which assesses the susceptibility of 
 \footnote{Estimation of Household Transmission Rates of Pertussis and the Effect of Cocooning Vaccination Strategies on Infant Pertussis Epidemiology 23(6):852-860, November 2012}
 \vspace{14px}
 
-Markus
-\vspace{14px}
-
-In our model individuals have the choice of vaccinating or not. They do that based on the current benefits of each option. The main parameters infulincing their decision are the perceived risk of side effects of the vaccination r\_v and perceived risk to get harmed by the disease r\_i. 
-These two parameters do not just have to be caused by one specific reason but can be composed of a number of factors. Certainly the actual risks play a part, but equally the perceived risk, which will rise for example when individuals in the neigborhood are infected. But also financial consideration may play a part. We will elaborate on the possible influences in Chapter….
-Furthermore we will assume that the disease can only be transmitted by humans. Childhood diseases like pertussis or measles are of that kind. Diseases like Cholera of Malaria can also infect someone if nobody else is infected. This sort of diseases will not be looked at in our initial model. We will however incorporate that possibility later. 
-The probability to get infected PI\_i is primarily determined by the proportion of people that are currently infected l\_i and the proportion of people that are vaccinated l\_c
 
 
 \subsubsection{Modelling immunisation}
 We assume that the vaccination provides 100\% safety, equal to having recovered from the disease. However, as recent research has shown that the protection considerably decreases about 10  years after the initial protection. 
-To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we give people the option to vaccinate again after 8 years. The average duration of protection is 12 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination. \footnote{Wendelboe, Van, Salmaso, Englund: Duration of immunity against pertussis after natural infection or vaccination. S58–S61} 
+To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we give people the option to vaccinate again after 8 years. The average duration of protection is 12 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination.\footnote{Wendelboe, Van, Salmaso, Englund: Duration of immunity against pertussis after natural infection or vaccination. S58–S61} 
 As this dynamics of waning immunity already provides us with a constant population, we do not model births and deaths, as Pertussis is not a disease that frequenly causes death. 
 
 \subsection{Network}
@@ -168,19 +161,35 @@ The main model of our project uses a complex network representing the contacts o
 All networks we used were also connected, which means that there is a path between each two vertices. All social networks nowadays are that way, in particular small sized systems like in our simulation. Moreover, unconnected individuals do not play a role as the disease can only be transmitted by human contact.
 \vspace{14px}
 
-As studied by Barabasi, \footnote{INSERT REFERENCE BARABASI} randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals. That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behavior, meaning that the degree distribution falls by some polynomial rather than being constant like in a completely random network. The Barabasi-Albert-Network reaches that by sequentially adding single nodes each with two new edges connecting randomly, but with a preference to nodes with a higher degree, to the already existing nodes. Using that process, a degree distribution of $k^{-3}$ is reached. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Networkx for most of our simulation, especially for those with a high number of vertices.
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{networkplot}
+  \caption{Network structure}  
+  \label{fig:test3}
+  
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{degreedistribution}
+  \caption{Degree distributions}
+  \label{fig:test4}
+ 
+\end{minipage}%
+\end{figure}
+
+As studied by Barabasi, randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals.\footnote{INSERT REFERENCE BARABASI} That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behavior, meaning that the degree distribution falls by some polynomial rather than being constant like in a completely random network. The Barabasi-Albert-Network reaches that by sequentially adding single nodes each with two new edges connecting randomly, but with a preference to nodes with a higher degree, to the already existing nodes. Using that process, a degree distribution of $k^{-3}$ is reached. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Networkx for most of our simulation, especially for those with a high number of vertices.
 \vspace{14px}
 
 
-\subsection{Vaccination Decision}
+\subsection{Vaccination decision}
 
-We assume that every person is a rational decision maker, who decides whether or not to get vaccinated based on the perceived costs of getting vaccination vs risking getting sick.  \footnote{INSERT RESEACH ABOUT 12 YEARS HERE}  
+We assume that every person is a rational decision maker. To evaluate the probability of a person to get vaccinated, we use a static model in which each individual assesses their personal cost of getting vaccinated versus getting infected.  \footnote{INSERT RESEACH ABOUT 12 YEARS HERE}  The main parameters guiding their decision are the perceived risk of side effects of the vaccination r\_v, and perceived risk of the loss they would incur by getting the disease r\_i.
 
-has an initial inclination to vaccinate themselves, which we initialise before the simulation. 
-
-
-\textbf{Cost functions}
-To evaluate the probability of a person to get vaccinated, we use a static model in which each individual assesses their personal cost of getting vaccinated versus getting infected. 
+These two parameters are influenced by various factors. The statistic risks will for sure play into them, but so does the risk that an individual perceives through media statements and
+the infection of people in their network, as well as influences from friends and family. Financial costs are likewise taken into consideration, be it the actual monetary cost of the vaccination or the foregone income when a person is infected and cannot work for a certain number of days. Furthermore we will assume that the disease can only be transmitted by humans. Childhood diseases like pertussis or measles are of that kind. 
+The probability to get infected PI\_i is primarily determined by the proportion of people that are currently infected l\_i and the proportion of people that are vaccinated l\_c
 
 
 \subsubsection{Perceived vaccination cost} 
@@ -206,29 +215,10 @@ The perceived vaccination cost of a person changes in two scenarios:
 \subsection{One person among N people}
 To illustrate this, let us have a look how a person A takes the decision to vaccinate: 
 We initialise each person with a value for perceived vaccination cost and perceived infection cost (which are the same for everyone at the beginning. 
-If a person B in the network of A falls ill, A\'s perceived infection cost rises by a factor of 1.2. If another person C in A's network were to fall ill, A's perceived infection cost would rise by a factor of 1.2 again. After person B recovers, A's perceived infection cost are multiplied by a factor of 0.9, the same is true when person C recovers, leaving person A with a perceived risk of infection of 1.1664 compared to 1 at the beginning, accounting for the fact that the person is more aware of the cost of the disease because B and C in their network have been affected. 
+If a person B in the network of A falls ill, A's perceived infection cost rises by a factor of 1.2. If another person C in A's network were to fall ill, A's perceived infection cost would rise by a factor of 1.2 again. After person B recovers, A's perceived infection cost are multiplied by a factor of 0.9, the same is true when person C recovers, leaving person A with a perceived risk of infection of 1.1664 compared to 1 at the beginning, accounting for the fact that the person is more aware of the cost of the disease because B and C in their network have been affected. 
 
 \subsection{Equilibria for N people}
 In addition to the "local" information of the nodes in the network of the person, there is also information on the general coverage and infection level in society available to the individual, as well as an additional factor that we call 
-
-
-
-\subsection{Important Parameters}
-First we look at the dynamics of the disease. Pertussis is highly contagious, and is transmitted via the respiratory organs. Sneezing, coughing or even speaking can release enough infected particles to cause the disease, making crowded spaces such as public transport and educational institutions ideal for transmission. We therefore initialised everyone in the network to have 40 connections, of which he or she meets 40\% every day, which seems realistic given that even a short encounter on a train station might cause the disease. 
-\begin{lstlisting}
-#Random probability (per day and person) to become sick 
-#without being infected by someone else
-prob_for_diseases = 0.000001 
-
-#probability to infect someone when there is contact
-prob_for_contact_infection = 0.5 
-
-#incubation time (in days)
-incubation_time = 12
- 
-#days from infection, after this time a person is recovered
-time_to_get_healthy = 42
-\end{lstlisting}
 
 
 \section{Implementation}
@@ -280,28 +270,34 @@ If there has not been a noticeable outbreak, the perceived vaccination percent o
 
 
 \subsection{Initial breakout}
-In our first test, we ran our model with different levels of initial coverage level, analogous to the study by Hein on Herd Immunity.\footnote{Fine, Paul, Ken Eames, and David L. Heymann. "“Herd immunity”: a rough guide." Clinical infectious diseases 52.7 (2011): 911-916.} As predicted by other models, our results indicate that there is a threshold of vaccination coverage, which is needed to keep the number of infections low. On the x-Axis we have the percentage of initially vaccinated people (we do not take into account waning immunity as we only run the programme for a period of 500 days), on the y-Axis the absolute number of people who get infected at some point during this time period, excluding the persons who are infected at the start of the simulation (just one person in our case). 
 
-This also coincides with the Vaccination coverage $V_{c}$ and the Basic Reproduction Number $R_{c}$ of Pertussis, that we have set to the value of xxxxxxxxxxxxxx\footnote{INSERT BASIC REP NO} for the purpose of our study. (This is based on the standard SIR model, which in our case was slightly modified). 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{totalinfecwoinitinfec}
+\end{center}
+\caption{caption}
+\label{fig:test5}
+\end{figure}
+total infected people without initially infected
+
+In our first test, we ran our model with different levels of initial coverage level, analogous to the study by Hein on Herd Immunity.\footnote{Fine, Paul, Ken Eames, and David L. Heymann. "“Herd immunity”: a rough guide." Clinical infectious diseases 52.7 (2011): 911-916.} As predicted by other models, our results indicate that there is a threshold of vaccination coverage, which is needed to keep the number of infections low. On the x-Axis we have the percentage of initially vaccinated people (we do not take into account waning immunity as we only run the programme for a period of 500 days), on the y-Axis the absolute number of people who get infected at some point during this time period, excluding the persons who are infected at the start of the simulation (just one person in our case). It is important to note that we generate figure 3 by running the programme 50 times for each initial vaccination level and taking the average, hence the smooth curve. The standard deviations were as following: 21,25260693
+ total infected people without initially infected
+
+This also coincides with the Vaccination coverage $V_{c}$ and the Basic Reproduction Number $R_{c}$ of Pertussis, our model yields -----------------------------------------------------------------------------------------------------------------------. (This is based on the standard SIR model, which in our case was slightly modified). 
 
 \begin{equation}
 V_{c} = 1-\dfrac{1}{R_{0}}
 \end{equation}
 
+The Basic Reporduction Number indicates the number of cases that one single case generates over the period in which the patient is contagious. The range of this measeure for Polio is wide, ranging from 5 to 18 in the literature. When comparing the output of our model (threshold where no new cases occur) and calculate the Basic Reproduction Number, we get 12, which is well within the range of observed BRNs, and makes sense, taking into account that we account for the number of contacts in other parameters.\footnote{McGirr, Estimation of the underlying burden of pertussis in adolescents and adults in Southern Ontario, Canada} 
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.6]{totalinfecwoinitinfec}
-\end{center}
-\caption{caption}
-\label{fig:test3}
-\end{figure}
-total infected people without initially infected
 
 
 
 \subsection{Long-term study}
 As explained in 5.2.1, we introduced vaccination scares in our long-term model, which results in a system that is a lot more unstable than the initial model without such supplement. Not only is this expected, it is also realistic to assume that outbreaks happen randomly and are not 'scheduled'. 
+
+We ran simulations for 7000 days for the long-term study. As mentioned before, due to the large number of random parameters, outbreaks happened at different periods in time, but they always looked similar, as can be seen in figure 4 and in a close-up in figure 5. As immunity is waning and the level of infection is low for a long period, the parameters determining vaccination in many people do not cross the threshold where they get vaccinated. This gives the disease a window where a seizable portion of people are not protected, resulting in an outbreak of the disease. When we look at the number of infections in these simulations, we talk about 60 cases in a population of 5493\footnote{project90.tsv (5493 vertices): https://opr.princeton.edu/archive/p90/}. When comparing  this to numbers of outbreaks in German federal countries, we see that the \footnote{DEUTSCHE BUNDESLÄNDER}
 
 
 \begin{figure}
@@ -310,14 +306,14 @@ As explained in 5.2.1, we introduced vaccination scares in our long-term model, 
   \centering
   \includegraphics[width=1\linewidth]{02aedges200001p2fixedtime5001p5sv0p001}
   \caption{graph 1}  
-  \label{fig:test4}
+  \label{fig:test6}
   
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{02bedges200001p2fixedtime5001p5sv0p001}
   \caption{graph 2}
-  \label{fig:test5}
+  \label{fig:test7}
  
 \end{minipage}%
 \end{figure}
@@ -345,6 +341,8 @@ Table of References:
 Bauch, C. T., \& Earn, D. J. (2004). Vaccination and the theory of games. Proceedings of the National Academy of Sciences, 101(36), 13391-13394.
 \vspace{14px}
 
+Office of Population Research, Princton University: https://opr.princeton.edu/archive/p90/
+
 Caldarelli, Guido, and Alessandro Chessa. Data science and complex networks: real case studies with Python. Oxford University Press, 2016.
 
 Coolen, Anthony CC, Alessia Annibale, and Ekaterina Roberts. Generating random networks and graphs. Oxford University Press, 2017.
@@ -356,6 +354,9 @@ Fine, Paul, Ken Eames, and David L. Heymann. "“Herd immunity”: a rough guide
 \vspace{14px}
 
 Heal, G., \& Kunreuther, H. (2005). The vaccination game. Risk Management and Decision Processes Center Working Paper, (05-10). 
+\vspace{14px}
+
+McGirr, Ashleigh A et al. “Estimation of the underlying burden of pertussis in adolescents and adults in Southern Ontario, Canada” PloS one vol. 8,12 e83850. 23 Dec. 2013, doi:10.1371/journal.pone.0083850
 \vspace{14px}
 
 Estimation of Household Transmission Rates of Pertussis and the Effect of Cocooning Vaccination Strategies on Infant Pertussis Epidemiology 23(6):852-860, November 2012
