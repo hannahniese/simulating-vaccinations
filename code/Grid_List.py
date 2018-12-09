@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import vacc
-import game_theory_tools as tool
+import simulation_vaccination_tools as tool
 import datetime
 
 # parameters for the disease
@@ -36,11 +36,17 @@ vaccinated_people_list = [] #integer-list: stores for every day the number of
 #Diseases parameters
 prob_for_diseases = 0 #Random probability (per day and person) to become
                             #sick without beeing infected by someone else
-prob_for_contact_infection = 0.03 #probability to infect an other person, when
+prob_for_contact_infection = 0.1 #probability to infect an other person, when
                                  #there is a contact
-incubation_time = 2 #days until person realizes that it is sick (needed for daily contacts)
-time_to_get_healthy = 10 #counts days from infection. After this time, a person
+incubation_time = 12 #days until person realizes that it is sick (needed for daily contacts)
+time_to_get_healthy = 42 #counts days from infection. After this time, a person
                          #becomes healty
+
+## Initial values of the percieved cost of vaccination and infection
+## for all people the same
+percieved_vacc_cost = 1
+percieved_infec_cost = 20000    
+
                          
 vacc.init_parameters(population, vaccinated_people, infected_people,\
         daily_contacts_when_healthy, daily_contacts_when_sick,\
@@ -50,10 +56,10 @@ vacc.init_parameters(population, vaccinated_people, infected_people,\
 #create population in people_list
 for x in range(0,population):
     if x == int(population/2 + np.sqrt(population)/2): #person is initially infected
-            people_list[x] = vacc.Grid_Person(False, 1, x)
+            people_list[x] = vacc.Grid_Person(False, 1, x, percieved_vacc_cost, percieved_infec_cost)
             infected_people += 1
     else:
-        people_list[x] = vacc.Grid_Person(False, -1, x)
+        people_list[x] = vacc.Grid_Person(False, -1, x, percieved_vacc_cost, percieved_infec_cost)
     
 
 #Simulation
@@ -73,7 +79,7 @@ time = str(int(now.hour/10)) + str(now.hour % 10) + '-' + \
            str(int(now.second/10)) + str(now.second % 10)
 
 #create .txt file
-f = open('vaccinations_graphics/' + date + '_' + time + '.txt',"w+")
+f = open('grid_graphics/' + date + '_' + time + '.txt',"w+")
 
 f.write("Population: %d\n" % population)
 f.write("Prob_for_contact_infection: %d Prozent \n" % (prob_for_contact_infection*100))

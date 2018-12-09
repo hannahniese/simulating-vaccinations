@@ -113,7 +113,7 @@ print("Initially infected:", vacc.get_num_infected_people())
 # equal to the number of nodes in the imported graph
 
 #network_generator.generate_Albert_Barbasi(people_list, 2, 3)
-network_generator.import_barabasi_graph("Networks/barabasi_10000_2.txt",\
+network_generator.import_barabasi_graph('Networks/barabasi_' + str(population) + '_2.txt',\
                                         people_list)
 #network_generator.import_graph_from_tsv("Networks/edges.tsv", people_list)
     

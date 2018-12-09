@@ -103,7 +103,9 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
                              
     ## Initial values of the percieved cost of vaccination and infection
     ## for all people the same
-    percieved_vacc_cost = 1
+    ## For this simulation, the parameters have no impact because people do
+    ## not vaccinate themselves during simulation.
+    percieved_vacc_cost = 1      
     percieved_infec_cost = 1500
     
     # The probability for a person to meet a contact each day
