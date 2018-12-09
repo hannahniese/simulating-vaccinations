@@ -9,48 +9,68 @@ Find all information about the code in code/readme.txt
 December 2018
 @author: Hannah Niese, Markus Niese, Timo Schönegg
 """
+"""
+This is the light test. It will produce a graph showing the outbreak of the
+disease dependent on the percentage of people that were initially vaccinated
 
+Find the description in code/readme.txt
+"""
 ## import packages
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-import random
-import timeit
 import matplotlib.ticker as ticker
+import random
 ## import modules
 import vacc
 import simulation_vaccination_tools as tool
-import network_generator
 
 
-population = 10000 # number of people in the simulation
-
-#network_generator.create_barabasi_in_file(population, 2, 'barabasi_' + str(population) + '_2.txt')
-
-
-print('\nInitially vaccinated (%),', 'Initially vaccinated people,', \
-       'Initially infected people,', 'Vaccinated people at the end,', \
-       'Maximum vaccinated people,', 'Total infected people at the end,', \
-       'Maximum infected people', 'Immune people at the end,', 'Running time')
+### Function to import the graph
+def import_barabasi_graph(path, people_list):
+    """
+    !!!Important!!!
+    
+    The number of elements in the people_list (variable population
+    in network.py) has to be the same as the number of nodes of the imported
+    graph
+    
+    !!!Important!!!
+    
+    import network from a txt file
+    It has to be organized as an adjacency list. First entry of every line 
+    is connected to all the following. Every connection will be added
+    for both nodes. So the result is a undirected graph.
+    Primarily used to import networks created with 
+        create_barabasi_in_file(n,m,filename)
+    All lines will be read except lines beginning with a '#'
+    
+    Args:
+        path (str): path of the file that should be imported
+    """
+    txtfile = open(path, "r")
+    reader = csv.reader(txtfile, delimiter=' ')
+    for row in reader:
+        if row[0][:1] != "#":
+            first = int(row[0])
+            for i in range(1,len(row)):
+                people_list[first].add_contact(int(row[i]))
+                people_list[int(row[i])].add_contact(first)
+                
 
 infected_to_not_vaccinated_list = []
 total_infected_people_list = []
 percentage_list = []
 
-stepwidth = 1
-
-for percent in range (0,100,stepwidth): #change initially vaccinated people
-    
-    ## start the time measurement of the simulation
-    start = timeit.default_timer()
-    
-    
+for percent in range (0,100,3): #change initially vaccinated people
+     
     ### parameters for the simulation
     
     ## Length of the Simulation
     simulation_length = 500
    
     ## Population parameters
+    population = 5000 # number of people in the simulation
     population_alive = 0 #number of people alive at the start of the simulation
     vaccinated_people = 0 # number vaccinated people
     infected_people = 0 # number of infected people
@@ -101,9 +121,8 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
                    percieved_infec_cost, age = age, length_immune_mean = 4380,\
                    length_immune_sigma = 712) 
     
-    ## set initial conditions
-    initially_infected_people = 0.1 # in percent
-    tool.initial_infected(people_list, initially_infected_people/100)
+    ## set initial conditions    
+    tool.initial_infected(people_list, 0.001)
     tool.initial_vaccinated(people_list, percent/100)
     
     ## make initial counts
@@ -117,16 +136,16 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
     # random network. Very slow. !!!Only use for population up to 1000!!!
     # 2. Op: Import random Albert-Barabasi_Graph generated with 
     # network_generator.create_barabasi_in_file() and import using
-    # network_generator.import_barabasi_graph()
+    # import_barabasi_graph()
     # 3. Op: Import from a TSV file using network_generator.import_graph_from_tsv()
     # !!! Important !!! For options 2 and 3 population (len(people_list)) HAS to be
     # equal to the number of nodes in the imported graph
     
     #network_generator.generate_Albert_Barbasi(people_list, 2, 3)
-    network_generator.import_barabasi_graph('Networks/barabasi_' + str(population) + '_2.txt', people_list)
+    import_barabasi_graph('Networks/barabasi_' + str(population) + '_2.txt', people_list)
     #network_generator.import_graph_from_tsv("Networks/edges.tsv", people_list)
         
-    new_infected_people = 0 #after simulation: total amount of people, who were infected once (without initially infected)
+    new_infected_people = vacc.get_num_infected_people() #after simulation: total amount of people, who were infected once
     
     ## simulation
     for days in range(0,simulation_length):
@@ -169,10 +188,7 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
                 print(days)
                 tool.change_vaccination_cost_population(people_list, 2, 0.3)
         
-    ## Count the vaccinations at the end
-    #211print("Vaccinated at the end:", vacc.get_num_vaccinated_people())
-    #211print("Maximal number of vaccinated people:", max(vaccinated_people_list))
-    #211print("Maximal number of infected people:", max(infected_people_list))
+
     vaccinated_people_after_500days_out = vacc.get_num_vaccinated_people()
     max_vaccinated_people_out = max(vaccinated_people_list)
     infected_people_after_500days_out = new_infected_people
@@ -189,12 +205,6 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
     #211print("Immune at the end:", test)
     immune_people_out = immune_people
     
-    ## print the time of the simulation
-    end = timeit.default_timer()
-    time = end - start
-    #211print("Running time:", time)
-        
-    time_out = time
      
     infected_to_not_vaccinated = (infected_people_after_500days_out-initially_infected_out) / (population - initially_vaccinated_out)
     
@@ -202,37 +212,25 @@ for percent in range (0,100,stepwidth): #change initially vaccinated people
     total_infected_people_list.append(infected_people_after_500days_out)
     percentage_list.append(percent)
     
-    print(str(percent)+',', str(initially_vaccinated_out)+',', str(initially_infected_out)+',', \
-          str(vaccinated_people_after_500days_out)+',', str(max_vaccinated_people_out)+',', \
-          str(infected_people_after_500days_out)+',', str(max_infected_people_out)+',', \
-          str(immune_people_out)+',', str(time_out))
     
-    
-fig, plt1 = plt.subplots()
 
-#Plot: Probability to get infected if not vaccinated
-plt1.set_xlabel('Initially vaccinated people (%)')
-plt1.set_ylabel('Infected / not vaccinated people')
-plt1.set_title('Probability to get infected if not vaccinated')
+fig, ax = plt.subplots()
+ax.get_yaxis().set_major_formatter(
+     ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+ax.xaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1))
 
-x_list = percentage_list
-y_list = infected_to_not_vaccinated_list
-
-plt1.plot(x_list, y_list, color = 'navy')
-
-plt.show()
-
-fig, plt2 = plt.subplots()
+ax.set_ylim([0,5000])
+ax.set_xlim([0,1])
 
 #Plot: Total infected people without initially infected
-plt2.set_xlabel('Initially vaccinated people (%)')
-plt2.set_ylabel('Infected people')
-plt2.set_title('People who were infected once (without initially infected)')
+ax.set_xlabel('Initially vaccinated people')
+ax.set_ylabel('Infected people')
+ax.set_title('People who got infected')
 
-x_list = percentage_list
+x_list = np.divide(percentage_list, 100)
 y_list = total_infected_people_list
 
-plt2.plot(x_list, y_list, color = 'navy')
+ax.plot(x_list, y_list, color = 'darkred')
 
 plt.show()
 

@@ -129,6 +129,8 @@ def import_barabasi_graph(path, people_list):
                 people_list[first].add_contact(int(row[i]))
                 people_list[int(row[i])].add_contact(first)
                 
+                
+                
 def create_barabasi_in_file(n, m, filename):
     """ Generates a random Network with the Albert-Barabasi-Model
     
