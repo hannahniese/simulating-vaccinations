@@ -16,7 +16,7 @@ Important:
     Second line is the labels of the axis
 '''
 
-filename = 'Short term analysis depedent on simulation time' #is also title of plot
+filename = 'total infected people without initially infected' #is also title of plot
 
 #read csv to data_list
 with open('csv_to_plot/' + filename + '.csv', 'r') as datas:
@@ -44,4 +44,4 @@ for t in data_list:
 
 #print(x_list)
 
-plt.plot(x_list, y_list, '.-', color = 'navy')
+plt.plot(x_list, y_list, color = 'navy')
