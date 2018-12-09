@@ -75,7 +75,7 @@ Note that extreme values of the parameters may lead to extreme results.
       population sizes. You can change the population variable in one 
       of these populations.
       Make sure there are enought initially infected people (at least ~3)
-      by changing the initially_infected_people variable (line 128).
+      by changing the initially_infected_people variable (line 130).
               
 - simulation_length (line 73):
       Change the time periode (in days) of the simulation.
