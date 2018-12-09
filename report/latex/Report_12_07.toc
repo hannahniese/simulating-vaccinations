@@ -6,18 +6,16 @@
 \contentsline {subsubsection}{\numberline {4.1.1}Modelling immunisation}{6}
 \contentsline {subsection}{\numberline {4.2}Network}{6}
 \contentsline {subsection}{\numberline {4.3}Vaccination decision}{7}
-\contentsline {subsubsection}{\numberline {4.3.1}Perceived vaccination cost}{8}
-\contentsline {subsubsection}{\numberline {4.3.2}Perceived infection cost}{8}
+\contentsline {subsubsection}{\numberline {4.3.1}Perceived cost functions}{8}
 \contentsline {subsection}{\numberline {4.4}One person among N people}{8}
-\contentsline {subsection}{\numberline {4.5}Equilibria for N people}{9}
 \contentsline {section}{\numberline {5}Implementation}{9}
 \contentsline {subsection}{\numberline {5.1}General Principle of the Simulation}{9}
 \contentsline {subsection}{\numberline {5.2}Initialisation for long time analysis}{10}
-\contentsline {subsubsection}{\numberline {5.2.1}Vaccination scares}{11}
+\contentsline {subsubsection}{\numberline {5.2.1}Vaccination scares}{10}
 \contentsline {section}{\numberline {6}Simulation Results and Discussion}{11}
 \contentsline {subsection}{\numberline {6.1}Initial breakout}{11}
 \contentsline {subsection}{\numberline {6.2}Long-term study}{12}
 \contentsline {subsection}{\numberline {6.3}Limitations}{13}
 \contentsline {subsection}{\numberline {6.4}Algorithm Performance}{14}
-\contentsline {section}{\numberline {7}Summary and Outlook}{14}
-\contentsline {section}{\numberline {8}References}{14}
+\contentsline {section}{\numberline {7}Summary and Outlook}{15}
+\contentsline {section}{\numberline {8}References}{15}
