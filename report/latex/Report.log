@@ -233,8 +233,7 @@ y"
 \WF@box=\box30
 \WF@everypar=\toks23
 Package: wrapfig 2003/01/31  v 3.6
-)
-No file Report.aux.
+) (Report.aux)
 \openout1 = `Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -249,6 +248,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -336,12 +336,11 @@ Overfull \hbox (88.14491pt too wide) in paragraph at lines 45--74
  [] 
  []
 
-[2]
-No file Report.toc.
+[2] (Report.toc)
 \tf@toc=\write3
 \openout3 = `Report.toc'.
 
-[3]
+ [3]
 Overfull \hbox (5.97696pt too wide) in paragraph at lines 107--108
 \OT1/cmr/m/n/12 Vaccines are with-out doubt one of the great-est ad-vances in m
 edicine, whose widespread
@@ -381,14 +380,7 @@ File: ./images/degreedistribution.png Graphic file (type png)
 Package pdftex.def Info: ./images/degreedistribution.png  used on input line 16
 9.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
-
-
-LaTeX Warning: Reference `fig:4' on page 6 undefined on input line 176.
-
-
-LaTeX Warning: Reference `fig:3' on page 6 undefined on input line 176.
-
-[6] [7 <./images/networkplot.png> <./images/degreedistribution.png>] [8]
+ [6] [7 <./images/networkplot.png> <./images/degreedistribution.png>] [8]
 Underfull \hbox (badness 10000) in paragraph at lines 230--230
 [][]\OT1/cmr/m/n/9 Bundeszentrale fur Gesund-heitliche Aufklarung Ger-many, K
 euch-hus-ten 
@@ -405,17 +397,7 @@ File: ./images/shorttermclose.png Graphic file (type png)
 <use ./images/shorttermclose.png>
 Package pdftex.def Info: ./images/shorttermclose.png  used on input line 269.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
-
-
-LaTeX Warning: Reference `fig:5' on page 11 undefined on input line 276.
-
-
-LaTeX Warning: Reference `fig:6' on page 11 undefined on input line 276.
-
-[11 <./images/shorttermwhole.png> <./images/shorttermclose.png>]
-
-LaTeX Warning: Reference `fig:9' on page 12 undefined on input line 290.
-
+ [11 <./images/shorttermwhole.png> <./images/shorttermclose.png>]
 <./images/04a10000200001p2fixedtime5001p5sv0p001.png, id=65, 462.528pt x 341.83
 71pt>
 File: ./images/04a10000200001p2fixedtime5001p5sv0p001.png Graphic file (type pn
@@ -432,8 +414,6 @@ g)
 Package pdftex.def Info: ./images/04b10000200001p2fixedtime5001p5sv0p001.png  u
 sed on input line 302.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
-
-LaTeX Warning: Reference `fig:1' on page 12 undefined on input line 309.
 
 [12]
 <./images/longtermoutbreak.png, id=70, 462.528pt x 341.8371pt>
@@ -457,36 +437,29 @@ Package pdftex.def Info: ./images/runtimepopulation.png  used on input line 341
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
  [14 <./images/runtimedays.png> <./images/runtimepopulation.png>] [15] [16] [17
 ]
-(Report.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+(Report.aux) ) 
 Here is how much of TeX's memory you used:
- 4668 strings out of 492970
- 64547 string characters out of 3135832
- 139191 words of memory out of 3000000
+ 4672 strings out of 492970
+ 64739 string characters out of 3135832
+ 139288 words of memory out of 3000000
  8461 multiletter control sequences out of 15000+200000
  15211 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,11n,32p,1343b,295s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Report.pdf (17 pages, 617169 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on Report.pdf (17 pages, 617555 bytes).
 PDF statistics:
  138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
