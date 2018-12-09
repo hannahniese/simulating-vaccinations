@@ -173,14 +173,16 @@ All networks we used were also connected, which means that there is a path betwe
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{degreedistribution}
-  \caption{}
+  \caption{Degree distributions}
   \label{fig:test4}
  
 \end{minipage}%
 \end{figure}
 
-As studied by Barabasi, randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals.\footnote{INSERT REFERENCE BARABASI} That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behavior, meaning that the degree distribution falls by some polynomial rather than being constant like in a completely random network. The Barabasi-Albert-Network reaches that by sequentially adding single nodes each with two new edges connecting randomly, but with a preference to nodes with a higher degree, to the already existing nodes. Using that process, a degree distribution of $k^{-3}$ is reached. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Networkx for most of our simulation, especially for those with a high number of vertices.
+As studied by Barabasi, randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals.\footnote{INSERT REFERENCE BARABASI} That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behavior, meaning that the degree distribution falls by some polynomial, in this case $k^{-3}$ as seen in figure 4, rather than being constant like in a completely random network.  The Barabasi-Albert-Network sequentially adds single nodes, each with two new edges connecting randomly with a preference to nodes with a higher degree to the already existing nodes. An example of this structure can be seen in figure 3. The nodes that were added most recently only have two connections, while the nodes in the center already have more connections. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Network for most of our simulation, especially for those with a high number of vertices.
 \vspace{14px}
+
+
 
 
 \subsection{Vaccination decision}

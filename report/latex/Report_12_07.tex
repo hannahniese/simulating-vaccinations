@@ -95,7 +95,7 @@
 
 \section{Abstract}
 The first objective of this paper is to model find which level of immunisation is required to eradicate Pertussis in a society. We simulated the effects of various initial vaccination rates and draw a comparison to theoretical models, and observe the stability of our results. 
-The second objective is to find out under wich circumstances Pertussis outbreaks occur, in particular in societies with high vaccination coverage. We find that a lack of  
+The second objective is to find out under which circumstances Pertussis outbreaks occur, in particular in societies with high vaccination coverage. We find that a lack of  
 
 \section{Individual contributions}
 
@@ -107,7 +107,7 @@ Vaccines are without doubt one of the greatest advances in medicine, whose wides
 
 We modelled the specific case of Pertussis or Whooping cough, as there have been several incidents where a rising number of infections have been observed despite relatively high vaccination rates. One of these cases is the Netherlands, where, despite a coverage rate of 95\% several cases of Pertussis have been registered. One of the reasons is waning immunisation and the lack of people getting vaccinated. Even though these cases might be few, the survival of the disease means that the coverage rate should remain high. 
 
-This paper tries to answer the question of how people take decisions on whenther to get vaccinated or not, and how the dynamics of the disease changes. 
+This paper tries to answer the question of how people take decisions on whether to get vaccinated or not, and how the dynamics of the disease changes. 
 
 \begin{figure}
 \centering
@@ -136,7 +136,7 @@ Figures 1 and 2 show interesting data from two countries with good vaccination c
 
 \subsection{SIR Model}
 
-We used an SIR model for the simulation of the spreading of Pertussis. Pertussis is transmitted by respiratory droplets human-to-human with an incubation period ranging from 9 to 14 days, while symptoms can last up to 6 weeks. \footnote{Torres Codeço, C; Mendes Luz, P; Is pertussis actually reemerging? Insights from an individual-based model, Cad. Saúde Pública vol.17 no.3 Rio de Janeiro May/June 2001}
+We used an SIR model for the simulation of the spreading of Pertussis. Pertussis is transmitted by respiratory droplets human-to-human with an incubation period ranging from 9 to 14 days, while symptoms can last up to 6 weeks. \footnote{Torres Codeço, C; Mendes Luz, P; Is pertussis actually re-emerging? Insights from an individual-based model, Cad. Saúde Pública vol.17 no.3 Rio de Janeiro May/June 2001}
 
 \begin{lstlisting}
 #probability of infection from outside sources
@@ -153,7 +153,7 @@ This estimation is taken from a simulation which assesses the susceptibility of 
 \subsubsection{Modelling immunisation}
 We assume that the vaccination provides 100\% safety, equal to having recovered from the disease. However, as recent research has shown that the protection considerably decreases about 10  years after the initial protection. 
 To simplify the length of the protection acquired either by being vaccinated or by having recovered from Pertussis, we give people the option to vaccinate again after 8 years. The average duration of protection is 12 years with a standard deviation of 2 years, which is on the conservative side, given that only 10\% of those vaccinated are still protected 12 years after the vaccination. There is less data available to assess the immunity after having recovered from the disease, but it can be assumed to be similar to the immunity acquired by vaccination. In addition we analyse a society with a high rate of coverage, so that the majority will have acquired their immunity by vaccination.\footnote{Wendelboe, Van, Salmaso, Englund: Duration of immunity against pertussis after natural infection or vaccination. S58–S61} 
-As this dynamics of waning immunity already provides us with a constant population, we do not model births and deaths, as Pertussis is not a disease that frequenly causes death. 
+As this dynamics of waning immunity already provides us with a constant population, we do not model births and deaths, as Pertussis is not a disease that frequently causes death. 
 
 \subsection{Network}
 
@@ -179,13 +179,15 @@ All networks we used were also connected, which means that there is a path betwe
 \end{minipage}%
 \end{figure}
 
-As studied by Barabasi, randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals.\footnote{INSERT REFERENCE BARABASI} That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behavior, meaning that the degree distribution falls by some polynomial rather than being constant like in a completely random network. The Barabasi-Albert-Network reaches that by sequentially adding single nodes each with two new edges connecting randomly, but with a preference to nodes with a higher degree, to the already existing nodes. Using that process, a degree distribution of $k^{-3}$ is reached. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Networkx for most of our simulation, especially for those with a high number of vertices.
+As studied by Barabasi, randomly generated graphs are not a good representation of real human networks as some people will have contact to many more people than average, while most will have contact to far fewer individuals.\footnote{INSERT REFERENCE BARABASI} That is because people with a large number of contacts are more likely to connect with even more people. That means real human networks exhibit so called scale-free behaviour, meaning that the degree distribution falls by some polynomial, in this case $k^{-3}$ as seen in figure 4, rather than being constant like in a completely random network.  The Barabasi-Albert-Network sequentially adds single nodes, each with two new edges connecting randomly with a preference to nodes with a higher degree to the already existing nodes. An example of this structure can be seen in figure 3. The nodes that were added most recently only have two connections, while the nodes in the center already have more connections. We did create our own generator which builds a network after the Barabasi-Albert-Model. However, due to considerable runtime length we used the Barabasi-Albert-Generator from the Python Module Network for most of our simulation, especially for those with a high number of vertices.
 \vspace{14px}
+
+
 
 
 \subsection{Vaccination decision}
 
-We assume that every person is a rational decision maker. To evaluate the probability of a person to get vaccinated, we use a static model in which each individual assesses their personal cost of getting vaccinated versus getting infected.  \footnote{INSERT RESEACH ABOUT 12 YEARS HERE}  The main parameters guiding their decision are the perceived risk of side effects of the vaccination r\_v, and perceived risk of the loss they would incur by getting the disease r\_i.
+We assume that every person is a rational decision maker. To evaluate the probability of a person to get vaccinated, we use a static model in which each individual assesses their personal cost of getting vaccinated versus getting infected.  \footnote{INSERT RESEARCH ABOUT 12 YEARS HERE}  The main parameters guiding their decision are the perceived risk of side effects of the vaccination r\_v, and perceived risk of the loss they would incur by getting the disease r\_i.
 
 These two parameters are influenced by various factors. The statistic risks will for sure play into them, but so does the risk that an individual perceives through media statements and
 the infection of people in their network, as well as influences from friends and family. Financial costs are likewise taken into consideration, be it the actual monetary cost of the vaccination or the foregone income when a person is infected and cannot work for a certain number of days. Furthermore we will assume that the disease can only be transmitted by humans. Childhood diseases like pertussis or measles are of that kind. 
@@ -236,19 +238,19 @@ The programme has an object-oriented approach, meaning that the main program is 
 \textbf{Network\_Person:} More realistic and thus the one used for the whole analysis. Every Network\_Person has an adjacency list of all its contacts and can only interact with those.
 \vspace{14px}
 
-Each timestep (one day) several member functions are called to refresh the status of each Person.
+Each time-step (one day) several member functions are called to refresh the status of each Person.
 
 \textbf{Next\_day():} Checks, whether immunisation or infection is still active or refreshes the corresponding variables if this is not the case
 
-\textbf{Get\_vaccinated():} Every day, each person decides whether to get vaccinated today, depening on the expected gain for themselves. The details of that can be found in 4.3. 
+\textbf{Get\_vaccinated():} Every day, each person decides whether to get vaccinated today, depending on the expected gain for themselves. The details of that can be found in 4.3. 
 
-\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle anymore and are only attended by those who have been vaccinated.\footnote{Bundeszentrale für Gesundheitliche Aufklärung Germany, Keuchhusten \break
+\textbf{Start\_infection(probability\_to\_meet):} An infected person starts being contagious 7 days after being infected until the end of incubation time, as we expect that sick people do not mingle any more and are only attended by those who have been vaccinated.\footnote{Bundeszentrale für Gesundheitliche Aufklärung Germany, Keuchhusten \break
 $www.infektionsschutz.de/erregersteckbriefe/keuchhusten/\#c3580$, accessed 30.11.2018} The probability\_to\_meet represents the probability of two people meeting each other, with the probability of being infected is prob\_for\_contact\_infection.
 \vspace{14px}
 
 
 \subsection{Initialisation for long time analysis}
-The main goal of the long-term analysis is to investigate if and when the disease can reemerge. To model this, a few new functions and parameters are needed. Following the assumptions about waning immunisation \textbf{(explained in 4.1.1)}, we approximate the length of immunity of an individual by a gaussian with a mean of 12 years and a standard deviation of two years. The individuals obviously do not know, whether they are still immune, but can vaccinate again after 8 years,consistent with recommendations from health organisations. 
+The main goal of the long-term analysis is to investigate if and when the disease can re-emerge. To model this, a few new functions and parameters are needed. Following the assumptions about waning immunisation \textbf{(explained in 4.1.1)}, we approximate the length of immunity of an individual by a Gaussian with a mean of 12 years and a standard deviation of two years. The individuals obviously do not know, whether they are still immune, but can vaccinate again after 8 years,consistent with recommendations from health organisations. 
 
 Another parameter that we introduce is a random probability to be infected. Pertussis is only transmitted by other humans. However, that random probability is needed as the disease would die out quickly due to the small size of our system, and represents contact with others outside the system (e.g. travellers) that would otherwise not be accounted for. 
 
@@ -289,7 +291,7 @@ This also coincides with the Vaccination coverage $V_{c}$ and the Basic Reproduc
 V_{c} = 1-\dfrac{1}{R_{0}}
 \end{equation}
 
-The Basic Reporduction Number indicates the number of cases that one single case generates over the period in which the patient is contagious. The range of this measeure for Polio is wide, ranging from 5 to 18 in the literature. When comparing the output of our model (threshold where no new cases occur) and calculate the Basic Reproduction Number, we get 12, which is well within the range of observed BRNs, and makes sense, taking into account that we account for the number of contacts in other parameters.\footnote{McGirr, Estimation of the underlying burden of pertussis in adolescents and adults in Southern Ontario, Canada} 
+The Basic Reproduction Number indicates the number of cases that one single case generates over the period in which the patient is contagious. The range of this measure for Polio is wide, ranging from 5 to 18 in the literature. When comparing the output of our model (threshold where no new cases occur) and calculate the Basic Reproduction Number, we get 12, which is well within the range of observed BRNs, and makes sense, taking into account that we account for the number of contacts in other parameters.\footnote{McGirr, Estimation of the underlying burden of pertussis in adolescents and adults in Southern Ontario, Canada} 
 
 
 

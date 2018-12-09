@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  9 DEC 2018 11:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.6)  9 DEC 2018 12:07
 entering extended mode
 **./Report_12_07.tex
 (Report_12_07.tex
@@ -371,18 +371,18 @@ File: ./images/degreedistribution.png Graphic file (type png)
 Package pdftex.def Info: ./images/degreedistribution.png  used on input line 17
 5.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
- [6] [7 <./images/networkplot.png> <./images/degreedistribution.png>] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 246--246
+ [6] [7 <./images/networkplot.png> <./images/degreedistribution.png>] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 248--248
 [][]\OT1/cmr/m/n/9 Bundeszentrale fur Gesund-heitliche Aufklarung Ger-many, K
 euch-hus-ten 
  []
 
-[9] [10]
+[10]
 <./images/totalinfecwoinitinfec.png, id=57, 462.528pt x 341.8371pt>
 File: ./images/totalinfecwoinitinfec.png Graphic file (type png)
 <use ./images/totalinfecwoinitinfec.png>
 Package pdftex.def Info: ./images/totalinfecwoinitinfec.png  used on input line
- 276.
+ 278.
 (pdftex.def)             Requested size: 231.26343pt x 170.91812pt.
  [11 <./images/totalinfecwoinitinfec.png>] [12]
 <./images/02aedges200001p2fixedtime5001p5sv0p001.png, id=66, 462.528pt x 341.83
@@ -391,7 +391,7 @@ File: ./images/02aedges200001p2fixedtime5001p5sv0p001.png Graphic file (type pn
 g)
 <use ./images/02aedges200001p2fixedtime5001p5sv0p001.png>
 Package pdftex.def Info: ./images/02aedges200001p2fixedtime5001p5sv0p001.png  u
-sed on input line 307.
+sed on input line 309.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
 <./images/02bedges200001p2fixedtime5001p5sv0p001.png, id=67, 462.528pt x 341.83
 71pt>
@@ -399,17 +399,17 @@ File: ./images/02bedges200001p2fixedtime5001p5sv0p001.png Graphic file (type pn
 g)
 <use ./images/02bedges200001p2fixedtime5001p5sv0p001.png>
 Package pdftex.def Info: ./images/02bedges200001p2fixedtime5001p5sv0p001.png  u
-sed on input line 314.
+sed on input line 316.
 (pdftex.def)             Requested size: 215.0023pt x 158.90044pt.
  [13 <./images/02aedges200001p2fixedtime5001p5sv0p001.png> <./images/02bedges20
 0001p2fixedtime5001p5sv0p001.png>]
-Overfull \hbox (52.70445pt too wide) in paragraph at lines 344--345
+Overfull \hbox (52.70445pt too wide) in paragraph at lines 346--347
 []\OT1/cmr/m/n/12 Office of Pop-u-la-tion Re-search, Princ-ton Uni-ver-sity: ht
 tps://opr.princeton.edu/archive/p90/ 
  []
 
 [14]
-Overfull \hbox (11.44775pt too wide) in paragraph at lines 362--364
+Overfull \hbox (11.44775pt too wide) in paragraph at lines 364--366
 \OT1/cmr/m/n/12 coon-ing Vac-ci-na-tion Strate-gies on In-fant Per-tus-sis Epi-
 demi-ol-ogy 23(6):852-860, Novem-
  []
@@ -422,7 +422,7 @@ Here is how much of TeX's memory you used:
  8639 multiletter control sequences out of 15000+200000
  15211 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,11n,32p,1153b,975s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,11n,32p,1291b,975s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 bx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb
@@ -436,7 +436,7 @@ nts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
 8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/
 Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
 Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Report_12_07.pdf (15 pages, 549550 bytes).
+Output written on Report_12_07.pdf (15 pages, 549587 bytes).
 PDF statistics:
  124 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
