@@ -1,3 +1,3 @@
 # Code Folder 
 
-Your code goes here. You could also replace the content of this file with something more meaningful such as a brief explanation of the code structure
+The code of the simulation. For a detailed desciption please read readme.txt
