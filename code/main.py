@@ -30,7 +30,7 @@ start = timeit.default_timer()
 ###############################################################################
 
 ## Population parameters
-population = 5493 # number of people in the simulation
+population = 10000 # number of people in the simulation
 population_alive = 0 #number of people alive at the start of the simulation
 vaccinated_people = 0 # number vaccinated people
 infected_people = 0 # number of infected people
@@ -70,7 +70,7 @@ probability_to_meet = 1
  
                            
 ## Length of the Simulation
-simulation_length = 8000
+simulation_length = 7000
 
 ## Initializes the global parameters for the Person Class
 ## !!!required!!!
@@ -113,8 +113,9 @@ print("Initially infected:", vacc.get_num_infected_people())
 # equal to the number of nodes in the imported graph
 
 #network_generator.generate_Albert_Barbasi(people_list, 2, 3)
-#network_generator.import_barabasi_graph("Networks/test_20000.txt", people_list)
-network_generator.import_graph_from_tsv("Networks/edges.tsv", people_list)
+network_generator.import_barabasi_graph("Networks/barabasi_10000_2.txt",\
+                                        people_list)
+#network_generator.import_graph_from_tsv("Networks/edges.tsv", people_list)
     
 days_since_opinion_change = 0   # saves the amount of days since 
                                 # tool.change_vaccination_cost_population()
@@ -146,14 +147,6 @@ for days in range(0,simulation_length):
             for i in people_list[x].contacts:
                 people_list[i].infected_contacts -= 1
                 people_list[i].change_infec_cost_relative(0.9)
-    
-    # removes and re-adds some vertices according to death rate
-    for x in range(population):
-        if random.random() < 0.0000214: # probability to die at this day
-                                        # deathrate 8/1000 per year
-            people_list[x].kill()
-            people_list[x].get_born(False, -1, percieved_vacc_cost,\
-                       percieved_infec_cost)
         
     # Updates infected_people_list and vaccinated_people_list
     infected_people_list.append(vacc.get_num_infected_people())    
@@ -164,7 +157,6 @@ for days in range(0,simulation_length):
     if days > 500:
         average_500 = np.average(infected_people_list[days-500:days])
         if average_500 < 5 and days_since_opinion_change > 500:
-            print(days)
             tool.change_vaccination_cost_population(people_list, 1.5, 0.3)
             days_since_opinion_change = 0
     
@@ -217,20 +209,7 @@ ax2.tick_params(axis='y')
 
 fig.tight_layout()  # otherwise the right y-label is slightly clipped
 plt.show()
-#plt.axes().yaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1))
-#plt.xlabel('Time (days)')
-#plt.ylabel('Percentage of Population')
-#
-#plt.plot(np.divide(infected_people_list[3500:5000], population), color = 'darkred', label = '% infected people',\
-#         linewidth = width_of_line)
-##plt.plot(np.divide(gradient_infections, population), color = 'peru', label = '% change of infected people',\
-##         linewidth = width_of_line)
-#plt.plot(np.divide(vaccinated_people_list[3500:5000], population), color = 'navy', label = '% vaccinated people',\
-#         linewidth = width_of_line)
-##plt.plot(np.divide(gradient_vaccinations, population), color = 'cadetblue', label = '% change of vaccinated people',\
-##         linewidth = width_of_line)
-#plt.legend(loc = 'best')
-#plt.show()
+
 
 
 

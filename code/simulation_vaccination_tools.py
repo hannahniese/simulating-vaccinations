@@ -18,40 +18,6 @@ This file contains a number of basic functions needed in various other files.
 import random
 import numpy as np
 
-def prob_infec(infec_level, coverage_level, risk = 0.5):
-	"""calculates the probability of getting infected
-
-	Args:
-		infec_level (double): The amount of people that are currently infected
-		coverage_level (double): Vaccinated proportion of the population
-		risk (double): The risk of getting infected
-	
-	Returns:
-		the probability of one person to get infected
-	"""
-	prob = infec_level * (1 - coverage_level) * risk
-	#prob = (1-coverage_level)
-	return prob
-
-
-
-def grid_prob_infec(infec_level, coverage_level,\
-                    rate_in_neighborhood, risk = 0.1):
-	"""calculates the probability of getting infected
-
-	Args:
-		infec_level (double): the amount of people that are currently infected
-		coverage_level (double): Vaccinated proportion of the population
-		risk (double): the risk of getting infected
-        rate_in_neighborhood (double): the porpotion of people infected in
-        the neighborhood
-        returns:
-		the probability of one person to get infected
-	"""
-	prob = infec_level * (1 - coverage_level) * risk
-	#prob = (1-coverage_level)
-	return rate_in_neighborhood
-
 
 
 def expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
@@ -91,8 +57,7 @@ def grid_expected_gain(coverage_level, infec_level, vacc_cost, infec_cost,\
 	Returns:
 		expectation value
 	"""
-	expect = - vacc_cost + infec_cost * prob_infec(infec_level,\
-        coverage_level, rate_in_neighborhood)
+	expect = - vacc_cost + infec_cost * rate_in_neighborhood
 	return expect
 
 
