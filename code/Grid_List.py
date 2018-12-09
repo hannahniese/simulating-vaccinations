@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov  6 21:13:09 2018
-
-@author: markus
+Simulating vaccination
+Created as part of the ETH course "Lecture with Computer Exercises: 
+    Modelling and Simulating Social Systems in MATLAB (or Python)"
+Find all information about the code in code/readme.txt
+December 2018
+@author: Hannah Niese, Markus Niese, Timo Schönegg
 """
-"""TODO auf die Welt bringen"""
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
