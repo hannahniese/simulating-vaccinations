@@ -23,7 +23,7 @@ We invite you to test our simulation and play around with the parameters.
 If you have any remarks please do not hesitate to contact us.
 nieseh@ethz.ch
 mniese@ethz.ch
-timosho@ethz.ch
+timoscho@ethz.ch
 
 
 
@@ -97,6 +97,15 @@ Note that extreme values of the parameters may lead to extreme results.
 ###############################################################################
 FULL TEST
 ###############################################################################
+
+
+Required libraries:
+numpy
+matplotlib
+random
+csv
+timeit
+networkx
 
 There are different files with different functionalities:
 main.py
