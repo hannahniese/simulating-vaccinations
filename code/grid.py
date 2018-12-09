@@ -147,7 +147,7 @@ plt.show()
 
 if count != 0 and population != 0:
     percentage_infected_people = (float(average)/float(count))/float(population)*100 #average calculation
-    print("In average", round(percentage_infected_people,1), "% of the population is infected.")
+    #print("In average", round(percentage_infected_people,1), "% of the population is infected.")
 
 #for x in people_list:
 #    print(x.infected_neighbors)
