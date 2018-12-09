@@ -2,4 +2,4 @@
 
 Find the report and the latex version.
 
-report.pdf and report_signatures.pdf do contain the same content. The report_signatures.pdf only has the signatures of the second page.
+report.pdf and report_signatures.pdf do contain the same content. But report_signatures.pdf has the signatures on the second page.
