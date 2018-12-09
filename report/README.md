@@ -1,5 +1,5 @@
 # Report Folder
 
-Your project report goes here. It is mandatory to use one of the templates (latex or word) that you find herein.
+Find the report and the latex version.
 
-Save the final report as report.pdf
+report.pdf and report_signatures.pdf do contain the same content. The report_signatures.pdf only has the signatures of the second page.
