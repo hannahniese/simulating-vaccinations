@@ -54,8 +54,8 @@ http://www.who.int/immunization/monitoring_surveillance/data/en/
 For detailed description of the full test please read code/readme.txt
 
 LIGHT TEST: (20 minutes, one graph)
-Reproduce the graph showing the number of people who get the disease in dependence
-of how many people are vaccinated in the beginning(in percent).
+Reproduce the graph showing the number of people who get the disease in
+dependence of how many people are vaccinated in the beginning (in percent).
 People do not vaccinate themselves during simulation.
 
 Follow these steps
@@ -65,40 +65,44 @@ Follow these steps
     vacc.py,
     simulation_vaccination_tools.py,
     network_generator.py,
-    folder networks with file 'barabasi_5000_2.txt' (This is a network with 5000 people)
+    folder networks with file 'barabasi_5000_2.txt'
+    (This is a network with 5000 people)
 
 
-2. Make sure you have matplotlib, numpy, csv, random, timeit and networkx installed.
+2. Make sure you have matplotlib, numpy and random installed.
 
 3. Open your favourite python development environment e.g. Spyder, PyCharm etc.
-Open the downloaded file LIGHT_network_0_to_100_percent.py 
-Important: Do NOT change anything in this file. All parameters are set
-to appropriate values.
-Start the program.
-It will iterate the percentage of vaccinated people from 0% to 100% with steps of 3%.
-This might take 2-3 minutes, depending on the CPU of your computer. 
-When finished, it will output the graph of people who were at least once infected 
-during the simulation time of 500 days. The graph might be in the background.
-Note that your graph is not as smooth as the corresponding graph in the report,
-as that one is a average of multible simulations.
+   Open the downloaded file LIGHT_network_0_to_100_percent.py 
+   Important: Do NOT change anything in this file. All parameters are set
+   to appropriate values.
+   Start the program.
+   It will iterate the percentage of vaccinated people from 0% to 100% with steps
+   of 3%. This might take 2-3 minutes, depending on the CPU of your computer.
+   When finished, it will output the graph of people who were at least once
+   infected during the simulation time of 500 days. The graph might be in the
+   background.
+   Note that your graph is not as smooth as the corresponding graph in the report,
+   as that one is a average of multible simulations.
 
-If you now want to play around a little bit, you can change the following parameters:
+If you now want to play around a little bit, you can change the
+following parameters:
 Note that extreme values of the parameters may lead to extreme results.
-- population (line 26): 
-      You need to create a new network graph for the new population!
-      Remove therefore the comment in line 28 to use the function
-      network_generator.create_barabasi_in_file(population, 2, 'barabasi_' + str(population) + '_2.txt')
+
+- population (line 76):
+      In the folder networks we provide several networks for different
+      population sizes. You can change the population variable in one 
+      of these populations.
       Make sure there are enought initially infected people (at least ~3)
-      by changing the initially_infected_people variable (line 105).
+      by changing the initially_infected_people variable (line 128).
               
-- simulation_length (line 51):
+- simulation_length (line 73):
       Change the time periode (in days) of the simulation.
       Be careful: if the periode is to short, some people are still sick and
       can infect other people, when the simulation ends.
       
-- stepwidth of iteration  (line 40):
-      Decrease the stepwith of the iteration throught the percentage of initially
-      vaccinated people for more exact results.
+- stepwidth of iteration  (line 66):
+      Decrease the stepwith of the iteration throught the percentage of
+      initially vaccinated people for more exact results.
       stepwidth needs to be an integer!
-                    
-    
+
+

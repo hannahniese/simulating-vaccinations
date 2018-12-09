@@ -15,6 +15,7 @@ disease dependent on the percentage of people that were initially vaccinated
 
 Find the description in code/readme.txt
 """
+
 ## import packages
 import csv
 import numpy as np
@@ -62,12 +63,14 @@ infected_to_not_vaccinated_list = []
 total_infected_people_list = []
 percentage_list = []
 
-for percent in range (0,100,3): #change initially vaccinated people
+stepwidth = 3
+
+for percent in range (0,100,stepwidth): #change initially vaccinated people
      
     ### parameters for the simulation
     
     ## Length of the Simulation
-    simulation_length = 500
+    simulation_length = 500 #days
    
     ## Population parameters
     population = 5000 # number of people in the simulation
@@ -121,8 +124,10 @@ for percent in range (0,100,3): #change initially vaccinated people
                    percieved_infec_cost, age = age, length_immune_mean = 4380,\
                    length_immune_sigma = 712) 
     
-    ## set initial conditions    
-    tool.initial_infected(people_list, 0.001)
+    ## set initial conditions
+    initially_infected_people = 0.1 #in percent
+    
+    tool.initial_infected(people_list, initially_infected_people/100)
     tool.initial_vaccinated(people_list, percent/100)
     
     ## make initial counts
@@ -219,7 +224,7 @@ ax.get_yaxis().set_major_formatter(
      ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 ax.xaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1))
 
-ax.set_ylim([0,5000])
+ax.set_ylim([0,population])
 ax.set_xlim([0,1])
 
 #Plot: Total infected people without initially infected
