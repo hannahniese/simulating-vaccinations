@@ -188,10 +188,7 @@ for percent in range (0,100,3): #change initially vaccinated people
                 print(days)
                 tool.change_vaccination_cost_population(people_list, 2, 0.3)
         
-    ## Count the vaccinations at the end
-    #211print("Vaccinated at the end:", vacc.get_num_vaccinated_people())
-    #211print("Maximal number of vaccinated people:", max(vaccinated_people_list))
-    #211print("Maximal number of infected people:", max(infected_people_list))
+
     vaccinated_people_after_500days_out = vacc.get_num_vaccinated_people()
     max_vaccinated_people_out = max(vaccinated_people_list)
     infected_people_after_500days_out = new_infected_people
@@ -216,19 +213,6 @@ for percent in range (0,100,3): #change initially vaccinated people
     percentage_list.append(percent)
     
     
-#fig, plt1 = plt.subplots()
-#
-##Plot: Probability to get infected if not vaccinated
-#plt1.set_xlabel('Initially vaccinated people (%)')
-#plt1.set_ylabel('Infected / not vaccinated people')
-#plt1.set_title('Probability to get infected if not vaccinated')
-#
-#x_list = percentage_list
-#y_list = infected_to_not_vaccinated_list
-#
-#plt1.plot(x_list, y_list, color = 'navy')
-#
-#plt.show()
 
 fig, ax = plt.subplots()
 ax.get_yaxis().set_major_formatter(
